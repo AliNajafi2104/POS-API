@@ -10,14 +10,21 @@ namespace FunctionLibrary.Models
 {
     public class Product
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductID { get; set; } // Primary key
+       
+
+        public Product()
+        {
+            Antal = 1;
+        }
+
         public string Name { get; set; } // Not null
         public string Barcode { get; set; } // Nullable
-        public decimal? Price { get; set; } // Nullable
+        public decimal Price { get; set; } // Nullable
 
         public int ProductTypeID { get; set; }
+        public int Antal;
+      
+       
     }
 
 }

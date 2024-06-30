@@ -14,7 +14,9 @@ namespace FunctionLibrary
 
         }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Product { get; set; }
+
+        public DbSet<Transaction> Transaction_ { get; set; }
 
 
 
