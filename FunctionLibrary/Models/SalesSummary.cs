@@ -12,7 +12,7 @@ namespace FunctionLibrary.Models
         public string ReportType { get; set; }
         public DateTime GeneratedTimestamp { get; set; }
         public decimal TotalAmount { get; set; }
-        public int? SalespersonID { get; set; } // Nullable reference to Salesperson
+        public int? SalespersonID { get; set; } 
     }
 
 }

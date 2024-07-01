@@ -25,34 +25,34 @@ namespace FunctionLibrary.Services
         {
             try
             {
-                // Determine the current date in yyyyMMdd format
+               
                 string currentDate = DateTime.Now.ToString("yyyyMMdd");
 
-                // Query the database to find transactions matching the initial criteria
+               
                 var transactions = await _context.Transaction_
                     .Where(t => t.TransactionID.StartsWith(currentDate))
                     .ToListAsync();
 
-                // Determine the next sequential number
+               
                 int nextNumber = 1;
                 if (transactions.Any())
                 {
-                    // Extract the sequential number part from the latest TransactionID
+                    
                     var lastTransaction = transactions
                         .OrderByDescending(t => t.TransactionID)
                         .FirstOrDefault();
 
-                    string lastNumberString = lastTransaction.TransactionID.Substring(9); // Assuming format is "yyyyMMdd-NNNN"
+                    string lastNumberString = lastTransaction.TransactionID.Substring(9); 
                     if (int.TryParse(lastNumberString, out int lastNumber))
                     {
                         nextNumber = lastNumber + 1;
                     }
                 }
 
-                // Generate the new TransactionID
+                
                 string nextTransactionID = $"{currentDate}-{nextNumber.ToString("0000")}";
 
-                // Create a new Transaction object
+               
                 Transaction transaction1 = new Transaction
                 {
                     TransactionID = nextTransactionID,
@@ -67,7 +67,7 @@ namespace FunctionLibrary.Services
                     SalespersonID = transaction.SalespersonID
                 };
 
-                // Add the transaction to the context and save changes
+                
                 _context.Transaction_.Add(transaction1);
                 await _context.SaveChangesAsync();
             }

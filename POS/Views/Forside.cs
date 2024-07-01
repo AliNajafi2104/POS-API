@@ -10,16 +10,17 @@ using System.Net.Http;
 using FunctionLibrary.Models;
 using Google.Protobuf.Reflection;
 using searchengine123.Models;
+using System.Linq;
 
 
 namespace searchengine123
 {
-        public partial class Forside : Form
-        {
+    public partial class Forside : Form
+    {
 
-        
+
         public Forside()
-            {
+        {
             InitializeComponent();
             this.KeyPreview = true;
             this.KeyPress += Form1_KeyPress;
@@ -31,6 +32,8 @@ namespace searchengine123
             dataGridViewBasket.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridViewBasket.MultiSelect = false;
             timer1.Start();
+            // Assuming dgv is your DataGridView instance
+            
 
             // Immediately update the labels with the current date and time
             UpdateDateTime();
@@ -48,20 +51,17 @@ namespace searchengine123
 
         private async void btnAddToBasket_Click_1(object sender, EventArgs e)
         {
-            if(scannedProducts.Count==0)
+            if (scannedProducts.Count == 0)
             {
                 timeStart = DateTime.Now;
             }
-
-
-            if(tbBarcode.Text=="")
+            if (tbBarcode.Text == "")
             {
                 return;
             }
             try
             {
                 Product produkt = await SQL.GetProductFromApiAsync(tbBarcode.Text);
-
                 if (produkt == null)
                 {
                     // Handle case where product is not found in the database
@@ -70,33 +70,10 @@ namespace searchengine123
                     tbBarcode.Clear();
                     return; // Exit method early
                 }
-
-                for (int i = 0; i < multiplier; i++)
-                {
-                    dataGridViewBasket.RowTemplate.Height = 70;
-                    bool productExists = false;
-
-                    foreach (Product product in scannedProducts)
-                    {
-                        if (product.Barcode == produkt.Barcode)
-                        {
-                            product.Antal++;
-                            productExists = true;
-                            break; // Exit foreach loop since product is found
-                        }
-                    }
-
-                    if (!productExists)
-                    {
-                        scannedProducts.Add(produkt);
-                    }
-
-                    totalSum_CurrentBasket += Convert.ToDecimal(produkt.Price);
-                    dataGridViewBasketRefresh();
-                    tbBarcode.Clear();
-                }
-
-                multiplier = 1;
+                scannedProducts.Add(produkt);
+                totalSum_CurrentBasket += Convert.ToDecimal(produkt.Price);
+                dataGridViewBasketRefresh();
+                tbBarcode.Clear();
             }
             catch (HttpRequestException ex)
             {
@@ -108,61 +85,62 @@ namespace searchengine123
                 // Handle any other unexpected exceptions
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            dataGridViewBasket.Columns[3].Visible = false;
         }
 
 
         public async void btnOrderConfirmed_Click(object sender, EventArgs e)
-            {
+        {
             scannedProducts.Clear();
             dataGridViewBasketRefresh();
 
 
-            }
+        }
 
         private void btnResetBasket_Click(object sender, EventArgs e)
         {
             clearBasket();
         }
-          
-           
+
+
         private void ManuelPrice_Click(object sender, EventArgs e)
-            {
+        {
             dataGridViewBasket.RowTemplate.Height = 70;
-           
-           
+
+
             Control control = sender as Control;
-               
-                if (decimal.TryParse(tbManuelPrice.Text, out decimal manuelPrice))
+
+            if (decimal.TryParse(tbManuelPrice.Text, out decimal manuelPrice))
+            {
+                scannedProducts.Add(new Product
                 {
-                    scannedProducts.Add(new Product
-                    {
-                        Name = control.Text,
-                        Barcode = null,
-                        Price = manuelPrice,
-                       
-                    });
-                    totalSum_CurrentBasket += manuelPrice;
-                    dataGridViewBasketRefresh();
-                
+                    Name = control.Text,
+                    Barcode = null,
+                    Price = manuelPrice,
+
+                });
+                totalSum_CurrentBasket += manuelPrice;
+                dataGridViewBasketRefresh();
+
                 tbManuelPrice.Clear();
                 btnAddToBasket.Focus();
-                }
-            
+            }
+
 
         }
         private void click(object sender, EventArgs e)
-            {
-                Control control = sender as Control;
+        {
+            Control control = sender as Control;
 
-              
-            if(textBox2.Text!="")
+
+            if (textBox2.Text != "")
             {
                 textBox3.Text += control.Text;
             }
             else
             {
 
-            if (control.Text == ",")
+                if (control.Text == ",")
                 {
                     tbManuelPrice.Text += ",";
                 }
@@ -177,69 +155,69 @@ namespace searchengine123
                         tbManuelPrice.Text = tbManuelPrice.Text.Substring(0, tbManuelPrice.Text.Length - 1);
                     }
                 }
-               
 
-           
 
-            else if (multiply)
-            {
-               
-                int.TryParse(control.Text, out multiplier);
-                multiply = false;
-                
 
-               
-            }
-            else
+
+                else if (multiply)
                 {
-               
+
+                    int.TryParse(control.Text, out multiplier);
+                    multiply = false;
+
+
+
+                }
+                else
+                {
+
                     tbManuelPrice.Text += control.Text;
-                multiplier = 1;
-             
+                    multiplier = 1;
+
+
+                }
 
             }
-            
+
+
         }
-          
-
-            }
 
 
 
 
         DateTime timeStart;
         DateTime timeStop;
-            
+
         public void dataGridViewBasketRefresh()
-            {
-                dataGridViewBasket.DataSource = null;
-                dataGridViewBasket.DataSource = scannedProducts;
-                dataGridViewBasket.ClearSelection();
-                label2.Text = $"Total:   {totalSum_CurrentBasket:C}";
-                
+        {
+            dataGridViewBasket.DataSource = null;
+            dataGridViewBasket.DataSource = scannedProducts;
+            dataGridViewBasket.ClearSelection();
+            label2.Text = $"Total:   {totalSum_CurrentBasket:C}";
+
 
             dataGridViewBasket.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridViewBasket.MultiSelect = false;
-          
+
 
         }
-        
-       
-       
 
 
 
 
 
 
-       
+
+
+
+
         List<Product> scannedProducts = new List<Product>();
-        decimal totalSum_CurrentBasket;   
+        decimal totalSum_CurrentBasket;
         bool multiply;
         int multiplier = 1;
-       
-            
-        
+
+
+
 
 
 
@@ -250,44 +228,44 @@ namespace searchengine123
         {
             if (e.KeyChar >= '0' && e.KeyChar <= '9')
             {
-                tbBarcode.AppendText(e.KeyChar.ToString()); 
+                tbBarcode.AppendText(e.KeyChar.ToString());
             }
             else if (e.KeyChar == (char)Keys.Enter)
             {
-                
+
                 btnAddToBasket.PerformClick();
-                e.Handled = true; 
+                e.Handled = true;
             }
             else if (e.KeyChar == '\b' && tbBarcode.Text.Length > 0)
             {
                 tbBarcode.Text = tbBarcode.Text.Remove(tbBarcode.Text.Length - 1);
 
-              
+
                 tbBarcode.SelectionStart = tbBarcode.Text.Length;
-                e.Handled = true; 
+                e.Handled = true;
             }
             else if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
-               
+
                 e.Handled = true;
             }
         }
 
-        
+
         private void clearBasket()
-            {
-                scannedProducts.Clear();
-                totalSum_CurrentBasket = 0;
-                dataGridViewBasketRefresh();
+        {
+            scannedProducts.Clear();
+            totalSum_CurrentBasket = 0;
+            dataGridViewBasketRefresh();
             btnAddToBasket.Focus();
-            }
-           
-           
-           
+        }
 
-           
 
-       
+
+
+
+
+
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -295,7 +273,7 @@ namespace searchengine123
             this.ActiveControl = null;
         }
 
-       
+
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -307,15 +285,19 @@ namespace searchengine123
             this.Close();
         }
 
-      
-       
+
+
 
         private void Button_Click(object sender, EventArgs e)
         {
+
             Button button = sender as Button;
-            
-                textBox2.Text += button.Text; // Append the text of the clicked button to textBox2
-            
+
+
+            textBox2.Text += button.Text; // Append the text of the clicked button to textBox2
+            btnAddToBasket.Focus();
+
+
         }
 
         private void Button_Click(object sender, KeyPressEventArgs e)
@@ -337,7 +319,7 @@ namespace searchengine123
 
             try
             {
-            SQL.CreateProductAsync(product);
+                SQL.CreateProductAsync(product);
 
 
                 MessageBox.Show("Vare oprettet");
@@ -359,7 +341,7 @@ namespace searchengine123
             decimal amount = 0;
             foreach (var item in scannedProducts)
             {
-                amount += item.Price;   
+                amount += item.Price;
             }
             TransactionDTO transaction = new TransactionDTO
             {
@@ -409,5 +391,10 @@ namespace searchengine123
             }
         }
 
+        private void button41_Click(object sender, EventArgs e)
+        {
+            textBox2.Clear();
+            btnAddToBasket.Focus();
+        }
     }
 }
