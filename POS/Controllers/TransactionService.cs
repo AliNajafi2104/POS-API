@@ -19,7 +19,7 @@ namespace searchengine123
         public TransactionService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7267/"); // Replace with your API base URL
+            _httpClient.BaseAddress = new Uri("https://localhost:7267/"); 
 
 
         }
@@ -57,11 +57,11 @@ namespace searchengine123
 
         public async Task<List<Transaction>> GetTransactions()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync("api/Transaction"); // Adjust the endpoint URL as per your API
+            HttpResponseMessage response = await _httpClient.GetAsync("api/Transaction"); 
 
             if (response.IsSuccessStatusCode)
             {
-                // Read the response content and deserialize into a List<Transaction> object
+              
                 string responseData = await response.Content.ReadAsStringAsync();
                 List<Transaction> transactions = JsonConvert.DeserializeObject<List<Transaction>>(responseData);
                 return transactions;
@@ -70,11 +70,11 @@ namespace searchengine123
             {
 
                 
-                return null; // Or handle the case where no transactions are found
+                return null; 
             }
             else
             {
-                // Handle other error cases
+                
                 string errorMessage = $"Error fetching transactions. Status code: {response.StatusCode}, Reason: {response.ReasonPhrase}";
                 throw new HttpRequestException(errorMessage);
             }

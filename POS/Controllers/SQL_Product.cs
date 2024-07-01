@@ -35,12 +35,12 @@ namespace searchengine123
 
         public async Task<Product> GetProductFromApiAsync(string barcode)
         {
-            // Make the GET request
+            
             HttpResponseMessage response = await _httpClient.GetAsync(barcode);
 
             if (response.IsSuccessStatusCode)
             {
-                // Read the response content and deserialize into a Product object
+               
                 string responseData = await response.Content.ReadAsStringAsync();
                 Product product = JsonConvert.DeserializeObject<Product>(responseData);
                 return product;

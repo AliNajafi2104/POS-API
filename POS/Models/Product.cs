@@ -11,9 +11,9 @@ namespace FunctionLibrary.Models
     public class Product
     {
          
-        public string Name { get; set; } // Not null
-        public string Barcode { get; set; } // Nullable
-        public decimal Price { get; set; } // Nullable
+        public string Name { get; set; } 
+        public string Barcode { get; set; } 
+        public decimal Price { get; set; } 
         
         public int ProductTypeID { get; set; }
         
