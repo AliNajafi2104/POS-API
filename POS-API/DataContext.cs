@@ -24,13 +24,6 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<TransactionDetail> TransactionDetail { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=tcp:vvmdb.database.windows.net,1433;Initial Catalog=VVMAPITEST;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=Active Directory Default;");
-                // Replace 'UseSqlServer' with the database provider you are using (e.g., UseSqlite, UseNpgsql for PostgreSQL, etc.)
-            }
-        }
+        
     }
 
