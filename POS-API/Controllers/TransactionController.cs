@@ -1,6 +1,4 @@
-﻿using FunctionLibrary.DTO;
-using FunctionLibrary.Models;
-using FunctionLibrary.Services;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +37,12 @@ namespace POS_API.Controllers
 
 
 
+        [HttpPost("/transactionDetail")]
+        public async Task<IActionResult> PostTransactionDetail(List<Product> products)
+        {
+            await _service.RegisterTransactionDetails(products);
+            return Ok();
+        }
 
 
 

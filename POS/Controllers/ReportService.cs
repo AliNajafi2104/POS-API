@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
+using FunctionLibrary.Models;
 
 namespace searchengine123.Models
 {
@@ -80,6 +81,21 @@ namespace searchengine123.Models
         public void GenerateXReport()
         {
 
+        }
+
+
+
+        public async void GenerateReceipt()
+        {
+            List<Transaction> transactions = await SQL.GetTransactions();
+
+            var lastTransaction = transactions
+    .OrderByDescending(t => t.TransactionID)
+    .FirstOrDefault();
+
+
+
+            //Print logik her
         }
     }
 }

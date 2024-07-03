@@ -28,7 +28,7 @@ namespace searchengine123
         public SQL_Product()
         {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7267/api/Product/"); // Replace with your API base URL
+        _httpClient.BaseAddress = new Uri("https://vvmapi.azurewebsites.net/api/Product/"); // Replace with your API base URL
 
 
         }

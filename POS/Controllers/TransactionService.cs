@@ -19,9 +19,9 @@ namespace searchengine123
         public TransactionService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7267/"); 
+            _httpClient.BaseAddress = new Uri("https://vvmapi.azurewebsites.net/"); 
 
-
+    
         }
             public async Task<TransactionService> registerTransaction(TransactionDTO transaction)
         {

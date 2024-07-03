@@ -1,5 +1,4 @@
-﻿using FunctionLibrary.Models;
-using FunctionLibrary.Services;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +13,13 @@ namespace POS_API.Controllers
         public ProductController(IServiceProduct serviceProduct)
         {
             _serviceProduct = serviceProduct;
+        }
+
+
+        [HttpGet("test")]
+        public int get()
+        {
+            return 5;
         }
 
         [HttpGet]
