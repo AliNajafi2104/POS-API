@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using POS_API.Models;
 
 
-    public class DataContext : DbContext
+public class DataContext : DbContext
     {
 
-      
 
-     
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+
+
+
+    
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
@@ -23,6 +26,7 @@ using Microsoft.EntityFrameworkCore;
 
         public DbSet<TransactionDetail> TransactionDetail { get; set; }
 
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         
     }

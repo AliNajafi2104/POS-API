@@ -19,16 +19,16 @@ using FunctionLibrary.Models;
 
 namespace searchengine123
 {
-    public class SQL_Product
+    public class ProductService
     {
 
         private readonly HttpClient _httpClient;
 
 
-        public SQL_Product()
+        public ProductService()
         {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://vvmapi.azurewebsites.net/api/Product/"); // Replace with your API base URL
+        _httpClient.BaseAddress = new Uri("https://vvmapi.azurewebsites.net/api/Product/"); 
 
 
         }

@@ -61,6 +61,14 @@ namespace POS_API.Controllers
             await _serviceProduct.UpdateProductAsync(barcode, product);
             return Ok();
         }
+
+
+        [HttpPost("Image")]
+        public async Task<IActionResult> PostImage(byte[] image)
+        {
+            await _serviceProduct.PostImage(image);
+            return Ok();
+        }
     }
 
 }

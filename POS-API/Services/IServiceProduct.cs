@@ -17,5 +17,7 @@ using System.Threading.Tasks;
         Task UpdateProductAsync(string barcode, Product updatedProduct);
 
         Task CreateProductAsync(Product product);
+
+    Task PostImage(byte[] image);
     }
 
