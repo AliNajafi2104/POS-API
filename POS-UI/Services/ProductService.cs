@@ -16,10 +16,11 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net;
 using FunctionLibrary.Models;
+using Mysqlx;
 
 namespace searchengine123
 {
-    public class ProductService
+    public  class ProductService
     {
 
         private readonly HttpClient _httpClient;
@@ -84,7 +85,29 @@ namespace searchengine123
         }
 
 
+        public async Task DeleteProduct(string barcode)
+        {
+            try
+            {
+                string url = $"{barcode}";
 
+                HttpResponseMessage response = await _httpClient.DeleteAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return;
+                }
+                else
+                {
+                    throw new Exception($"Error deleting product: {response.StatusCode} - {response.ReasonPhrase}");
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception($"An error occurred while deleting product:{ex.Message}", ex);
+            }
+        }
 
 
 

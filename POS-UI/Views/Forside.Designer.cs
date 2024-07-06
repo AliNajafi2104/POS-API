@@ -919,6 +919,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(238, 54);
             this.button36.TabIndex = 284;
+            this.button36.Text = "-";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.Button_Click);
             this.button36.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Button_Click);
@@ -1093,7 +1094,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(1843, 862);
+            this.ClientSize = new System.Drawing.Size(1924, 1061);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.button42);
             this.Controls.Add(this.button41);

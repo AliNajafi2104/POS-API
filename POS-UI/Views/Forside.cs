@@ -60,6 +60,8 @@ namespace searchengine123
 
         private async void btnAddToBasket_Click_1(object sender, EventArgs e)
         {
+
+            latestBarcode = tbBarcode.Text;
             if (scannedProducts.Count == 0)
             {
                 timeStart = DateTime.Now;
@@ -253,10 +255,18 @@ namespace searchengine123
 
             if(textBox1.Text!="")
             {
+                if (button != null && button.Text!="-")
+                {
+                    
+                    textBox2.Text += button.Text; // Append the text of the clicked button to textBox2
+                }
+                else if (button.Text == "-" && button != null)
+                {
 
-            textBox2.Text += button.Text; // Append the text of the clicked button to textBox2
-          
-
+              
+                    textBox2.Text +=" ";
+              
+                }
             }
             btnAddToBasket.Focus();
         }
@@ -284,6 +294,9 @@ namespace searchengine123
 
 
                     MessageBox.Show("Vare oprettet");
+                    scannedProducts.Add(product);
+                    totalSum_CurrentBasket += Convert.ToDecimal(product.Price);
+                    dataGridViewBasketRefresh();
                 }
 
                 catch (Exception ex)
@@ -364,7 +377,7 @@ namespace searchengine123
 
 
 
-
+        string latestBarcode;
         DateTime timeStart;
         DateTime timeStop;
         List<Product> scannedProducts = new List<Product>();
@@ -372,7 +385,21 @@ namespace searchengine123
         bool multiply;
         ProductService SQL = new ProductService();
         TransactionService transactionService = new TransactionService();
-
-       
+        /*
+        private async void button43_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await SQL.DeleteProduct(latestBarcode);
+               btnResetBasket.PerformClick();
+                MessageBox.Show("Product deleted");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting product" +  ex.Message);
+            }
+            btnAddToBasket.Focus();
+        }
+        */
     }
 }

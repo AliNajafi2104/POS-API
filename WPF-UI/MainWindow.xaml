@@ -8,52 +8,46 @@
         Title="MainWindow" Height="802" Width="1707"
         xmlns:viewmodel="clr-namespace:WPF_UI.ViewModels"
        >
-    
-    
     <Grid>
-        <Grid.RowDefinitions >
+        <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-
             <RowDefinition Height="700" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-
             <ColumnDefinition Width="600" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal">
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
             <TextBox Width="500" />
             <Button Width="100" x:Name="searchBtn" Content="Søg" FontSize="28" />
         </StackPanel>
+
         <DataGrid Grid.Row="1" Grid.Column="0"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="20,0,0,0">
-            <Button Width="100" Margin="10,0,10,0" />
+            <Button Width="100" Margin="10,0,10,0" Content="Kontant" />
             <Button Width="100" Margin="10,0,10,0"/>
             <Button Width="100" Margin="10,0,10,0"/>
         </StackPanel>
 
-        <Grid Grid.Row="1" Grid.Column="1" Width="300" Height="200" Margin="0,0,500,0" >
-            <Grid.RowDefinitions >
+        <Grid Grid.Row="1" Grid.Column="1" Width="300" Height="200" Margin="41,50,766,450">
+            <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="1" Margin="10"/>
-            <Button Grid.Column="1" Grid.Row="1" Margin="10"/>
-            <Button Grid.Column="2" Grid.Row="1" Margin="10"/>
-            <Button Grid.Column="0" Grid.Row="0" Margin="10"/>
-            <Button Grid.Column="1" Grid.Row="0" Margin="10"/>
-            <Button Grid.Column="2" Grid.Row="0" Margin="10"/>
+            <Button Grid.Column="0" Grid.Row="1" Margin="10" Content="GRØNT" FontSize="20"/>
+            <Button Grid.Column="1" Grid.Row="1" Margin="10" Content="KØD" FontSize="20"/>
+            <Button Grid.Column="2" Grid.Row="1" Margin="10" Content="RIS" FontSize="20"/>
+            <Button Grid.Column="0" Grid.Row="0" Margin="10" Content="FRUGT" FontSize="20"/>
+            <Button Grid.Column="1" Grid.Row="0" Margin="10" Content="SAUCE" FontSize="20"/>
+            <Button Grid.Column="2" Grid.Row="0" Margin="10" FontSize="20" Content=""/>
         </Grid>
-
     </Grid>
-
 </Window>
