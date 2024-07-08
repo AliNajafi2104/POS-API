@@ -24,7 +24,7 @@ namespace searchengine123
             this.KeyPreview = true;
             this.KeyPress += Form1_KeyPress;
             this.WindowState = FormWindowState.Maximized;
-            this.Click += Button_Click;
+            this.Click += Numpad;
             
             dataGridViewBasket.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridViewBasket.DataSource = scannedProducts;
@@ -35,13 +35,13 @@ namespace searchengine123
             timer1.Start();
             UpdateDateTime();
             
-            initiateHTTP();
+            InitiateHTTP();
         }
 
-        private async void initiateHTTP()
+        private async void InitiateHTTP()
         {
             try
-            { Product produkt = await SQL.GetProductFromApiAsync("1");
+            { Product produkt = await productService.GetProductFromApiAsync("1");
             }
 
             catch (Exception ex)
@@ -49,9 +49,6 @@ namespace searchengine123
                 MessageBox.Show("intital http error ", ex.Message);
             }
             }
-
-       
-   
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -62,7 +59,7 @@ namespace searchengine123
         private async void btnAddToBasket_Click_1(object sender, EventArgs e)
         {
 
-            latestBarcode = tbBarcode.Text;
+           
             if (scannedProducts.Count == 0)
             {
                 timeStart = DateTime.Now;
@@ -73,14 +70,14 @@ namespace searchengine123
             }
             try
             {
-                Product produkt = await SQL.GetProductFromApiAsync(tbBarcode.Text);
+                Product produkt = await productService.GetProductFromApiAsync(tbBarcode.Text);
                 if (produkt == null)
                 {
                     
                     MessageBox.Show("Product not found in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBox1.Text = tbBarcode.Text;
-                    textBox2.Text = "";
-                    textBox3.Text = "";
+                    tbBarcodeCreate.Text = tbBarcode.Text;
+                    tbNameCreate.Text = "";
+                    tbPriceCreate.Text = "";
                     tbBarcode.Clear();
                     return; 
                 }
@@ -112,7 +109,10 @@ namespace searchengine123
 
         private void btnResetBasket_Click(object sender, EventArgs e)
         {
-            clearBasket();
+            scannedProducts.Clear();
+            totalSum_CurrentBasket = 0;
+            dataGridViewBasketRefresh();
+            btnAddToBasket.Focus();
         }
 
         private void ManuelPrice_Click(object sender, EventArgs e)
@@ -140,14 +140,14 @@ namespace searchengine123
 
 
         }
-        private void click(object sender, EventArgs e)
+        private void Numpad(object sender, EventArgs e)
         {
             Control control = sender as Control;
 
 
-            if (textBox2.Text != "")
+            if (tbNameCreate.Text != "")
             {
-                textBox3.Text += control.Text;
+                tbPriceCreate.Text += control.Text;
             }
             else
             {
@@ -186,7 +186,7 @@ namespace searchengine123
             dataGridViewBasket.DataSource = null;
             dataGridViewBasket.DataSource = scannedProducts;
             dataGridViewBasket.ClearSelection();
-            label2.Text = $"Total:   {totalSum_CurrentBasket:C}";
+            displayTotal.Text = $"Total:   {totalSum_CurrentBasket:C}";
 
 
             dataGridViewBasket.SelectionMode = DataGridViewSelectionMode.CellSelect;
@@ -224,74 +224,62 @@ namespace searchengine123
             }
         }
 
-        private void clearBasket()
-        {
-            scannedProducts.Clear();
-            totalSum_CurrentBasket = 0;
-            dataGridViewBasketRefresh();
-            btnAddToBasket.Focus();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            
-            this.ActiveControl = null;
-        }
-
-        private void button12_Click(object sender, EventArgs e)
+        private void Minimize(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void Close(object sender, EventArgs e)
         {
             this.Close();
         }
 
         
-        private void Button_Click(object sender, EventArgs e)
+        private void Keyboard(object sender, EventArgs e)
         {
 
             Button button = sender as Button;
 
-            if(textBox1.Text!="")
+            if(tbBarcodeCreate.Text!="")
             {
-                if (button != null && button.Text!="-")
+                if (button != null && button.Text != "-" && button.Text!="<--")
                 {
-                    
-                    textBox2.Text += button.Text; 
+
+                    tbNameCreate.Text += button.Text;
                 }
                 else if (button.Text == "-" && button != null)
                 {
 
-              
-                    textBox2.Text +=" ";
-              
+
+                    tbNameCreate.Text += " ";
+
                 }
+                else if (button.Text == "<--" && button != null)
+                    tbNameCreate.Text = "";
             }
             btnAddToBasket.Focus();
         }
         
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CreateProduct(object sender, EventArgs e)
         {
 
-            if (textBox3.Text != "")
+            if (tbPriceCreate.Text != "")
             {
 
                 Product product = new Product
                 {
 
-                    Barcode = textBox1.Text,
-                    Name = textBox2.Text,
-                    Price = Convert.ToDecimal(textBox3.Text),
+                    Barcode = tbBarcodeCreate.Text,
+                    Name = tbNameCreate.Text,
+                    Price = Convert.ToDecimal(tbPriceCreate.Text),
                     ProductTypeID = 1
                 };
 
 
                 try
                 {
-                    SQL.CreateProductAsync(product);
+                    productService.CreateProductAsync(product);
 
 
                     MessageBox.Show("Vare oprettet");
@@ -305,19 +293,19 @@ namespace searchengine123
                     MessageBox.Show("error" + ex.Message);
                 }
 
-                textBox1.Clear();
-                textBox2.Clear();
-                textBox3.Clear();
+                tbBarcodeCreate.Clear();
+                tbNameCreate.Clear();
+                tbPriceCreate.Clear();
                 btnAddToBasket.Focus();
             }
             else
-                textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
+                tbBarcodeCreate.Clear();
+            tbNameCreate.Clear();
+            tbPriceCreate.Clear();
             btnAddToBasket.Focus();
             }
 
-        private async void button38_Click(object sender, EventArgs e)
+        private async void PaymentCash(object sender, EventArgs e)
         {
             decimal amount = 0;
             foreach (var item in scannedProducts)
@@ -350,11 +338,11 @@ namespace searchengine123
         private void UpdateDateTime()
         {
           
-            label5.Text = DateTime.Now.ToString("yyyy-MM-dd"); 
-            label6.Text = DateTime.Now.ToString("HH:mm");   
+            displayDate.Text = DateTime.Now.ToString("yyyy-MM-dd"); 
+            displayTime.Text = DateTime.Now.ToString("HH:mm");   
         }
        
-        private async void button40_Click(object sender, EventArgs e)
+        private async void GenerateZReport(object sender, EventArgs e)
         {
             try
             {
@@ -368,39 +356,12 @@ namespace searchengine123
             }
         }
 
-        private void button41_Click(object sender, EventArgs e)
-        {
-            textBox2.Clear();
-            btnAddToBasket.Focus();
-        }
-
-
-
-
-
-        string latestBarcode;
-        DateTime timeStart;
-        DateTime timeStop;
-        List<Product> scannedProducts = new List<Product>();
-        decimal totalSum_CurrentBasket;
         
-        ProductService SQL = new ProductService();
-        TransactionService transactionService = new TransactionService();
-        /*
-        private async void button43_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                await SQL.DeleteProduct(latestBarcode);
-               btnResetBasket.PerformClick();
-                MessageBox.Show("Product deleted");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error deleting product" +  ex.Message);
-            }
-            btnAddToBasket.Focus();
-        }
-        */
+        DateTime timeStart;
+        readonly List<Product> scannedProducts = new List<Product>();
+        decimal totalSum_CurrentBasket;
+        ProductService productService = new ProductService();
+        readonly TransactionService transactionService = new TransactionService();
+       
     }
 }
