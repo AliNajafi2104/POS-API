@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POS Web API", "POS Web API\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForms-GUI", "WinForms-GUI\WinForms-GUI.csproj", "{F470EB68-38FA-43BD-BBF8-5CE6294579DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF-GUI", "WPF-GUI\WPF-GUI.csproj", "{D5FD5264-E67C-4803-9149-47A9E054FB98}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{F470EB68-38FA-43BD-BBF8-5CE6294579DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F470EB68-38FA-43BD-BBF8-5CE6294579DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F470EB68-38FA-43BD-BBF8-5CE6294579DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5FD5264-E67C-4803-9149-47A9E054FB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5FD5264-E67C-4803-9149-47A9E054FB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5FD5264-E67C-4803-9149-47A9E054FB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5FD5264-E67C-4803-9149-47A9E054FB98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
