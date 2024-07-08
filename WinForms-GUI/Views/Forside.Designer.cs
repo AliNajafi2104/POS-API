@@ -1179,7 +1179,7 @@
         #endregion
         private System.Windows.Forms.TextBox tbBarcode;
         private System.Windows.Forms.DataGridView dataGridViewBasket;
-        private MySql.Data.MySqlClient.MySqlDataAdapter mySqlDataAdapter1;
+       
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button btnResetBasket;
         private System.Windows.Forms.TextBox tbManuelPrice;

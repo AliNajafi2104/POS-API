@@ -108,10 +108,8 @@ public async Task<List<Transaction>> GetTransactions()
             }
         }
 
-        // Helper method to extract transaction number
         private int GetTransactionNumber(string transactionID)
         {
-            // Extract the transaction number part after "-"
             string transactionNumberPart = transactionID.Split('-')[1];
             return Convert.ToInt32(transactionNumberPart);
         }

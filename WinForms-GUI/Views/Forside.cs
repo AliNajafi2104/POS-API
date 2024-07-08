@@ -23,17 +23,18 @@ namespace searchengine123
             InitializeComponent();
             this.KeyPreview = true;
             this.KeyPress += Form1_KeyPress;
-            dataGridViewBasket.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridViewBasket.MultiSelect = false;
-            tbBarcode.Enabled = false;
             this.WindowState = FormWindowState.Maximized;
             this.Click += Button_Click;
+            
             dataGridViewBasket.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridViewBasket.MultiSelect = false;
-            timer1.Start();
-            UpdateDateTime();
             dataGridViewBasket.DataSource = scannedProducts;
             dataGridViewBasket.Columns["ProductTypeID"].Visible = false;
+            
+            tbBarcode.Enabled = false;
+            
+            timer1.Start();
+            UpdateDateTime();
+            
             initiateHTTP();
         }
 
@@ -54,7 +55,7 @@ namespace searchengine123
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // Update labels with current date and time on every tick
+            
             UpdateDateTime();
         }
 
@@ -75,13 +76,13 @@ namespace searchengine123
                 Product produkt = await SQL.GetProductFromApiAsync(tbBarcode.Text);
                 if (produkt == null)
                 {
-                    // Handle case where product is not found in the database
+                    
                     MessageBox.Show("Product not found in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox1.Text = tbBarcode.Text;
                     textBox2.Text = "";
                     textBox3.Text = "";
                     tbBarcode.Clear();
-                    return; // Exit method early
+                    return; 
                 }
                 scannedProducts.Add(produkt);
                 totalSum_CurrentBasket += Convert.ToDecimal(produkt.Price);
@@ -90,18 +91,18 @@ namespace searchengine123
             }
             catch (HttpRequestException ex)
             {
-                // Handle case where API is unavailable
-                MessageBox.Show("API is unavailable. Please try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                MessageBox.Show("API is unavailable. Please try again later.", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                // Handle any other unexpected exceptions
+                
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             dataGridViewBasket.Columns[3].Visible = false;
         }
 
-        public async void btnOrderConfirmed_Click(object sender, EventArgs e)
+        public void btnOrderConfirmed_Click(object sender, EventArgs e)
         {
             scannedProducts.Clear();
             dataGridViewBasketRefresh();
@@ -233,7 +234,7 @@ namespace searchengine123
 
         private void button9_Click(object sender, EventArgs e)
         {
-            multiply = true;
+            
             this.ActiveControl = null;
         }
 
@@ -258,7 +259,7 @@ namespace searchengine123
                 if (button != null && button.Text!="-")
                 {
                     
-                    textBox2.Text += button.Text; // Append the text of the clicked button to textBox2
+                    textBox2.Text += button.Text; 
                 }
                 else if (button.Text == "-" && button != null)
                 {
@@ -316,7 +317,7 @@ namespace searchengine123
             btnAddToBasket.Focus();
             }
 
-        private void button38_Click(object sender, EventArgs e)
+        private async void button38_Click(object sender, EventArgs e)
         {
             decimal amount = 0;
             foreach (var item in scannedProducts)
@@ -336,7 +337,7 @@ namespace searchengine123
             try
             {
 
-                transactionService.registerTransaction(transaction);
+               await transactionService.registerTransaction(transaction);
                 MessageBox.Show("Transaktion registreret");
             }
 
@@ -349,8 +350,8 @@ namespace searchengine123
         private void UpdateDateTime()
         {
           
-            label5.Text = DateTime.Now.ToString("yyyy-MM-dd"); // Customize date format as needed
-            label6.Text = DateTime.Now.ToString("HH:mm");   // Customize time format as needed
+            label5.Text = DateTime.Now.ToString("yyyy-MM-dd"); 
+            label6.Text = DateTime.Now.ToString("HH:mm");   
         }
        
         private async void button40_Click(object sender, EventArgs e)
@@ -363,7 +364,7 @@ namespace searchengine123
             catch (Exception ex)
             {
                 MessageBox.Show($"Error generating Z Report: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Optionally, log the exception or perform additional error handling as needed
+               
             }
         }
 
@@ -382,7 +383,7 @@ namespace searchengine123
         DateTime timeStop;
         List<Product> scannedProducts = new List<Product>();
         decimal totalSum_CurrentBasket;
-        bool multiply;
+        
         ProductService SQL = new ProductService();
         TransactionService transactionService = new TransactionService();
         /*

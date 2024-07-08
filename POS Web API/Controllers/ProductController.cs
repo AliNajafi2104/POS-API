@@ -44,7 +44,7 @@ namespace POS_API.Controllers
         public async Task<IActionResult> PostProduct(Product product)
         {
             await _serviceProduct.CreateProductAsync(product);
-            return Ok(); // Return an IActionResult to satisfy the return type
+            return Ok(); 
         }
 
 
