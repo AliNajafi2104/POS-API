@@ -96,19 +96,7 @@ namespace POS_API.Controllers
             }
         }
 
-        [HttpPatch("count")]
-        public async Task<IActionResult> PostProductCount(ProductDTO product)
-        {
-            try
-            {
-                await _serviceProduct.AddProductCount(product);
-                return Ok();
-            }
-            catch
-            {
-                return StatusCode(500, new { message = "Error occurred while adding product count" });
-            }
-        }
+
 
     }
 

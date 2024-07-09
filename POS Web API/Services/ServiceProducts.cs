@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using POS_API.DTO;
 
 
@@ -105,35 +106,6 @@ public class ServiceProducts : IServiceProduct
     }
 
 
-    public async Task AddProductCount(ProductDTO product)
-    {
-
-        try
-        {
-
-            var productToUpdate = _context.Product.FirstOrDefault(p => p.Barcode == product.Barcode);
-
-
-
-            if (productToUpdate != null)
-            {
-                productToUpdate.Count = product.Amount;
-                productToUpdate.CountDate = System.DateTime.Now;
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new InvalidOperationException($"Product with Barcode '{product.Barcode}' not found.");
-            }
-          
-        }
-        catch (Exception ex)
-        {
-            throw new Exception("Error occcured Adding producct count", ex);
-        }
-    }
-
-
-
+  
 }
 
