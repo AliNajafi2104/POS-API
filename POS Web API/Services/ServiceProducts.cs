@@ -1,12 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using POS_API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
 
 
 
@@ -67,14 +60,6 @@ public class ServiceProducts: IServiceProduct
 
    
 
-    public async Task PostImage(byte[] image)
-    {
-        ProductImage productImage = new ProductImage
-        {
-            ImageData = image
-        };
-        _context.ProductImages.Add(productImage);
-        await _context.SaveChangesAsync();
-    }
+    
 }
 

@@ -14,13 +14,7 @@ namespace POS_API.Controllers
         {
             _serviceProduct = serviceProduct;
         }
-
-
-        [HttpGet("test")]
-        public int get()
-        {
-            return 5;
-        }
+       
 
         [HttpGet]
         public async Task<IActionResult> GetProducts()
@@ -63,12 +57,7 @@ namespace POS_API.Controllers
         }
 
 
-        [HttpPost("Image")]
-        public async Task<IActionResult> PostImage(byte[] image)
-        {
-            await _serviceProduct.PostImage(image);
-            return Ok();
-        }
+        
     }
 
 }

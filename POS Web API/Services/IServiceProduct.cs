@@ -18,6 +18,6 @@ using System.Threading.Tasks;
 
         Task CreateProductAsync(Product product);
 
-    Task PostImage(byte[] image);
+   
     }
 

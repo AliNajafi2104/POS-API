@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using POS_API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
 
 
 public class DataContext : DbContext
@@ -26,8 +21,7 @@ public class DataContext : DbContext
 
         public DbSet<TransactionDetail> TransactionDetail { get; set; }
 
-        public DbSet<ProductImage> ProductImages { get; set; }
-
+      
         
     }
 
