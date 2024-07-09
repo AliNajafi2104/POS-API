@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using POS_API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IServiceProduct, ServiceProducts>();
 builder.Services.AddScoped<IServiceTransaction, ServiceTransaction>();
-
+builder.Services.AddScoped<IServiceCounter, ServiceCounter>();
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
