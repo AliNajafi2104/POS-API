@@ -1,6 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using POS_API.DTO;
+
 
 namespace POS_API.Controllers
 {
@@ -14,50 +17,99 @@ namespace POS_API.Controllers
         {
             _serviceProduct = serviceProduct;
         }
-       
+
 
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _serviceProduct.GetProducts();
-            return Ok(products);
+            try
+            {
+                var products = await _serviceProduct.GetProducts();
+                return Ok(products);
+            }
+
+            catch
+            {
+                return StatusCode(500, new { message = "Error occurred while fetching products" });
+            }
         }
 
         [HttpGet("{barcode}")]
         public async Task<IActionResult> GetProduct(string barcode)
         {
-            var product = await _serviceProduct.GetProduct(barcode);
-            if (product == null)
+            try
             {
-                return NotFound();
+
+                var product = await _serviceProduct.GetProduct(barcode);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                return Ok(product);
             }
-            return Ok(product);
+            catch
+            {
+                return StatusCode(500, new { message = "Error occurred while fetching product" });
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> PostProduct(Product product)
         {
-            await _serviceProduct.CreateProductAsync(product);
-            return Ok(); 
+            try
+            {
+                await _serviceProduct.CreateProductAsync(product);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(500, new { message = "Error occurred while creating product" });
+            }
         }
 
 
         [HttpDelete("{barcode}")]
         public async Task<IActionResult> DeleteProduct(string barcode)
         {
-            await _serviceProduct.DeleteProduct(barcode);
-            return Ok();
+            try
+            {
+                await _serviceProduct.DeleteProduct(barcode);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(500, new { message = "Error occurred while deleting product" });
+            }
         }
 
         [HttpPut("{barcode}")]
         public async Task<IActionResult> UpdateProduct(string barcode, Product product)
         {
-            await _serviceProduct.UpdateProductAsync(barcode, product);
-            return Ok();
+            try
+            {
+                await _serviceProduct.UpdateProductAsync(barcode, product);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(500, new { message = "Error occurred while updating product" });
+            }
         }
 
+        [HttpPatch("count")]
+        public async Task<IActionResult> PostProductCount(ProductDTO product)
+        {
+            try
+            {
+                await _serviceProduct.AddProductCount(product);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(500, new { message = "Error occurred while adding product count" });
+            }
+        }
 
-        
     }
 
 }

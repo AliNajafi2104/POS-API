@@ -7,93 +7,97 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    public class ServiceTransaction : IServiceTransaction
+public class ServiceTransaction : IServiceTransaction
+{
+
+    private readonly DataContext _context;
+
+
+    public ServiceTransaction(DataContext context)
     {
+        _context = context;
+    }
 
-        private readonly DataContext _context;
-
-
-        public ServiceTransaction(DataContext context)
+    public async Task RegisterTransaction(transactionDTO transaction)
+    {
+        try
         {
-            _context = context;
-        }
+
+            string currentDate = DateTime.Now.ToString("yyyyMMdd");
 
 
-        public async Task RegisterTransaction(transactionDTO transaction)
-        {
-            try
+            var transactions = await _context.Transaction_
+                .Where(t => t.TransactionID.StartsWith(currentDate))
+                .ToListAsync();
+
+
+            int nextNumber = 1;
+            if (transactions.Any())
             {
-               
-                string currentDate = DateTime.Now.ToString("yyyyMMdd");
 
-               
-                var transactions = await _context.Transaction_
-                    .Where(t => t.TransactionID.StartsWith(currentDate))
-                    .ToListAsync();
+                var lastTransaction = transactions
+                    .OrderByDescending(t => t.TransactionID)
+                    .FirstOrDefault();
 
-               
-                int nextNumber = 1;
-                if (transactions.Any())
+                string lastNumberString = lastTransaction.TransactionID.Substring(9);
+                if (int.TryParse(lastNumberString, out int lastNumber))
                 {
-                    
-                    var lastTransaction = transactions
-                        .OrderByDescending(t => t.TransactionID)
-                        .FirstOrDefault();
-
-                    string lastNumberString = lastTransaction.TransactionID.Substring(9); 
-                    if (int.TryParse(lastNumberString, out int lastNumber))
-                    {
-                        nextNumber = lastNumber + 1;
-                    }
+                    nextNumber = lastNumber + 1;
                 }
-
-                
-                string nextTransactionID = $"{currentDate}-{nextNumber.ToString("0000")}";
-
-               
-                Transaction transaction1 = new Transaction
-                {
-                    TransactionID = nextTransactionID,
-                    CVR = "CVR-NUMMER",
-                    ActionType = transaction.ActionType,
-                    StartTimestamp = transaction.StartTimestamp,
-                    EndTimestamp = transaction.EndTimestamp,
-                    PaymentMethodID = transaction.PaymentMethodID,
-                    SystemSerialNumber = "SSN",
-                    DigitalSignature = "SIGNATURE",
-                    Amount = transaction.Amount,
-                    SalespersonID = transaction.SalespersonID
-                };
-
-                
-                _context.Transaction_.Add(transaction1);
-                await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+
+
+            string nextTransactionID = $"{currentDate}-{nextNumber.ToString("0000")}";
+
+
+            Transaction transaction1 = new Transaction
             {
-                throw new Exception("Error registering transaction", ex);
-            }
+                TransactionID = nextTransactionID,
+                CVR = "CVR-NUMMER",
+                ActionType = transaction.ActionType,
+                StartTimestamp = transaction.StartTimestamp,
+                EndTimestamp = transaction.EndTimestamp,
+                PaymentMethodID = transaction.PaymentMethodID,
+                SystemSerialNumber = "SSN",
+                DigitalSignature = "SIGNATURE",
+                Amount = transaction.Amount,
+                SalespersonID = transaction.SalespersonID
+            };
+
+
+            _context.Transaction_.Add(transaction1);
+            await _context.SaveChangesAsync();
         }
-
-        
-
-
-public async Task<List<Transaction>> GetTransactions()
+        catch (Exception ex)
         {
+            throw new Exception("Error registering transaction", ex);
+        }
+    }
+
+    public async Task<List<Transaction>> GetTransactions()
+    {
+        try
+        {
+
             var transactions = await _context.Transaction_.ToListAsync();
             return transactions;
         }
-
-
-
-        public async Task RegisterTransactionDetails(List<Product> products)
+        catch (Exception ex)
         {
-            
+            throw new Exception("Error occured fetching transactions ", ex);
+        }
+    }
+
+    public async Task RegisterTransactionDetails(List<Product> products)
+    {
+        try
+        {
+
             string currentDate = DateTime.Now.ToString("yyyyMMdd");
 
 
             var latestTransaction = await _context.Transaction_.OrderByDescending(t => t.EndTimestamp).FirstOrDefaultAsync();
-                                                
+
             foreach (var item in products)
             {
                 TransactionDetail transactionDetail = new TransactionDetail
@@ -108,10 +112,16 @@ public async Task<List<Transaction>> GetTransactions()
             }
         }
 
-        private int GetTransactionNumber(string transactionID)
+        catch (Exception ex)
         {
-            string transactionNumberPart = transactionID.Split('-')[1];
-            return Convert.ToInt32(transactionNumberPart);
+            throw new Exception("Error occured registering transaction details ", ex);
         }
-
     }
+
+    private int GetTransactionNumber(string transactionID)
+    {
+        string transactionNumberPart = transactionID.Split('-')[1];
+        return Convert.ToInt32(transactionNumberPart);
+    }
+
+}

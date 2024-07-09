@@ -11,41 +11,52 @@ namespace POS_API.Controllers
 
 
         private readonly IServiceTransaction _service;
-
         public TransactionController(IServiceTransaction service)
         {
             _service = service;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetAllTransactions()
         {
-            var transactions = await _service.GetTransactions();
-            return Ok(transactions);
+            try
+            {
+                var transactions = await _service.GetTransactions();
+                return Ok(transactions);
+            }
+            catch 
+            {
+                return StatusCode(500, new { message = "An error occurred while fetching transactions." });
+            }
         }
-
-
-
 
         [HttpPost]
         public async Task<IActionResult> PostTransaction(transactionDTO transaction)
         {
-            await _service.RegisterTransaction(transaction);
-            return Ok();
+            try
+            {
+                await _service.RegisterTransaction(transaction);
+                return Ok();
+            }
+            catch 
+            {
+                return StatusCode(500, new { message = "An error occurred while registering transaction." });
+            }
         }
-
-
 
         [HttpPost("/transactionDetail")]
         public async Task<IActionResult> PostTransactionDetail(List<Product> products)
         {
-            await _service.RegisterTransactionDetails(products);
-            return Ok();
+            try
+            {
+                await _service.RegisterTransactionDetails(products);
+                return Ok();
+            }
+            catch 
+            {
+                return StatusCode(500, new { message = "An error occurred while registering transaction details." });
+            }
         }
-
-
-
 
     }
 }

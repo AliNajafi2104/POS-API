@@ -2,6 +2,7 @@
 
 
 
+
 public class DataContext : DbContext
     {
 
@@ -21,7 +22,6 @@ public class DataContext : DbContext
 
         public DbSet<TransactionDetail> TransactionDetail { get; set; }
 
-      
-        
+     
     }
 

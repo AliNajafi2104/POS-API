@@ -1,23 +1,22 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using POS_API.DTO;
 
 
-    public interface IServiceProduct
-    {
-        Task<List<Product>> GetProducts();
 
-        Task<Product> GetProduct(string barcode);
+public interface IServiceProduct
+{
+    Task<List<Product>> GetProducts();
 
-        Task DeleteProduct(string barcode);
+    Task<Product> GetProduct(string barcode);
 
-        Task UpdateProductAsync(string barcode, Product updatedProduct);
+    Task DeleteProduct(string barcode);
 
-        Task CreateProductAsync(Product product);
+    Task UpdateProductAsync(string barcode, Product updatedProduct);
 
-   
-    }
+    Task CreateProductAsync(Product product);
+
+    Task AddProductCount(ProductDTO product);
+
+
+}
 
