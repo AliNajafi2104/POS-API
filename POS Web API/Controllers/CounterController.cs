@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using POS_API.DTO;
 using POS_API.Services;
+using System.Data.SqlClient;
 
 namespace POS_API.Controllers
 {
@@ -10,10 +11,12 @@ namespace POS_API.Controllers
     public class CounterController : ControllerBase
     {
         private readonly IServiceCounter _serviceCounter;
+        private readonly Logger<CounterController> _logger;
 
-        public CounterController(IServiceCounter serviceCounter)
+        public CounterController(IServiceCounter serviceCounter, Logger<CounterController> logger)
         {
             _serviceCounter = serviceCounter;
+            _logger = logger;
         }
 
 
@@ -21,13 +24,19 @@ namespace POS_API.Controllers
         [HttpPatch("count")]
         public async Task<IActionResult> PostProductCount(ProductDTO product)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 await _serviceCounter.AddProductCount(product);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error while adding product count");
                 return StatusCode(500, new { message = "Error occurred while adding product count" });
             }
         }
@@ -41,8 +50,9 @@ namespace POS_API.Controllers
                 await _serviceCounter.ResetProductCounters();
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error reseting product Counters");
                 return StatusCode(500, new { message = "Error occurred while reseting product counters" });
             }
         }
@@ -50,8 +60,17 @@ namespace POS_API.Controllers
         [HttpGet("TotalCounter")]
         public async Task<IActionResult> GetTotalCounterPrice()
         {
-            var Total = await _serviceCounter.GetTotalPriceOfCounters();
-            return Ok(Total);
+            try
+            {
+                var Total = await _serviceCounter.GetTotalPriceOfCounters();
+                return Ok(Total);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting total count price");
+                return StatusCode(500, new { message = "Error occurred while fetching total price of counters" });
+            }
         }
     }
 }

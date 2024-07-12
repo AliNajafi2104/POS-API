@@ -12,10 +12,13 @@ namespace POS_API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IServiceProduct _serviceProduct;
+        private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IServiceProduct serviceProduct)
+
+        public ProductController(IServiceProduct serviceProduct, ILogger<ProductController> logger)
         {
             _serviceProduct = serviceProduct;
+            _logger = logger;
         }
 
 
@@ -28,8 +31,9 @@ namespace POS_API.Controllers
                 return Ok(products);
             }
 
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error gettings products ");
                 return StatusCode(500, new { message = "Error occurred while fetching products" });
             }
         }
@@ -47,22 +51,28 @@ namespace POS_API.Controllers
                 }
                 return Ok(product);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error getting product");
                 return StatusCode(500, new { message = "Error occurred while fetching product" });
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostProduct(Product product)
+        public async Task<IActionResult> PostProduct([FromBody]Product product)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 await _serviceProduct.CreateProductAsync(product);
-                return Ok();
+                return CreatedAtAction(nameof(GetProduct), new { barcode = product.Barcode }, product);
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error");
                 return StatusCode(500, new { message = "Error occurred while creating product" });
             }
         }
@@ -74,10 +84,11 @@ namespace POS_API.Controllers
             try
             {
                 await _serviceProduct.DeleteProduct(barcode);
-                return Ok();
+                return NoContent();
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error");
                 return StatusCode(500, new { message = "Error occurred while deleting product" });
             }
         }
@@ -88,10 +99,11 @@ namespace POS_API.Controllers
             try
             {
                 await _serviceProduct.UpdateProductAsync(barcode, product);
-                return Ok();
+                return NoContent();
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error");
                 return StatusCode(500, new { message = "Error occurred while updating product" });
             }
         }

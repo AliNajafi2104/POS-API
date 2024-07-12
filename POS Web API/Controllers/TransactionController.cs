@@ -11,9 +11,11 @@ namespace POS_API.Controllers
 
 
         private readonly IServiceTransaction _service;
-        public TransactionController(IServiceTransaction service)
+        private readonly Logger<TransactionController> _logger;
+        public TransactionController(IServiceTransaction service, Logger<TransactionController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -24,8 +26,9 @@ namespace POS_API.Controllers
                 var transactions = await _service.GetTransactions();
                 return Ok(transactions);
             }
-            catch 
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error");
                 return StatusCode(500, new { message = "An error occurred while fetching transactions." });
             }
         }
@@ -38,8 +41,10 @@ namespace POS_API.Controllers
                 await _service.RegisterTransaction(transaction);
                 return Ok();
             }
-            catch 
+            catch (Exception ex)
+
             {
+                _logger.LogError(ex, "Error");
                 return StatusCode(500, new { message = "An error occurred while registering transaction." });
             }
         }
@@ -52,8 +57,9 @@ namespace POS_API.Controllers
                 await _service.RegisterTransactionDetails(products);
                 return Ok();
             }
-            catch 
+            catch (Exception ex) 
             {
+                _logger.LogError(ex, "Error");
                 return StatusCode(500, new { message = "An error occurred while registering transaction details." });
             }
         }
