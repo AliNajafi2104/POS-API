@@ -1,4 +1,5 @@
 ﻿using POS_API.DTO;
+using System.Data.Entity;
 
 namespace POS_API.Services
 {
@@ -19,7 +20,7 @@ namespace POS_API.Services
             try
             {
 
-                var productToUpdate = _context.Product.FirstOrDefault(p => p.Barcode == product.Barcode);
+                var productToUpdate = await _context.Product.FirstOrDefaultAsync(p => p.Barcode == product.Barcode);
 
 
 
@@ -46,7 +47,8 @@ namespace POS_API.Services
 
         public async Task ResetProductCounters()
         {
-            foreach (var product in _context.Product)
+            var products = await _context.Product.ToListAsync();
+            foreach (var product in products)
             {
                 product.Count = 0;
             }
