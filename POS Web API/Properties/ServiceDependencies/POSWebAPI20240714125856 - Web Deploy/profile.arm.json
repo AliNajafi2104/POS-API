@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "VVMAPI",
+      "defaultValue": "POSWebAPI20240714125856",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }
