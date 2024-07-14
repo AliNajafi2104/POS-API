@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace POS_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240709131658_ttr")]
-    partial class ttr
+    [Migration("20240714104806_t")]
+    partial class t
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,10 +36,10 @@ namespace POS_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Count")
+                    b.Property<int?>("Count")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CountDate")
+                    b.Property<DateTime?>("CountDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -49,7 +49,7 @@ namespace POS_API.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductTypeID")
+                    b.Property<int?>("ProductTypeID")
                         .HasColumnType("int");
 
                     b.HasKey("ProductID");

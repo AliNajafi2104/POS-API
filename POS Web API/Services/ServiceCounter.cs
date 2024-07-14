@@ -61,9 +61,10 @@ namespace POS_API.Services
             decimal TotalSum = 0;
             foreach (var product in _context.Product)
             {
-                TotalSum += product.Price * product.Count;
+                TotalSum += product.Price * (product.Count ?? 0);
             }
             return TotalSum;
         }
+
     }
 }

@@ -33,10 +33,10 @@ namespace POS_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Count")
+                    b.Property<int?>("Count")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CountDate")
+                    b.Property<DateTime?>("CountDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -46,7 +46,7 @@ namespace POS_API.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductTypeID")
+                    b.Property<int?>("ProductTypeID")
                         .HasColumnType("int");
 
                     b.HasKey("ProductID");

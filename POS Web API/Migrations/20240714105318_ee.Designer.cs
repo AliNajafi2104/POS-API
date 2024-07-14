@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace POS_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240709130227_ddde")]
-    partial class ddde
+    [Migration("20240714105318_ee")]
+    partial class ee
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,25 +23,6 @@ namespace POS_API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("POS_API.Models.ProductCount", b =>
-                {
-                    b.Property<int>("ProductCountID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductCountID"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CountDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ProductCountID");
-
-                    b.ToTable("ProductCount");
-                });
 
             modelBuilder.Entity("Product", b =>
                 {
@@ -55,14 +36,20 @@ namespace POS_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CountDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ProductTypeID")
+                    b.Property<int?>("ProductTypeID")
                         .HasColumnType("int");
 
                     b.HasKey("ProductID");
