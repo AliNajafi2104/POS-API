@@ -29,7 +29,7 @@ namespace searchengine123
         public ProductService()
         {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://vvmapi.azurewebsites.net/api/Product/"); 
+        _httpClient.BaseAddress = new Uri("https://poswebapi20240714125856.azurewebsites.net"); 
 
 
         }

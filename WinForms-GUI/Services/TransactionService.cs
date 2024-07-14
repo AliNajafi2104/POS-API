@@ -19,7 +19,7 @@ namespace searchengine123
         public TransactionService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://vvmapi.azurewebsites.net/"); 
+            _httpClient.BaseAddress = new Uri("https://poswebapi20240714125856.azurewebsites.net"); 
 
     
         }
