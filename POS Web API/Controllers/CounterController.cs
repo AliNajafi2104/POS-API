@@ -11,9 +11,9 @@ namespace POS_API.Controllers
     public class CounterController : ControllerBase
     {
         private readonly IServiceCounter _serviceCounter;
-        private readonly Logger<CounterController> _logger;
+        private readonly ILogger<CounterController> _logger;
 
-        public CounterController(IServiceCounter serviceCounter, Logger<CounterController> logger)
+        public CounterController(IServiceCounter serviceCounter, ILogger<CounterController> logger)
         {
             _serviceCounter = serviceCounter;
             _logger = logger;

@@ -20,12 +20,20 @@ namespace POS_API.Services
             try
             {
 
-                var productToUpdate = await _context.Product.FirstOrDefaultAsync(p => p.Barcode == product.Barcode);
+                var productToUpdate =  _context.Product.FirstOrDefault(p => p.Barcode == product.Barcode);
 
 
 
                 if (productToUpdate != null)
                 {
+                    if(product.Name !=null)
+                    {
+                        productToUpdate.Name = product.Name;
+                    }
+                    if(product.Price !=null)
+                    {
+                        productToUpdate.Price = (product.Price ?? 0);
+                    }
                     productToUpdate.Count = product.Amount;
                     productToUpdate.CountDate = System.DateTime.Now;
                     await _context.SaveChangesAsync();
