@@ -29,43 +29,46 @@ namespace searchengine123
         public ProductService()
         {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://poswebapi20240714125856.azurewebsites.net"); 
+        _httpClient.BaseAddress = new Uri("https://poswebapi20240714125856.azurewebsites.net/"); 
 
 
         }
 
+
         public async Task<Product> GetProductFromApiAsync(string barcode)
         {
-            
-            HttpResponseMessage response = await _httpClient.GetAsync(barcode);
+           
+            string requestUri = $"api/product/{barcode}";
+
+            HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
 
             if (response.IsSuccessStatusCode)
             {
-               
                 string responseData = await response.Content.ReadAsStringAsync();
                 Product product = JsonConvert.DeserializeObject<Product>(responseData);
                 return product;
             }
 
-            if(response.StatusCode==HttpStatusCode.NotFound)
+            if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 return null;
             }
             else
             {
-                throw new Exception("Error\n" +response );
+                throw new Exception("Error\n" + response);
             }
         }
+    
 
 
-        public async Task<Product> CreateProductAsync(Product product)
+    public async Task<Product> CreateProductAsync(Product product)
         {
             try
             {
                 string json = JsonConvert.SerializeObject(product);
                 HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await _httpClient.PostAsync("", content);
+                HttpResponseMessage response = await _httpClient.PostAsync("api/product", content);
 
                 if (response.IsSuccessStatusCode)
                 {

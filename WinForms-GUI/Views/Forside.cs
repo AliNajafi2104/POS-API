@@ -261,7 +261,7 @@ namespace searchengine123
         }
         
 
-        private void CreateProduct(object sender, EventArgs e)
+        private async void CreateProduct(object sender, EventArgs e)
         {
 
             if (tbPriceCreate.Text != "")
@@ -279,7 +279,7 @@ namespace searchengine123
 
                 try
                 {
-                    productService.CreateProductAsync(product);
+                   await productService.CreateProductAsync(product);
 
 
                     MessageBox.Show("Vare oprettet");
