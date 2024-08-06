@@ -99,17 +99,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCreateProduct = new System.Windows.Forms.Button();
-            this.btnKort = new System.Windows.Forms.Button();
-            this.btnKontant = new System.Windows.Forms.Button();
-            this.btnMobilepay = new System.Windows.Forms.Button();
             this.displayDate = new System.Windows.Forms.Label();
             this.displayTime = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnXReport = new System.Windows.Forms.Button();
-            this.btnZReport = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
-            this.btnReceipt = new System.Windows.Forms.Button();
-            this.rbTestbon = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBasket)).BeginInit();
             this.SuspendLayout();
             // 
@@ -947,40 +940,6 @@
             this.btnCreateProduct.UseVisualStyleBackColor = false;
             this.btnCreateProduct.Click += new System.EventHandler(this.CreateProduct);
             // 
-            // btnKort
-            // 
-            this.btnKort.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKort.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnKort.Location = new System.Drawing.Point(842, 18);
-            this.btnKort.Name = "btnKort";
-            this.btnKort.Size = new System.Drawing.Size(153, 63);
-            this.btnKort.TabIndex = 289;
-            this.btnKort.Text = "Kort";
-            this.btnKort.UseVisualStyleBackColor = true;
-            // 
-            // btnKontant
-            // 
-            this.btnKontant.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKontant.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnKontant.Location = new System.Drawing.Point(681, 18);
-            this.btnKontant.Name = "btnKontant";
-            this.btnKontant.Size = new System.Drawing.Size(155, 63);
-            this.btnKontant.TabIndex = 290;
-            this.btnKontant.Text = "Kontant";
-            this.btnKontant.UseVisualStyleBackColor = true;
-            this.btnKontant.Click += new System.EventHandler(this.PaymentCash);
-            // 
-            // btnMobilepay
-            // 
-            this.btnMobilepay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMobilepay.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnMobilepay.Location = new System.Drawing.Point(1001, 18);
-            this.btnMobilepay.Name = "btnMobilepay";
-            this.btnMobilepay.Size = new System.Drawing.Size(152, 63);
-            this.btnMobilepay.TabIndex = 291;
-            this.btnMobilepay.Text = "Mobilepay";
-            this.btnMobilepay.UseVisualStyleBackColor = true;
-            // 
             // displayDate
             // 
             this.displayDate.AutoSize = true;
@@ -1003,29 +962,6 @@
             this.displayTime.TabIndex = 293;
             this.displayTime.Text = "label6";
             // 
-            // btnXReport
-            // 
-            this.btnXReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXReport.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnXReport.Location = new System.Drawing.Point(1326, 18);
-            this.btnXReport.Name = "btnXReport";
-            this.btnXReport.Size = new System.Drawing.Size(161, 63);
-            this.btnXReport.TabIndex = 294;
-            this.btnXReport.Text = "X-rapport";
-            this.btnXReport.UseVisualStyleBackColor = true;
-            // 
-            // btnZReport
-            // 
-            this.btnZReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnZReport.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnZReport.Location = new System.Drawing.Point(1159, 18);
-            this.btnZReport.Name = "btnZReport";
-            this.btnZReport.Size = new System.Drawing.Size(161, 63);
-            this.btnZReport.TabIndex = 295;
-            this.btnZReport.Text = "Z-rapport";
-            this.btnZReport.UseVisualStyleBackColor = true;
-            this.btnZReport.Click += new System.EventHandler(this.GenerateZReport);
-            // 
             // button41
             // 
             this.button41.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1039,46 +975,15 @@
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.Keyboard);
             // 
-            // btnReceipt
-            // 
-            this.btnReceipt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReceipt.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnReceipt.Location = new System.Drawing.Point(1493, 18);
-            this.btnReceipt.Name = "btnReceipt";
-            this.btnReceipt.Size = new System.Drawing.Size(169, 63);
-            this.btnReceipt.TabIndex = 297;
-            this.btnReceipt.Text = "PRINT BON";
-            this.btnReceipt.UseVisualStyleBackColor = true;
-            // 
-            // rbTestbon
-            // 
-            this.rbTestbon.AutoSize = true;
-            this.rbTestbon.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbTestbon.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.rbTestbon.Location = new System.Drawing.Point(1035, 938);
-            this.rbTestbon.Name = "rbTestbon";
-            this.rbTestbon.Size = new System.Drawing.Size(129, 29);
-            this.rbTestbon.TabIndex = 298;
-            this.rbTestbon.TabStop = true;
-            this.rbTestbon.Text = "TESTBON";
-            this.rbTestbon.UseVisualStyleBackColor = true;
-            // 
             // Forside
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1924, 1061);
-            this.Controls.Add(this.rbTestbon);
-            this.Controls.Add(this.btnReceipt);
             this.Controls.Add(this.button41);
-            this.Controls.Add(this.btnZReport);
-            this.Controls.Add(this.btnXReport);
             this.Controls.Add(this.displayTime);
             this.Controls.Add(this.displayDate);
-            this.Controls.Add(this.btnMobilepay);
-            this.Controls.Add(this.btnKontant);
-            this.Controls.Add(this.btnKort);
             this.Controls.Add(this.btnCreateProduct);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -1217,17 +1122,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCreateProduct;
-        private System.Windows.Forms.Button btnKort;
-        private System.Windows.Forms.Button btnKontant;
-        private System.Windows.Forms.Button btnMobilepay;
         private System.Windows.Forms.Label displayDate;
         private System.Windows.Forms.Label displayTime;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btnXReport;
-        private System.Windows.Forms.Button btnZReport;
         private System.Windows.Forms.Button button41;
-        private System.Windows.Forms.Button btnReceipt;
-        private System.Windows.Forms.RadioButton rbTestbon;
     }
 }
 
