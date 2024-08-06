@@ -221,6 +221,8 @@ namespace searchengine123
         private void Minimize(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
         }
 
         private void Close(object sender, EventArgs e)
@@ -355,6 +357,8 @@ namespace searchengine123
         private void button1_Click(object sender, EventArgs e)
         {
             tbPriceCreate.Text = "";
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
         }
     }
 }
