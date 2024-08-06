@@ -33,8 +33,7 @@ namespace searchengine123
             tbBarcode.Enabled = false;
             
             timer1.Start();
-            UpdateDateTime();
-            
+           
             InitiateHTTP();
         }
 
@@ -50,12 +49,7 @@ namespace searchengine123
             }
             }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            
-            UpdateDateTime();
-        }
-
+       
         private async void btnAddToBasket_Click_1(object sender, EventArgs e)
         {
 
@@ -335,12 +329,7 @@ namespace searchengine123
             }
         }
 
-        private void UpdateDateTime()
-        {
-          
-            displayDate.Text = DateTime.Now.ToString("yyyy-MM-dd"); 
-            displayTime.Text = DateTime.Now.ToString("HH:mm");   
-        }
+       
        
         private async void GenerateZReport(object sender, EventArgs e)
         {
