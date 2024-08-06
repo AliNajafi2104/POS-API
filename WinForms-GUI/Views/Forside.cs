@@ -351,5 +351,10 @@ namespace searchengine123
         decimal totalSum_CurrentBasket;
         ProductService productService = new ProductService();
         readonly TransactionService transactionService = new TransactionService();
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tbPriceCreate.Text = "";
+        }
     }
 }
