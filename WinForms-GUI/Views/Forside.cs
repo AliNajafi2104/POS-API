@@ -35,6 +35,8 @@ namespace searchengine123
             timer1.Start();
            
             InitiateHTTP();
+
+
         }
 
         private async void InitiateHTTP()
@@ -189,6 +191,12 @@ namespace searchengine123
             dataGridViewBasket.Columns["ProductTypeID"].Visible = false;
             dataGridViewBasket.Columns["ProductTypeID"].Visible = false;
 
+            dataGridViewBasket.Columns[0].Width = 138;
+
+            dataGridViewBasket.Columns[1].Width = 95;
+
+            dataGridViewBasket.Columns[2].Width = 110;
+
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
@@ -251,7 +259,13 @@ namespace searchengine123
 
                 }
                 else if (button.Text == "<--" && button != null)
-                    tbNameCreate.Text = "";
+                {
+                    if (tbNameCreate.Text.Length > 0) // Ensure there is text to remove
+                    {
+                        tbNameCreate.Text = tbNameCreate.Text.Substring(0, tbNameCreate.Text.Length - 1);
+                    }
+                }
+
             }
             btnAddToBasket.Focus();
         }
@@ -357,6 +371,32 @@ namespace searchengine123
         private void button1_Click(object sender, EventArgs e)
         {
             tbPriceCreate.Text = "";
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tbBarcode.Clear();
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+        }
+
+        private void Forside_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            tbNameCreate.Clear();
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            tbManuelPrice.Clear();
             this.ActiveControl = null;
             btnAddToBasket.Focus();
         }
