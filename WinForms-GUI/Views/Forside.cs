@@ -20,7 +20,7 @@ namespace searchengine123
     public partial class Forside : Form
     {
         private readonly List<Product> scannedProducts = new List<Product>();
-      
+
         private readonly ProductService productService = new ProductService();
 
         public Forside()
@@ -31,7 +31,7 @@ namespace searchengine123
 
         private void InitializeFormSettings()
         {
-           
+
             KeyPreview = true;
             KeyPress += Form1_KeyPress;
             WindowState = FormWindowState.Maximized;
@@ -99,7 +99,7 @@ namespace searchengine123
                 }
 
                 scannedProducts.Add(product);
-                 tbBarcode.Clear();
+                tbBarcode.Clear();
             }
             catch (HttpRequestException ex)
             {
@@ -136,7 +136,7 @@ namespace searchengine123
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = scannedProducts;
             dataGridView1.Refresh();
-       
+
         }
 
         private void btnResetBasket_Click(object sender, EventArgs e)
@@ -167,7 +167,7 @@ namespace searchengine123
             if (sender is Button button)
             {
                 // Determine if the button is a numpad or keyboard button based on its text
-                if (char.IsDigit(button.Text[0])||button.Text==",")  // Check if the button's text is a digit
+                if (char.IsDigit(button.Text[0]) || button.Text == ",")  // Check if the button's text is a digit
                 {
                     HandleNumpadInput(button);
                 }
@@ -251,7 +251,7 @@ namespace searchengine123
                 await productService.CreateProductAsync(product);
                 panel2.Visible = true;
                 scannedProducts.Add(product);
-                 ClearTextBoxes(tbBarcodeCreate, tbNameCreate, tbPriceCreate);
+                ClearTextBoxes(tbBarcodeCreate, tbNameCreate, tbPriceCreate);
             }
             catch (Exception ex)
             {
@@ -266,29 +266,35 @@ namespace searchengine123
             btnAddToBasket.Focus();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+
+        private void ClearTextBoxBasedOnButton(object sender, EventArgs e)
         {
-            tbPriceCreate.Clear();
+            if (sender is Button button)
+            {
+                switch (button.Name)
+                {
+                    case "tbPriceDel":
+                        tbPriceCreate.Clear();
+                        break;
+                    case "tbNameDel":
+                        tbNameCreate.Clear();
+                        break;
+                    case "tbBarcodeDel":
+                        tbBarcode.Clear();
+                        break;
+                    case "tbManuelPriceDel":
+                        tbManuelPrice.Clear();
+                        break;
+                    default:
+
+                        break;
+                }
+            }
             FocusButton();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            tbBarcode.Clear();
-            FocusButton();
-        }
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            tbNameCreate.Clear();
-            FocusButton();
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            tbManuelPrice.Clear();
-            FocusButton();
-        }
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -324,14 +330,8 @@ namespace searchengine123
             FocusButton();
         }
 
-        private void Forside_Load(object sender, EventArgs e) { }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-       
+        private void btnClose_Click(object sender, EventArgs e) => Close();
     }
 
 
