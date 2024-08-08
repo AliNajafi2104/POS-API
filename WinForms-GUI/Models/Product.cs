@@ -15,7 +15,7 @@ namespace FunctionLibrary.Models
         public string Barcode { get; set; } 
         public decimal Price { get; set; } 
         
-        public int? ProductTypeID { get; set; }
+      
         
       
        
