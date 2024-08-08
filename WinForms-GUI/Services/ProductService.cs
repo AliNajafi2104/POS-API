@@ -92,7 +92,7 @@ namespace searchengine123
         {
             try
             {
-                string url = $"{barcode}";
+                string url = $"api/product/{barcode}";
 
                 HttpResponseMessage response = await _httpClient.DeleteAsync(url);
                 if (response.IsSuccessStatusCode)

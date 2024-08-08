@@ -12,6 +12,7 @@ using Google.Protobuf.Reflection;
 using searchengine123.Models;
 using System.Linq;
 using searchengine123.Properties;
+using searchengine123.Views;
 
 
 namespace searchengine123
@@ -25,20 +26,28 @@ namespace searchengine123
             this.KeyPress += Form1_KeyPress;
             this.WindowState = FormWindowState.Maximized;
             this.Click += Numpad;
-            
+            panel1.Visible = false;
             dataGridViewBasket.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridViewBasket.DataSource = scannedProducts;
             dataGridViewBasket.Columns["ProductTypeID"].Visible = false;
-            
+            panel2.Visible = false;
             tbBarcode.Enabled = false;
             
             timer1.Start();
-           
+            pictureBox1.Image = Properties.Resources.green_check;
             InitiateHTTP();
 
-
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+            this.KeyPreview = true; // Ensure the form captures key events before other controls
         }
-
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnAddToBasket.PerformClick();
+                e.SuppressKeyPress = true; // Prevent other default actions
+            }
+        }
         private async void InitiateHTTP()
         {
             try
@@ -64,19 +73,26 @@ namespace searchengine123
             {
                 return;
             }
+
+            panel1.Visible = true;
+
             try
             {
+
                 Product produkt = await productService.GetProductFromApiAsync(tbBarcode.Text);
                 if (produkt == null)
                 {
-                    
-                    MessageBox.Show("Product not found in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    panel1.Visible = false;
+                    PopUp popUp = new PopUp();
+                    popUp.ShowDialog();
+                   // MessageBox.Show("Product not found in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbBarcodeCreate.Text = tbBarcode.Text;
                     tbNameCreate.Text = "";
                     tbPriceCreate.Text = "";
                     tbBarcode.Clear();
                     return; 
                 }
+               
                 scannedProducts.Add(produkt);
                 totalSum_CurrentBasket += Convert.ToDecimal(produkt.Price);
                 dataGridViewBasketRefresh();
@@ -92,6 +108,7 @@ namespace searchengine123
                 
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            panel1.Visible = false;
             dataGridViewBasket.Columns[3].Visible = false;
         }
 
@@ -205,12 +222,7 @@ namespace searchengine123
             {
                 tbBarcode.AppendText(e.KeyChar.ToString());
             }
-            else if (e.KeyChar == (char)Keys.Enter)
-            {
-
-                btnAddToBasket.PerformClick();
-                e.Handled = true;
-            }
+         
             else if (e.KeyChar == '\b' && tbBarcode.Text.Length > 0)
             {
                 tbBarcode.Text = tbBarcode.Text.Remove(tbBarcode.Text.Length - 1);
@@ -292,10 +304,13 @@ namespace searchengine123
                    await productService.CreateProductAsync(product);
 
 
-                    MessageBox.Show("Vare oprettet");
+                    panel2.Visible = true;
+
                     scannedProducts.Add(product);
                     totalSum_CurrentBasket += Convert.ToDecimal(product.Price);
                     dataGridViewBasketRefresh();
+                    this.ActiveControl = null;
+                    btnAddToBasket.Focus();
                 }
 
                 catch (Exception ex)
@@ -313,7 +328,10 @@ namespace searchengine123
             tbNameCreate.Clear();
             tbPriceCreate.Clear();
             btnAddToBasket.Focus();
-            }
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+
+        }
 
         private async void PaymentCash(object sender, EventArgs e)
         {
@@ -399,6 +417,22 @@ namespace searchengine123
             tbManuelPrice.Clear();
             this.ActiveControl = null;
             btnAddToBasket.Focus();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            SletVare sletVare = new SletVare();
+            sletVare.ShowDialog();
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            panel2.Visible = false;
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+                
         }
     }
 }
