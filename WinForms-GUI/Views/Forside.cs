@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-
-
+using System.Web;
+using static System.Net.WebUtility;
 using System.Net.Http;
 
 using FunctionLibrary.Models;
@@ -15,6 +15,9 @@ using searchengine123.Properties;
 using searchengine123.Views;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Net;
+using System.Text;
+using Microsoft.AspNetCore.WebUtilities;
 
 
 namespace searchengine123
@@ -25,60 +28,124 @@ namespace searchengine123
 
         private readonly ProductService productService = new ProductService();
         private HubConnection _hubConnection;
-        public Forside()
-        {
-            InitializeComponent();
-            InitializeFormSettings();
-            InitializeSignalR();
-        }
-        private async void InitializeSignalR()
-        {
-            // Initialize the connection to the SignalR hub
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl("https://poswebapi20240714125856.azurewebsites.net/notificationHub") // Use the correct URL for your SignalR hub
-                .Build();
+        private HttpListener _httpListener;
 
-            // Define how to handle incoming messages
-            _hubConnection.On<string>("ReceiveBarcode", barcode =>
+            public Forside()
             {
-                // Update the UI on the main thread
-                Invoke(new Action(() =>
+                InitializeComponent();
+                InitializeFormSettings();
+                InitializeSignalR();
+                //StartHttpServer();
+            }
+            private async void InitializeSignalR()
+            {
+                // Initialize the connection to the SignalR hub
+                _hubConnection = new HubConnectionBuilder()
+                    .WithUrl("https://poswebapi20240714125856.azurewebsites.net/notificationHub") // Use the correct URL for your SignalR hub
+                    .Build();
+
+                // Define how to handle incoming messages
+                _hubConnection.On<string>("ReceiveBarcode", barcode =>
                 {
-                    tbBarcode.Text = barcode; // Assuming you have a TextBox named tbBarcode
-                    btnAddToBasket.PerformClick(); // Assuming you want to trigger a button click
-                }));
-            });
+                    // Update the UI on the main thread
+                    Invoke(new Action(() =>
+                    {
+                        tbBarcode.Text = barcode; // Assuming you have a TextBox named tbBarcode
+                        btnAddToBasket.PerformClick(); // Assuming you want to trigger a button click
+                    }));
+                });
 
-            try
-            {
-                // Start the connection
-                await _hubConnection.StartAsync();
-                Console.WriteLine("SignalR connection started.");
+                try
+                {
+                    // Start the connection
+                    await _hubConnection.StartAsync();
+                    Console.WriteLine("SignalR connection started.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
+                }
             }
-            catch (Exception ex)
+            private void InitializeFormSettings()
             {
-                Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
+
+                KeyPreview = true;
+                KeyPress += Form1_KeyPress;
+                WindowState = FormWindowState.Maximized;
+                Click += HandleInput;
+                panel1.Visible = false;
+                panel2.Visible = false;
+                tbBarcode.Enabled = false;
+                timer1.Start();
+                pictureBox1.Image = Properties.Resources.green_check;
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                dataGridView1.RowTemplate.Height = 50;
+                dataGridView1.DataBindingComplete += DataGridView1_DataBindingComplete;
+
+
             }
-        }
-        private void InitializeFormSettings()
+        /*
+            private void StartHttpServer()
+            {
+                _httpListener = new HttpListener();
+                _httpListener.Prefixes.Add("http://*:8080/");  // Listen on all network interfaces
+                _httpListener.Start();
+                Task.Run(() => HandleRequests());
+            }
+
+
+        private async Task HandleRequests()
         {
+            while (true)
+            {
+                var context = await _httpListener.GetContextAsync();
+                var request = context.Request;
+                var response = context.Response;
 
-            KeyPreview = true;
-            KeyPress += Form1_KeyPress;
-            WindowState = FormWindowState.Maximized;
-            Click += HandleInput;
-            panel1.Visible = false;
-            panel2.Visible = false;
-            tbBarcode.Enabled = false;
-            timer1.Start();
-            pictureBox1.Image = Properties.Resources.green_check;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridView1.RowTemplate.Height = 50;
-            dataGridView1.DataBindingComplete += DataGridView1_DataBindingComplete;
+                string barcode = "";
+                if (request.Url.Query.Length > 0)
+                {
+                    var query = request.Url.Query;
+                    var queryParams = QueryHelpers.ParseQuery(query);
+                    barcode = queryParams["barcode"];  // Extract the barcode from the query string
+                }
 
+                // Process the barcode here
+                Console.WriteLine("Received barcode: " + barcode);
 
+                // Respond to the request
+                string responseString = "Barcode received";
+                byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+                response.ContentLength64 = buffer.Length;
+                using (var output = response.OutputStream)
+                {
+                    await output.WriteAsync(buffer, 0, buffer.Length);
+                }
+
+                // Update UI on the main thread
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(() =>
+                    {
+                        tbBarcode.Text = barcode;
+                        btnAddToBasket.PerformClick();
+                    }));
+                }
+                else
+                {
+                    tbBarcode.Text = barcode;
+                    btnAddToBasket.PerformClick();
+                }
+            }
         }
 
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+            {
+                base.OnFormClosed(e);
+                _httpListener.Stop();
+            }
+        */
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Handle key press event
