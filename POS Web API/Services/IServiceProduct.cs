@@ -15,6 +15,12 @@ public interface IServiceProduct
 
     Task CreateProductAsync(Product product);
 
+
+    Task PostBasket(string barcode);
+
+    Task<List<ProductBasketDTO>> GetBasket();
+
+    Task ResetBasket();
   
 }
 

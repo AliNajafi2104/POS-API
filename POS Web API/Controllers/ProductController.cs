@@ -22,6 +22,8 @@ namespace POS_API.Controllers
         }
 
 
+      
+
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
@@ -108,8 +110,53 @@ namespace POS_API.Controllers
             }
         }
 
+        [HttpPost("Scan/{barcode}")]
+        public async Task<IActionResult> PostBasket(string barcode)
+        {
+            try
+            {
+                await _serviceProduct.PostBasket(barcode);
+                return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
 
+        [HttpGet("Basket")]
+        public async Task<IActionResult> GetBasket()
+        {
+            try
+            {
+                var products = await _serviceProduct.GetBasket();
+                return Ok(products);
+            }
 
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error gettings products ");
+                return StatusCode(500, new { message = "Error occurred while fetching products" });
+            }
+        }
+
+        [HttpPost("ResetBasket")]
+        public async Task<IActionResult> ResetBasket()
+        {
+            try
+            {
+                await _serviceProduct.ResetBasket();
+                return Ok(new { message = "Basket has been reset successfully." });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (if you have a logger)
+                // _logger.LogError(ex, "Error occurred while resetting the basket");
+                return StatusCode(500, new { message = "Error occurred while resetting the basket" });
+            }
+        }
     }
 
 }
+
+

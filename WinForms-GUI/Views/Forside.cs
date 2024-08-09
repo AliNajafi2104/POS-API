@@ -13,6 +13,7 @@ using searchengine123.Models;
 using System.Linq;
 using searchengine123.Properties;
 using searchengine123.Views;
+using System.Threading.Tasks;
 
 
 namespace searchengine123
@@ -44,6 +45,7 @@ namespace searchengine123
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridView1.RowTemplate.Height = 50;
             dataGridView1.DataBindingComplete += DataGridView1_DataBindingComplete;
+
 
         }
 
@@ -78,9 +80,9 @@ namespace searchengine123
             // Set column widths after data binding is complete
             if (dataGridView1.Columns.Count > 2) // Ensure there are enough columns
             {
-                dataGridView1.Columns[0].Width = 138;
-                dataGridView1.Columns[1].Width = 95;
-                dataGridView1.Columns[2].Width = 110;
+                dataGridView1.Columns[1].Width = 138;
+                dataGridView1.Columns[2].Width = 95;
+                dataGridView1.Columns[3].Width = 110;
             }
         }
         private async void btnAddToBasket_Click_1(object sender, EventArgs e)
@@ -100,6 +102,7 @@ namespace searchengine123
 
                 scannedProducts.Add(product);
                 tbBarcode.Clear();
+
             }
             catch (HttpRequestException ex)
             {
@@ -132,9 +135,11 @@ namespace searchengine123
 
         private void UpdateDataGridView()
         {
+
             displayTotal.Text = $"Total: {scannedProducts.Sum(product => product.Price):C}";
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = scannedProducts;
+            dataGridView1.Columns["Id"].Visible = false;
             dataGridView1.Refresh();
 
         }
@@ -332,7 +337,65 @@ namespace searchengine123
 
 
         private void btnClose_Click(object sender, EventArgs e) => Close();
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Await the asynchronous GetBasket method
+                List<Product> newProducts = await productService.GetBasket();
+
+                if (newProducts != null)
+                {
+                    foreach (var newProduct in newProducts)
+                    {
+                        // Check if the product is already in the scannedProducts list
+                        var existingProduct = scannedProducts.FirstOrDefault(p => p.Id == newProduct.Id);
+
+                        if (existingProduct != null)
+                        {
+
+                        }
+                        else
+                        {
+                            // Add the new product to the list if it doesn't already exist
+                            scannedProducts.Add(newProduct);
+                        }
+                    }
+
+                    // Update the UI or perform other actions with the updated list
+                    UpdateDataGridView();
+                }
+                else
+                {
+                    // Handle the case where GetBasket returns null, if needed
+                    MessageBox.Show("No products found or an error occurred while fetching products.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions if needed
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
+       
+
+        private async void button4_Click(object sender, EventArgs e)
+        {
+            bool result = await productService.ResetPhoneBasket();
+            if (result)
+            {
+                MessageBox.Show("Nulstillet");
+            }
+            else
+            {
+                MessageBox.Show("Nulstilling fejlede");
+            }
+
+        }
     }
 
 
 }
+

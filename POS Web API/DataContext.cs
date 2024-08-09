@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using POS_API.DTO;
 
 
 
@@ -22,6 +23,7 @@ public class DataContext : DbContext
 
     public DbSet<TransactionDetail> TransactionDetail { get; set; }
 
+    public DbSet<ProductBasketDTO> ProductBasketDTO { get; set; }
 
 }
 

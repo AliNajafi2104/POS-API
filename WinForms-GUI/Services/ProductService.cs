@@ -20,7 +20,7 @@ using Mysqlx;
 
 namespace searchengine123
 {
-    public  class ProductService
+    public class ProductService
     {
 
         private readonly HttpClient _httpClient;
@@ -28,8 +28,8 @@ namespace searchengine123
 
         public ProductService()
         {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://poswebapi20240714125856.azurewebsites.net/"); 
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("https://poswebapi20240714125856.azurewebsites.net/");
 
 
         }
@@ -37,7 +37,7 @@ namespace searchengine123
 
         public async Task<Product> GetProductFromApiAsync(string barcode)
         {
-           
+
             string requestUri = $"api/product/{barcode}";
 
             HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
@@ -58,10 +58,10 @@ namespace searchengine123
                 throw new Exception("Error\n" + response);
             }
         }
-    
 
 
-    public async Task<Product> CreateProductAsync(Product product)
+
+        public async Task<Product> CreateProductAsync(Product product)
         {
             try
             {
@@ -113,7 +113,64 @@ namespace searchengine123
         }
 
 
+        public async Task<List<Product>> GetBasket()
+        {
+            try
+            {
+                string url = "api/product/Basket";
+
+                HttpResponseMessage response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+                    List<Product> products = JsonConvert.DeserializeObject<List<Product>>(responseData);
+                    return products;
+                }
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return new List<Product>(); // Return an empty list instead of null
+                }
+                else
+                {
+                    throw new Exception($"Error: {response.ReasonPhrase}"); // Improved error message
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log it if necessary
+                throw new Exception("An error occurred while fetching the basket.", ex);
+            }
+        }
+
+        public async Task<bool> ResetPhoneBasket()
+        {
+            try
+            {
+                string url = "api/product/ResetBasket";
+                HttpResponseMessage response = await _httpClient.PostAsync(url, null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+
+
+                }
+                else
+                {
+                return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            }
+
+
 
 
     }
+
+
 }

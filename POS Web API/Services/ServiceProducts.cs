@@ -105,7 +105,70 @@ public class ServiceProducts : IServiceProduct
         }
     }
 
+    public async Task PostBasket(string barcode)
+    {
 
-  
+        try
+        {
+            var product = await GetProduct(barcode);
+
+            if (product == null)
+            {
+                throw new Exception("Product not found.");
+            }
+
+            var productBasket = new ProductBasketDTO
+            {
+                Name = product.Name,
+                Barcode = product.Barcode,
+                Price = product.Price
+            };
+
+            _context.ProductBasketDTO.Add(productBasket); // Add entity to DbSet
+            await _context.SaveChangesAsync(); // Save changes to the database
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error occurred while posting to basket", ex);
+        }
+
+    }
+
+    public async Task<List<ProductBasketDTO>> GetBasket()
+    {
+        try
+        {
+            var products = await _context.ProductBasketDTO.ToListAsync();
+            return products;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+
+    public async Task ResetBasket()
+    {
+        try
+        {
+            // Assuming ProductBasketDTO is a DbSet in your DbContext
+            var items = _context.ProductBasketDTO.ToList();
+
+            // Remove all items from the basket
+            _context.ProductBasketDTO.RemoveRange(items);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            // Log the exception if you have a logging mechanism
+            
+            // Optionally, rethrow the exception or handle it as needed
+            throw new Exception("Error occurred while resetting the basket", ex);
+        }
+    }
+
 }
 
