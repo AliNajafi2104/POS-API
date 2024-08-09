@@ -24,5 +24,10 @@ namespace searchengine123.Views
         {
             this.Close();
         }
+
+        private void PopUp_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

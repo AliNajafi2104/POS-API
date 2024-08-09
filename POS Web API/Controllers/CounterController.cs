@@ -71,6 +71,15 @@ namespace POS_API.Controllers
                 _logger.LogError(ex, "Error getting total count price");
                 return StatusCode(500, new { message = "Error occurred while fetching total price of counters" });
             }
+
+
+
+
+
         }
+
+
+      
+
     }
 }

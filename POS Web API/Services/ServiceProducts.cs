@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using POS_API.DTO;
+using POS_API.Models;
+using System.Net.Http;
 
 
 
@@ -8,13 +10,14 @@ using POS_API.DTO;
 
 public class ServiceProducts : IServiceProduct
 {
+    private readonly HttpClient _httpClient;
     private readonly DataContext _context;
 
-    public ServiceProducts(DataContext context)
+    public ServiceProducts(HttpClient httpClient, DataContext context)
     {
+        _httpClient = httpClient;
         _context = context;
     }
-
 
 
 
@@ -105,70 +108,46 @@ public class ServiceProducts : IServiceProduct
         }
     }
 
-    public async Task PostBasket(string barcode)
+
+
+    public async Task getdata()
     {
+        string baseUrl = "https://poswebapi20240714125856.azurewebsites.net";
+        string endpoint = "/api/product";
 
         try
         {
-            var product = await GetProduct(barcode);
+            // Step 1: Get the list of products from the remote API
+            var products = await _httpClient.GetFromJsonAsync<List<Product>>(baseUrl + endpoint);
 
-            if (product == null)
+            if (products != null)
             {
-                throw new Exception("Product not found.");
+                // Step 2: Create each product in the local database
+                foreach (var product in products)
+                {
+
+                    if(product.Barcode.Length<255)
+                    {
+
+                    Product productDTOMove = new Product
+                    {
+                        Name = product.Name,
+                        Price = product.Price,
+                        Barcode = product.Barcode
+                    };
+                    await CreateProductAsync(productDTOMove);
+                    }
+                }
             }
-
-            var productBasket = new ProductBasketDTO
-            {
-                Name = product.Name,
-                Barcode = product.Barcode,
-                Price = product.Price
-            };
-
-            _context.ProductBasketDTO.Add(productBasket); // Add entity to DbSet
-            await _context.SaveChangesAsync(); // Save changes to the database
         }
         catch (Exception ex)
         {
-            throw new Exception("Error occurred while posting to basket", ex);
-        }
-
-    }
-
-    public async Task<List<ProductBasketDTO>> GetBasket()
-    {
-        try
-        {
-            var products = await _context.ProductBasketDTO.ToListAsync();
-            return products;
-        }
-        catch
-        {
-            return null;
+            // Handle exceptions as needed
+            throw new Exception("An error occurred while retrieving or saving products.", ex);
         }
     }
 
 
-    public async Task ResetBasket()
-    {
-        try
-        {
-            // Assuming ProductBasketDTO is a DbSet in your DbContext
-            var items = _context.ProductBasketDTO.ToList();
-
-            // Remove all items from the basket
-            _context.ProductBasketDTO.RemoveRange(items);
-
-            // Save changes to the database
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            // Log the exception if you have a logging mechanism
-            
-            // Optionally, rethrow the exception or handle it as needed
-            throw new Exception("Error occurred while resetting the basket", ex);
-        }
-    }
 
 }
 

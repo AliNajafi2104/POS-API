@@ -16,8 +16,6 @@ using System.Threading.Tasks;
         public string Barcode { get; set; } 
         public decimal Price { get; set; } 
 
-        public int? ProductTypeID { get; set; }
-
         public int? Count { get; set; }
 
         public DateTime? CountDate { get; set; }

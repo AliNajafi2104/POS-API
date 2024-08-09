@@ -11,10 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddHttpClient();
 // Register services
 builder.Services.AddScoped<IServiceProduct, ServiceProducts>();
-builder.Services.AddScoped<IServiceTransaction, ServiceTransaction>();
 builder.Services.AddScoped<IServiceCounter, ServiceCounter>();
 builder.Services.AddLogging();
 
