@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.SignalR;
 using POS_API.DTO;
 
 
@@ -15,14 +16,26 @@ namespace POS_API.Controllers
         private readonly ILogger<ProductController> _logger;
 
 
-        public ProductController(IServiceProduct serviceProduct, ILogger<ProductController> logger)
+        public ProductController(IServiceProduct serviceProduct, ILogger<ProductController> logger, IHubContext<NotificationHub> hubContext)
         {
             _serviceProduct = serviceProduct;
             _logger = logger;
+
+            _hubContext = hubContext;
         }
 
 
-      
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+       
+        [HttpPost("SignalR/{barcode}")]
+        public async Task<IActionResult> PostBarcode(string barcode)
+        {
+            // Broadcast the barcode data to all connected clients
+            await _hubContext.Clients.All.SendAsync("ReceiveBarcode", barcode);
+            return Ok();
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> GetProducts()
@@ -160,3 +173,7 @@ namespace POS_API.Controllers
 }
 
 
+public class BarcodeData
+{
+    public string Barcode { get; set; }
+}

@@ -14,6 +14,7 @@ using System.Linq;
 using searchengine123.Properties;
 using searchengine123.Views;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
 
 
 namespace searchengine123
@@ -23,13 +24,42 @@ namespace searchengine123
         private readonly List<Product> scannedProducts = new List<Product>();
 
         private readonly ProductService productService = new ProductService();
-
+        private HubConnection _hubConnection;
         public Forside()
         {
             InitializeComponent();
             InitializeFormSettings();
+            InitializeSignalR();
         }
+        private async void InitializeSignalR()
+        {
+            // Initialize the connection to the SignalR hub
+            _hubConnection = new HubConnectionBuilder()
+                .WithUrl("https://poswebapi20240714125856.azurewebsites.net/notificationHub") // Use the correct URL for your SignalR hub
+                .Build();
 
+            // Define how to handle incoming messages
+            _hubConnection.On<string>("ReceiveBarcode", barcode =>
+            {
+                // Update the UI on the main thread
+                Invoke(new Action(() =>
+                {
+                    tbBarcode.Text = barcode; // Assuming you have a TextBox named tbBarcode
+                    btnAddToBasket.PerformClick(); // Assuming you want to trigger a button click
+                }));
+            });
+
+            try
+            {
+                // Start the connection
+                await _hubConnection.StartAsync();
+                Console.WriteLine("SignalR connection started.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
+            }
+        }
         private void InitializeFormSettings()
         {
 
@@ -377,6 +407,7 @@ namespace searchengine123
                 // Handle exceptions if needed
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
+            FocusButton();
         }
 
        
@@ -392,8 +423,9 @@ namespace searchengine123
             {
                 MessageBox.Show("Nulstilling fejlede");
             }
-
+            FocusButton() ;
         }
+
     }
 
 

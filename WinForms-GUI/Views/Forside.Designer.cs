@@ -111,8 +111,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -334,7 +332,7 @@
             // displayTotal
             // 
             this.displayTotal.AutoSize = true;
-            this.displayTotal.BackColor = System.Drawing.Color.White;
+            this.displayTotal.BackColor = System.Drawing.Color.LightGray;
             this.displayTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayTotal.ForeColor = System.Drawing.SystemColors.InfoText;
             this.displayTotal.Location = new System.Drawing.Point(21, 940);
@@ -1092,38 +1090,12 @@
             this.dataGridView1.TabIndex = 306;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.button1.Location = new System.Drawing.Point(683, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 63);
-            this.button1.TabIndex = 307;
-            this.button1.Text = "Importer kurv";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.button4.Location = new System.Drawing.Point(683, 87);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(138, 69);
-            this.button4.TabIndex = 308;
-            this.button4.Text = "Scanner reset";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // Forside
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1856, 1024);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.panel1);
@@ -1284,8 +1256,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
     }
 }
 
