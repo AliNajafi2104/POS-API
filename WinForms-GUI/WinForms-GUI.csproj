@@ -258,16 +258,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\ReportService.cs" />
-    <Compile Include="Services\TransactionService.cs" />
-    <Compile Include="Models\Journal.cs" />
-    <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductType.cs" />
-    <Compile Include="Models\Salesperson.cs" />
-    <Compile Include="Models\SalesSummary.cs" />
-    <Compile Include="Models\Transaction.cs" />
-    <Compile Include="Models\TransactionDTO.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

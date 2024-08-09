@@ -48,8 +48,8 @@ namespace POS_API.Controllers
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error gettings products ");
-                return StatusCode(500, new { message = "Error occurred while fetching products" });
+
+                return Ok(ex.Message + ex.InnerException);
             }
         }
 

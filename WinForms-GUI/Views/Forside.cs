@@ -9,7 +9,6 @@ using System.Net.Http;
 
 using FunctionLibrary.Models;
 using Google.Protobuf.Reflection;
-using searchengine123.Models;
 using System.Linq;
 using searchengine123.Properties;
 using searchengine123.Views;
@@ -28,20 +27,19 @@ namespace searchengine123
 
         private readonly ProductService productService = new ProductService();
         private HubConnection _hubConnection;
-        private HttpListener _httpListener;
-
+       
             public Forside()
             {
                 InitializeComponent();
                 InitializeFormSettings();
                 InitializeSignalR();
-                //StartHttpServer();
+               
             }
             private async void InitializeSignalR()
             {
                 // Initialize the connection to the SignalR hub
                 _hubConnection = new HubConnectionBuilder()
-                    .WithUrl("https://poswebapi20240714125856.azurewebsites.net/notificationHub") // Use the correct URL for your SignalR hub
+                    .WithUrl("http://localhost:2030/notificationHub") // Use the correct URL for your SignalR hub
                     .Build();
 
                 // Define how to handle incoming messages
@@ -84,68 +82,7 @@ namespace searchengine123
 
 
             }
-        /*
-            private void StartHttpServer()
-            {
-                _httpListener = new HttpListener();
-                _httpListener.Prefixes.Add("http://*:8080/");  // Listen on all network interfaces
-                _httpListener.Start();
-                Task.Run(() => HandleRequests());
-            }
-
-
-        private async Task HandleRequests()
-        {
-            while (true)
-            {
-                var context = await _httpListener.GetContextAsync();
-                var request = context.Request;
-                var response = context.Response;
-
-                string barcode = "";
-                if (request.Url.Query.Length > 0)
-                {
-                    var query = request.Url.Query;
-                    var queryParams = QueryHelpers.ParseQuery(query);
-                    barcode = queryParams["barcode"];  // Extract the barcode from the query string
-                }
-
-                // Process the barcode here
-                Console.WriteLine("Received barcode: " + barcode);
-
-                // Respond to the request
-                string responseString = "Barcode received";
-                byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-                response.ContentLength64 = buffer.Length;
-                using (var output = response.OutputStream)
-                {
-                    await output.WriteAsync(buffer, 0, buffer.Length);
-                }
-
-                // Update UI on the main thread
-                if (InvokeRequired)
-                {
-                    Invoke(new Action(() =>
-                    {
-                        tbBarcode.Text = barcode;
-                        btnAddToBasket.PerformClick();
-                    }));
-                }
-                else
-                {
-                    tbBarcode.Text = barcode;
-                    btnAddToBasket.PerformClick();
-                }
-            }
-        }
-
-
-        protected override void OnFormClosed(FormClosedEventArgs e)
-            {
-                base.OnFormClosed(e);
-                _httpListener.Stop();
-            }
-        */
+       
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Handle key press event
