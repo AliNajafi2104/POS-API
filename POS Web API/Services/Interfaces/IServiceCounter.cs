@@ -1,6 +1,4 @@
-﻿
-
-namespace POS_API.Services
+﻿namespace POS_API.Services.Interfaces
 {
     public interface IServiceCounter
     {

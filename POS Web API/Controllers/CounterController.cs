@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-using POS_API.Services;
+using POS_API.Services.Interfaces;
 using System.Data.SqlClient;
 
 namespace POS_API.Controllers

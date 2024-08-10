@@ -1,5 +1,6 @@
 ﻿
 using System.Data.Entity;
+using POS_API.Services.Interfaces;
 
 namespace POS_API.Services
 {
