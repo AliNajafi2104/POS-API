@@ -13,14 +13,11 @@ namespace POS_API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IServiceProduct _serviceProduct;
-        private readonly ILogger<ProductController> _logger;
+       
 
-
-        public ProductController(IServiceProduct serviceProduct, ILogger<ProductController> logger, IHubContext<NotificationHub> hubContext)
+        public ProductController(IServiceProduct serviceProduct, IHubContext<NotificationHub> hubContext)
         {
             _serviceProduct = serviceProduct;
-            _logger = logger;
-
             _hubContext = hubContext;
         }
 
@@ -68,7 +65,7 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting product");
+                
                 return StatusCode(500, new { message = "Error occurred while fetching product" });
             }
         }
@@ -87,7 +84,7 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error");
+               
                 return StatusCode(500, new { message = "Error occurred while creating product" });
             }
         }
@@ -103,7 +100,7 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error");
+               
                 return StatusCode(500, new { message = "Error occurred while deleting product" });
             }
         }
@@ -118,7 +115,7 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error");
+               
                 return StatusCode(500, new { message = "Error occurred while updating product" });
             }
         }
@@ -136,8 +133,3 @@ namespace POS_API.Controllers
 
 }
 
-
-public class BarcodeData
-{
-    public string Barcode { get; set; }
-}

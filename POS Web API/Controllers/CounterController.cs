@@ -10,12 +10,11 @@ namespace POS_API.Controllers
     public class CounterController : ControllerBase
     {
         private readonly IServiceCounter _serviceCounter;
-        private readonly ILogger<CounterController> _logger;
-
-        public CounterController(IServiceCounter serviceCounter, ILogger<CounterController> logger)
+       
+        public CounterController(IServiceCounter serviceCounter)
         {
             _serviceCounter = serviceCounter;
-            _logger = logger;
+           
         }
 
 
@@ -35,7 +34,7 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while adding product count");
+              
                 return StatusCode(500, new { message = "Error occurred while adding product count" });
             }
         }
@@ -51,7 +50,7 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error reseting product Counters");
+               
                 return StatusCode(500, new { message = "Error occurred while reseting product counters" });
             }
         }
@@ -67,7 +66,7 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting total count price");
+               
                 return StatusCode(500, new { message = "Error occurred while fetching total price of counters" });
             }
 
