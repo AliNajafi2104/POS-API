@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace searchengine123
+namespace WinformsGUI
 {
     internal static class Program
     {

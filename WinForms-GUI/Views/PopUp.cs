@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace searchengine123.Views
+namespace WinformsGUI
 {
     public partial class PopUp : Form
     {

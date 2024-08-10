@@ -34,7 +34,7 @@ namespace POS_API.Services
                         productToUpdate.Price = product.Price;
                     }
 
-                    productToUpdate.Count = product.Amount;
+                    productToUpdate.Count = product.Count;
 
                     await _context.SaveChangesAsync();
                 }

@@ -1,6 +1,5 @@
-﻿using FunctionLibrary.Models;
+﻿
 using Microsoft.AspNetCore.SignalR.Client;
-using searchengine123.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Net.Http;
 using System.Windows.Forms;
 
 
-namespace searchengine123
+namespace WinformsGUI
 {
     public partial class Forside : Form
     {
@@ -361,63 +360,10 @@ namespace searchengine123
 
         private void btnClose_Click(object sender, EventArgs e) => Close();
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Await the asynchronous GetBasket method
-                List<Product> newProducts = await productService.GetBasket();
-
-                if (newProducts != null)
-                {
-                    foreach (var newProduct in newProducts)
-                    {
-                        // Check if the product is already in the scannedProducts list
-                        var existingProduct = scannedProducts.FirstOrDefault(p => p.Id == newProduct.Id);
-
-                        if (existingProduct != null)
-                        {
-
-                        }
-                        else
-                        {
-                            // Add the new product to the list if it doesn't already exist
-                            scannedProducts.Add(newProduct);
-                        }
-                    }
-
-                    // Update the UI or perform other actions with the updated list
-                    UpdateDataGridView();
-                }
-                else
-                {
-                    // Handle the case where GetBasket returns null, if needed
-                    MessageBox.Show("No products found or an error occurred while fetching products.");
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions if needed
-                MessageBox.Show($"An error occurred: {ex.Message}");
-            }
-            FocusButton();
-        }
 
 
 
-        private async void button4_Click(object sender, EventArgs e)
-        {
-            bool result = await productService.ResetPhoneBasket();
-            if (result)
-            {
-                MessageBox.Show("Nulstillet");
-            }
-            else
-            {
-                MessageBox.Show("Nulstilling fejlede");
-            }
-            FocusButton();
-        }
+
 
     }
 

@@ -1,4 +1,4 @@
-﻿namespace searchengine123
+﻿namespace WinformsGUI
 {
     partial class Forside
     {

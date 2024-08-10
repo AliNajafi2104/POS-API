@@ -1,4 +1,4 @@
-﻿namespace searchengine123.Views
+﻿namespace WinformsGUI
 {
     partial class SletVare
     {
