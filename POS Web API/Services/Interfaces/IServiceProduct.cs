@@ -15,6 +15,6 @@ public interface IServiceProduct
     Task CreateProductAsync(Product product);
 
     Task getdata();
-  
+
 }
 

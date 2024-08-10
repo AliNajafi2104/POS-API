@@ -1,9 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using POS_API.Services;
-using Microsoft.AspNetCore.SignalR;
 using POS_API.Services.Interfaces; // Add SignalR namespace
 
 var builder = WebApplication.CreateBuilder(args);

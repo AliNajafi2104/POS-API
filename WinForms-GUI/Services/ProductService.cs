@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
-using System.Data;
-
+﻿using FunctionLibrary.Models;
+using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Net;
-using FunctionLibrary.Models;
-using Mysqlx;
 
 namespace searchengine123
 {
@@ -113,9 +101,9 @@ namespace searchengine123
         }
 
 
-      
 
-     
+
+
 
 
 

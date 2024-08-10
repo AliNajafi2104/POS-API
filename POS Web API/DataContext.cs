@@ -18,6 +18,6 @@ public class DataContext : DbContext
     }
 
     public DbSet<Product> Product { get; set; }
-   
+
 }
 

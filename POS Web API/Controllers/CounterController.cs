@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using POS_API.Services.Interfaces;
-using System.Data.SqlClient;
 
 namespace POS_API.Controllers
 {
@@ -10,11 +8,11 @@ namespace POS_API.Controllers
     public class CounterController : ControllerBase
     {
         private readonly IServiceCounter _serviceCounter;
-       
+
         public CounterController(IServiceCounter serviceCounter)
         {
             _serviceCounter = serviceCounter;
-           
+
         }
 
 
@@ -34,8 +32,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-              
-                return StatusCode(500, new { message = "Error occurred while adding product count" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception:" + ex.InnerException });
             }
         }
 
@@ -50,8 +48,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-               
-                return StatusCode(500, new { message = "Error occurred while reseting product counters" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception:" + ex.InnerException });
             }
         }
 
@@ -66,8 +64,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-               
-                return StatusCode(500, new { message = "Error occurred while fetching total price of counters" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception:" + ex.InnerException });
             }
 
 
@@ -77,7 +75,7 @@ namespace POS_API.Controllers
         }
 
 
-      
+
 
     }
 }

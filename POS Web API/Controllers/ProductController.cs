@@ -1,7 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 
@@ -13,7 +10,7 @@ namespace POS_API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IServiceProduct _serviceProduct;
-       
+
 
         public ProductController(IServiceProduct serviceProduct, IHubContext<NotificationHub> hubContext)
         {
@@ -24,7 +21,7 @@ namespace POS_API.Controllers
 
         private readonly IHubContext<NotificationHub> _hubContext;
 
-       
+
         [HttpPost("SignalR/{barcode}")]
         public async Task<IActionResult> PostBarcode(string barcode)
         {
@@ -33,7 +30,16 @@ namespace POS_API.Controllers
             return Ok();
         }
 
+        [HttpGet("move")]
+        public async Task getdata()
+        {
+            await _serviceProduct.getdata();
 
+        }
+
+
+
+        #region CRUD
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
@@ -46,7 +52,7 @@ namespace POS_API.Controllers
             catch (Exception ex)
             {
 
-                return Ok(ex.Message + ex.InnerException);
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
@@ -65,15 +71,15 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                
-                return StatusCode(500, new { message = "Error occurred while fetching product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostProduct([FromBody]Product product)
+        public async Task<IActionResult> PostProduct([FromBody] Product product)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -84,8 +90,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-               
-                return StatusCode(500, new { message = "Error occurred while creating product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
@@ -100,8 +106,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-               
-                return StatusCode(500, new { message = "Error occurred while deleting product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
@@ -115,19 +121,11 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-               
-                return StatusCode(500, new { message = "Error occurred while updating product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
-
-
-
-        [HttpGet("move")]
-        public async Task getdata()
-        {
-        await    _serviceProduct.getdata();
-          
-        }
+        #endregion
 
     }
 

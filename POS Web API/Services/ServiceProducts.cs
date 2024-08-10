@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
-
-using POS_API.Models;
-using System.Net.Http;
+﻿using Microsoft.EntityFrameworkCore;
 
 
 
@@ -126,16 +122,16 @@ public class ServiceProducts : IServiceProduct
                 foreach (var product in products)
                 {
 
-                    if(product.Barcode.Length<255)
+                    if (product.Barcode.Length < 255)
                     {
 
-                    Product productDTOMove = new Product
-                    {
-                        Name = product.Name,
-                        Price = product.Price,
-                        Barcode = product.Barcode
-                    };
-                    await CreateProductAsync(productDTOMove);
+                        Product productDTOMove = new Product
+                        {
+                            Name = product.Name,
+                            Price = product.Price,
+                            Barcode = product.Barcode
+                        };
+                        await CreateProductAsync(productDTOMove);
                     }
                 }
             }

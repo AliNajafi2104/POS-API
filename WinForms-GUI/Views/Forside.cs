@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-
-using System.Web;
-using static System.Net.WebUtility;
-using System.Net.Http;
-
-using FunctionLibrary.Models;
-using Google.Protobuf.Reflection;
-using System.Linq;
-using searchengine123.Properties;
-using searchengine123.Views;
-using System.Threading.Tasks;
+﻿using FunctionLibrary.Models;
 using Microsoft.AspNetCore.SignalR.Client;
-using System.Net;
-using System.Text;
-using Microsoft.AspNetCore.WebUtilities;
+using searchengine123.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Windows.Forms;
 
 
 namespace searchengine123
@@ -27,62 +16,62 @@ namespace searchengine123
 
         private readonly ProductService productService = new ProductService();
         private HubConnection _hubConnection;
-       
-            public Forside()
+
+        public Forside()
+        {
+            InitializeComponent();
+            InitializeFormSettings();
+            InitializeSignalR();
+
+        }
+        private async void InitializeSignalR()
+        {
+            // Initialize the connection to the SignalR hub
+            _hubConnection = new HubConnectionBuilder()
+                .WithUrl("http://localhost:2030/notificationHub") // Use the correct URL for your SignalR hub
+                .Build();
+
+            // Define how to handle incoming messages
+            _hubConnection.On<string>("ReceiveBarcode", barcode =>
             {
-                InitializeComponent();
-                InitializeFormSettings();
-                InitializeSignalR();
-               
-            }
-            private async void InitializeSignalR()
+                // Update the UI on the main thread
+                Invoke(new Action(() =>
+                {
+                    tbBarcode.Text = barcode; // Assuming you have a TextBox named tbBarcode
+                    btnAddToBasket.PerformClick(); // Assuming you want to trigger a button click
+                }));
+            });
+
+            try
             {
-                // Initialize the connection to the SignalR hub
-                _hubConnection = new HubConnectionBuilder()
-                    .WithUrl("http://localhost:2030/notificationHub") // Use the correct URL for your SignalR hub
-                    .Build();
-
-                // Define how to handle incoming messages
-                _hubConnection.On<string>("ReceiveBarcode", barcode =>
-                {
-                    // Update the UI on the main thread
-                    Invoke(new Action(() =>
-                    {
-                        tbBarcode.Text = barcode; // Assuming you have a TextBox named tbBarcode
-                        btnAddToBasket.PerformClick(); // Assuming you want to trigger a button click
-                    }));
-                });
-
-                try
-                {
-                    // Start the connection
-                    await _hubConnection.StartAsync();
-                    Console.WriteLine("SignalR connection started.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
-                }
+                // Start the connection
+                await _hubConnection.StartAsync();
+                Console.WriteLine("SignalR connection started.");
             }
-            private void InitializeFormSettings()
+            catch (Exception ex)
             {
-
-                KeyPreview = true;
-                KeyPress += Form1_KeyPress;
-                WindowState = FormWindowState.Maximized;
-                Click += HandleInput;
-                panel1.Visible = false;
-                panel2.Visible = false;
-                tbBarcode.Enabled = false;
-                timer1.Start();
-                pictureBox1.Image = Properties.Resources.green_check;
-                dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-                dataGridView1.RowTemplate.Height = 50;
-                dataGridView1.DataBindingComplete += DataGridView1_DataBindingComplete;
-
-
+                Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
             }
-       
+        }
+        private void InitializeFormSettings()
+        {
+
+            KeyPreview = true;
+            KeyPress += Form1_KeyPress;
+            WindowState = FormWindowState.Maximized;
+            Click += HandleInput;
+            panel1.Visible = false;
+            panel2.Visible = false;
+            tbBarcode.Enabled = false;
+            timer1.Start();
+            pictureBox1.Image = Properties.Resources.green_check;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dataGridView1.RowTemplate.Height = 50;
+            dataGridView1.DataBindingComplete += DataGridView1_DataBindingComplete;
+
+
+        }
+
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Handle key press event
@@ -414,7 +403,7 @@ namespace searchengine123
             FocusButton();
         }
 
-       
+
 
         private async void button4_Click(object sender, EventArgs e)
         {
@@ -427,7 +416,7 @@ namespace searchengine123
             {
                 MessageBox.Show("Nulstilling fejlede");
             }
-            FocusButton() ;
+            FocusButton();
         }
 
     }

@@ -1,10 +1,10 @@
 ﻿
-using System.Data.Entity;
 using POS_API.Services.Interfaces;
+using System.Data.Entity;
 
 namespace POS_API.Services
 {
-    public class ServiceCounter: IServiceCounter
+    public class ServiceCounter : IServiceCounter
     {
 
         private readonly DataContext _context;
@@ -35,7 +35,7 @@ namespace POS_API.Services
                     }
 
                     productToUpdate.Count = product.Amount;
-                  
+
                     await _context.SaveChangesAsync();
                 }
                 else
