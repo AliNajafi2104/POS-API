@@ -7,19 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    public class Product
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductID { get; set; } 
-        public string Name { get; set; } 
-        public string Barcode { get; set; } 
-        public decimal Price { get; set; } 
+public class Product
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int ProductID { get; set; }
+    public string Name { get; set; }
+    public string Barcode { get; set; }
+    public decimal Price { get; set; }
+    public int? Amount { get; set; }
 
-        public int? Count { get; set; }
+    public int? Count { get; set; }
 
-        public DateTime? CountDate { get; set; }
+   
 
-    }
+}
 
 

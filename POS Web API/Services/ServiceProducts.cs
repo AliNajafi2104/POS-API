@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
-using POS_API.DTO;
+
 using POS_API.Models;
 using System.Net.Http;
 

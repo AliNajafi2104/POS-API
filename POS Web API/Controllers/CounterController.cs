@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using POS_API.DTO;
+
 using POS_API.Services;
 using System.Data.SqlClient;
 
@@ -22,7 +22,7 @@ namespace POS_API.Controllers
 
 
         [HttpPatch("count")]
-        public async Task<IActionResult> PostProductCount(ProductDTO product)
+        public async Task<IActionResult> PostProductCount(Product product)
         {
             if (!ModelState.IsValid)
             {

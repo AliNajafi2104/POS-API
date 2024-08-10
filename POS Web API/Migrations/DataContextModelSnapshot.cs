@@ -29,15 +29,15 @@ namespace POS_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
 
+                    b.Property<int?>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Barcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Count")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("CountDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -1,4 +1,4 @@
-﻿namespace POS_API.DTO
+﻿namespace POS_API.Models
 {
     public class Barcode
     {
