@@ -113,60 +113,9 @@ namespace searchengine123
         }
 
 
-        public async Task<List<Product>> GetBasket()
-        {
-            try
-            {
-                string url = "api/product/Basket";
+      
 
-                HttpResponseMessage response = await _httpClient.GetAsync(url);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseData = await response.Content.ReadAsStringAsync();
-                    List<Product> products = JsonConvert.DeserializeObject<List<Product>>(responseData);
-                    return products;
-                }
-
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return new List<Product>(); // Return an empty list instead of null
-                }
-                else
-                {
-                    throw new Exception($"Error: {response.ReasonPhrase}"); // Improved error message
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle the exception, log it if necessary
-                throw new Exception("An error occurred while fetching the basket.", ex);
-            }
-        }
-
-        public async Task<bool> ResetPhoneBasket()
-        {
-            try
-            {
-                string url = "api/product/ResetBasket";
-                HttpResponseMessage response = await _httpClient.PostAsync(url, null);
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-
-
-                }
-                else
-                {
-                return false;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-            }
-
+     
 
 
 
