@@ -16,7 +16,7 @@ namespace WinformsGUI
         public ProductService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:2030/");
+            _httpClient.BaseAddress = new Uri("http://192.168.1.22:2030/");
 
 
         }
@@ -29,9 +29,9 @@ namespace WinformsGUI
 
             HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
 
+            string responseData = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                string responseData = await response.Content.ReadAsStringAsync();
                 Product product = JsonConvert.DeserializeObject<Product>(responseData);
                 return product;
             }

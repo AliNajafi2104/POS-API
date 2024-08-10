@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using POS_API.Models;
 
 
 
@@ -25,10 +26,18 @@ namespace POS_API.Controllers
         [HttpPost("SignalR/{barcode}")]
         public async Task<IActionResult> PostBarcode(string barcode)
         {
-            Product product = await _serviceProduct.GetProduct(barcode);
 
+            
+            Product product = await _serviceProduct.GetProduct(barcode);
+            
+            
+            ProductResponse productResponse = new ProductResponse
+            {
+                Product = product,
+                Barcode = barcode
+            };
             // Broadcast the product data to all connected clients
-            await _hubContext.Clients.All.SendAsync("ReceiveProduct", product);
+            await _hubContext.Clients.All.SendAsync("ReceiveProduct", productResponse);
             return Ok();
         }
 
@@ -65,12 +74,9 @@ namespace POS_API.Controllers
             try
             {
 
-                var product = await _serviceProduct.GetProduct(barcode);
-                if (product == null)
-                {
-                    return NotFound();
-                }
-                return Ok(product);
+                var result = await _serviceProduct.GetProduct(barcode);
+              
+                return Ok(result);
             }
             catch (Exception ex)
             {

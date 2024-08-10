@@ -1,10 +1,12 @@
 ﻿
 using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Windows.Forms;
+using WinformsGUI.Models;
 
 
 namespace WinformsGUI
@@ -35,27 +37,29 @@ namespace WinformsGUI
         {
             // Initialize the connection to the SignalR hub
             _hubConnection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7267/notificationHub") // Use the correct URL for your SignalR hub
+                .WithUrl("http://192.168.1.22:2030/notificationHub") // Use the correct URL for your SignalR hub
                 .Build();
 
             // Define how to handle incoming messages
-            _hubConnection.On<string, Product>("ReceiveProduct", (barcode,product) =>
+            _hubConnection.On<ProductResponse>("ReceiveProduct", result =>
             {
+
+              
                 // Update the UI on the main thread
                 Invoke(new Action(() =>
                 {
-                    if (product == null)
+                   if(result.Product!=null)
+                    {
+                        scannedProducts.Add(result.Product);
+                        UpdateDataGridView();
+                    }
+                   else
                     {
                         ShowPopUp();
-                        
+                        tbBarcodeCreate.Text = result.Barcode;
                     }
-                    else
-                    {
-                        scannedProducts.Add(product);
 
-                        UpdateDataGridView();
 
-                    }
                 }));
             });
 
@@ -299,14 +303,14 @@ namespace WinformsGUI
             try
             {
                 var product = await productService.GetProductFromApiAsync(tbBarcode.Text);
-                if (product == null)
+               if(product==null)
                 {
                     ShowPopUp();
                     return;
                 }
-
                 scannedProducts.Add(product);
                 tbBarcode.Clear();
+
 
             }
             catch (HttpRequestException ex)

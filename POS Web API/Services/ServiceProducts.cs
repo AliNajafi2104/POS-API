@@ -37,6 +37,7 @@ public class ServiceProducts : IServiceProduct
         {
 
             var entity = await _context.Product.FirstOrDefaultAsync(e => e.Barcode == barcode);
+           
             return entity;
         }
         catch (Exception ex)
