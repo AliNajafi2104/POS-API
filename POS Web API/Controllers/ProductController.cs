@@ -25,10 +25,13 @@ namespace POS_API.Controllers
         [HttpPost("SignalR/{barcode}")]
         public async Task<IActionResult> PostBarcode(string barcode)
         {
-            // Broadcast the barcode data to all connected clients
-            await _hubContext.Clients.All.SendAsync("ReceiveBarcode", barcode);
+            Product product = await _serviceProduct.GetProduct(barcode);
+
+            // Broadcast the product data to all connected clients
+            await _hubContext.Clients.All.SendAsync("ReceiveProduct", product);
             return Ok();
         }
+
 
         [HttpGet("move")]
         public async Task getdata()

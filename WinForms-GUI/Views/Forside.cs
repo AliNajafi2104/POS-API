@@ -35,17 +35,27 @@ namespace WinformsGUI
         {
             // Initialize the connection to the SignalR hub
             _hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:2030/notificationHub") // Use the correct URL for your SignalR hub
+                .WithUrl("https://localhost:7267/notificationHub") // Use the correct URL for your SignalR hub
                 .Build();
 
             // Define how to handle incoming messages
-            _hubConnection.On<string>("ReceiveBarcode", barcode =>
+            _hubConnection.On<string, Product>("ReceiveProduct", (barcode,product) =>
             {
                 // Update the UI on the main thread
                 Invoke(new Action(() =>
                 {
-                    tbBarcode.Text = barcode; // Assuming you have a TextBox named tbBarcode
-                    btnAddToBasket.PerformClick(); // Assuming you want to trigger a button click
+                    if (product == null)
+                    {
+                        ShowPopUp();
+                        
+                    }
+                    else
+                    {
+                        scannedProducts.Add(product);
+
+                        UpdateDataGridView();
+
+                    }
                 }));
             });
 
@@ -60,6 +70,7 @@ namespace WinformsGUI
                 Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
             }
         }
+
         private void InitializeFormSettings()
         {
 
