@@ -11,10 +11,14 @@ namespace WinformsGUI
 {
     public partial class Forside : Form
     {
-        private readonly List<Product> scannedProducts = new List<Product>();
 
+        #region VARIABLES
+        private readonly List<Product> scannedProducts = new List<Product>();
         private readonly ProductService productService = new ProductService();
         private HubConnection _hubConnection;
+        #endregion
+
+
 
         public Forside()
         {
@@ -23,6 +27,10 @@ namespace WinformsGUI
             InitializeSignalR();
 
         }
+
+
+
+        #region INITIALIZATION
         private async void InitializeSignalR()
         {
             // Initialize the connection to the SignalR hub
@@ -70,6 +78,9 @@ namespace WinformsGUI
 
 
         }
+        #endregion
+
+
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -89,14 +100,6 @@ namespace WinformsGUI
                 e.Handled = true; // Prevent invalid keys from being processed
             }
         }
-        private void ClearTextBoxes(params TextBox[] textBoxes)
-        {
-            foreach (var textBox in textBoxes)
-            {
-                textBox.Clear();
-            }
-        }
-
         private void DataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             // Set column widths after data binding is complete
@@ -106,6 +109,175 @@ namespace WinformsGUI
                 dataGridView1.Columns[2].Width = 95;
                 dataGridView1.Columns[3].Width = 110;
             }
+        }
+        private void ShowPopUp()
+        {
+            panel1.Visible = false;
+            var popUp = new PopUp();
+            popUp.ShowDialog();
+            tbBarcodeCreate.Text = tbBarcode.Text;
+            ClearTextBoxes(tbBarcode, tbPriceCreate, tbBarcode);
+        }
+        private void HandleInput(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                // Determine if the button is a numpad or keyboard button based on its text
+                if (char.IsDigit(button.Text[0]) || button.Text == ",")  // Check if the button's text is a digit
+                {
+                    HandleNumpadInput(button);
+                }
+                else
+                {
+                    HandleKeyboardInput(button);
+                }
+            }
+            FocusButton();
+        }
+        private void HandleNumpadInput(Button button)
+        {
+            // Handle inputs for the numpad
+            if (!string.IsNullOrWhiteSpace(tbNameCreate.Text))
+            {
+                tbPriceCreate.Text += button.Text;
+            }
+            else
+            {
+                switch (button.Text)
+                {
+                    case ",":
+                        tbManuelPrice.Text += ",";
+                        break;
+                    case "c":
+                        tbManuelPrice.Clear();
+                        break;
+                    case "":
+                        if (tbManuelPrice.Text.Length > 0)
+                            tbManuelPrice.Text = tbManuelPrice.Text.Substring(0, tbManuelPrice.Text.Length - 1);
+                        break;
+                    default:
+                        tbManuelPrice.Text += button.Text;
+                        break;
+                }
+            }
+        }
+        private void HandleKeyboardInput(Button button)
+        {
+            // Handle inputs for the keyboard
+            if (!string.IsNullOrWhiteSpace(tbBarcodeCreate.Text))
+            {
+                if (button.Text == "-" || button.Text == "<--")
+                {
+                    if (button.Text == "-")
+                    {
+                        tbNameCreate.Text += " ";
+                    }
+                    else if (button.Text == "<--")
+                    {
+                        if (tbNameCreate.Text.Length > 0)
+                            tbNameCreate.Text = tbNameCreate.Text.Substring(0, tbNameCreate.Text.Length - 1);
+                    }
+                }
+                else
+                {
+                    tbNameCreate.Text += button.Text;
+                }
+            }
+        }
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
+            {
+                var productToRemove = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+                if (productToRemove != null &&
+                    MessageBox.Show(
+                        $"Are you sure you want to delete {productToRemove.Name} priced at {productToRemove.Price:C}?",
+                        "Delete Confirmation",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning
+                    ) == DialogResult.Yes)
+                {
+                    scannedProducts.Remove(productToRemove);
+                    UpdateDataGridView();
+
+                }
+            }
+            FocusButton();
+        }
+
+
+
+
+        #region HELPER FUNCTIONS
+        private void ManuelPrice_Click(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(tbManuelPrice.Text, out var manuelPrice))
+            {
+                scannedProducts.Add(new Product
+                {
+                    Name = (sender as Control)?.Text,
+                    Barcode = null,
+                    Price = manuelPrice,
+                });
+                tbManuelPrice.Clear();
+                UpdateDataGridView();
+                FocusButton();
+            }
+        }
+        private void ShowError(string message, Exception ex)
+        {
+            MessageBox.Show(message, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private void FocusButton()
+        {
+            btnAddToBasket.Focus();
+        }
+        private void UpdateDataGridView()
+        {
+
+            displayTotal.Text = $"Total: {scannedProducts.Sum(product => product.Price):C}";
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = scannedProducts;
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Refresh();
+
+        }
+        private void ClearTextBoxes(params TextBox[] textBoxes)
+        {
+            foreach (var textBox in textBoxes)
+            {
+                textBox.Clear();
+            }
+        }
+        #endregion
+
+
+
+        #region BUTTONS
+        private void ClearTextBoxBasedOnButton(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                switch (button.Name)
+                {
+                    case "tbPriceDel":
+                        tbPriceCreate.Clear();
+                        break;
+                    case "tbNameDel":
+                        tbNameCreate.Clear();
+                        break;
+                    case "tbBarcodeDel":
+                        tbBarcode.Clear();
+                        break;
+                    case "tbManuelPriceDel":
+                        tbManuelPrice.Clear();
+                        break;
+                    default:
+
+                        break;
+                }
+            }
+            FocusButton();
         }
         private async void btnAddToBasket_Click_1(object sender, EventArgs e)
         {
@@ -140,128 +312,6 @@ namespace WinformsGUI
                 UpdateDataGridView();
             }
         }
-
-        private void ShowPopUp()
-        {
-            panel1.Visible = false;
-            var popUp = new PopUp();
-            popUp.ShowDialog();
-            tbBarcodeCreate.Text = tbBarcode.Text;
-            ClearTextBoxes(tbBarcode, tbPriceCreate, tbBarcode);
-        }
-
-        private void ShowError(string message, Exception ex)
-        {
-            MessageBox.Show(message, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void UpdateDataGridView()
-        {
-
-            displayTotal.Text = $"Total: {scannedProducts.Sum(product => product.Price):C}";
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = scannedProducts;
-            dataGridView1.Columns["Id"].Visible = false;
-            dataGridView1.Refresh();
-
-        }
-
-        private void btnResetBasket_Click(object sender, EventArgs e)
-        {
-            scannedProducts.Clear();
-            UpdateDataGridView();
-            FocusButton();
-        }
-
-        private void ManuelPrice_Click(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(tbManuelPrice.Text, out var manuelPrice))
-            {
-                scannedProducts.Add(new Product
-                {
-                    Name = (sender as Control)?.Text,
-                    Barcode = null,
-                    Price = manuelPrice,
-                });
-                tbManuelPrice.Clear();
-                UpdateDataGridView();
-                FocusButton();
-            }
-        }
-
-        private void HandleInput(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                // Determine if the button is a numpad or keyboard button based on its text
-                if (char.IsDigit(button.Text[0]) || button.Text == ",")  // Check if the button's text is a digit
-                {
-                    HandleNumpadInput(button);
-                }
-                else
-                {
-                    HandleKeyboardInput(button);
-                }
-            }
-            FocusButton();
-        }
-
-
-        private void HandleNumpadInput(Button button)
-        {
-            // Handle inputs for the numpad
-            if (!string.IsNullOrWhiteSpace(tbNameCreate.Text))
-            {
-                tbPriceCreate.Text += button.Text;
-            }
-            else
-            {
-                switch (button.Text)
-                {
-                    case ",":
-                        tbManuelPrice.Text += ",";
-                        break;
-                    case "c":
-                        tbManuelPrice.Clear();
-                        break;
-                    case "":
-                        if (tbManuelPrice.Text.Length > 0)
-                            tbManuelPrice.Text = tbManuelPrice.Text.Substring(0, tbManuelPrice.Text.Length - 1);
-                        break;
-                    default:
-                        tbManuelPrice.Text += button.Text;
-                        break;
-                }
-            }
-        }
-
-        private void HandleKeyboardInput(Button button)
-        {
-            // Handle inputs for the keyboard
-            if (!string.IsNullOrWhiteSpace(tbBarcodeCreate.Text))
-            {
-                if (button.Text == "-" || button.Text == "<--")
-                {
-                    if (button.Text == "-")
-                    {
-                        tbNameCreate.Text += " ";
-                    }
-                    else if (button.Text == "<--")
-                    {
-                        if (tbNameCreate.Text.Length > 0)
-                            tbNameCreate.Text = tbNameCreate.Text.Substring(0, tbNameCreate.Text.Length - 1);
-                    }
-                }
-                else
-                {
-                    tbNameCreate.Text += button.Text;
-                }
-            }
-        }
-
-
-
-
         private async void CreateProduct(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbPriceCreate.Text)) return;
@@ -287,81 +337,25 @@ namespace WinformsGUI
             FocusButton();
             UpdateDataGridView();
         }
-
-        private void FocusButton()
+        private void btnResetBasket_Click(object sender, EventArgs e)
         {
-            btnAddToBasket.Focus();
-        }
-
-
-
-        private void ClearTextBoxBasedOnButton(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                switch (button.Name)
-                {
-                    case "tbPriceDel":
-                        tbPriceCreate.Clear();
-                        break;
-                    case "tbNameDel":
-                        tbNameCreate.Clear();
-                        break;
-                    case "tbBarcodeDel":
-                        tbBarcode.Clear();
-                        break;
-                    case "tbManuelPriceDel":
-                        tbManuelPrice.Clear();
-                        break;
-                    default:
-
-                        break;
-                }
-            }
+            scannedProducts.Clear();
+            UpdateDataGridView();
             FocusButton();
         }
-
-
-
         private void button9_Click(object sender, EventArgs e)
         {
             var sletVare = new SletVare();
             sletVare.ShowDialog();
             FocusButton();
         }
-
         private void button28_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
             FocusButton();
         }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
-            {
-                var productToRemove = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
-                if (productToRemove != null &&
-                    MessageBox.Show(
-                        $"Are you sure you want to delete {productToRemove.Name} priced at {productToRemove.Price:C}?",
-                        "Delete Confirmation",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning
-                    ) == DialogResult.Yes)
-                {
-                    scannedProducts.Remove(productToRemove);
-                    UpdateDataGridView();
-
-                }
-            }
-            FocusButton();
-        }
-
-
         private void btnClose_Click(object sender, EventArgs e) => Close();
-
-
-
+        #endregion
 
 
 
