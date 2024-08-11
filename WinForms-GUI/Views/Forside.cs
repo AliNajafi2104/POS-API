@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Windows.Forms;
@@ -94,6 +95,92 @@ namespace WinformsGUI
 
         }
         #endregion
+
+
+        private void CallPythonScript(string number)
+        {
+            try
+            {
+                this.WindowState = FormWindowState.Minimized;
+
+                // Path to your Python interpreter
+                string pythonPath = @"C:\anaconda\python.exe";
+
+                // Path to your Python script
+                string scriptPath = @"C:\Users\Ali Najafi\OneDrive - Aarhus universitet\Dokumenter\pytautogui\test.py";
+
+                // Create a new process to run the Python script
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = pythonPath,
+                    Arguments = $"\"{scriptPath}\" {number}",  // Pass the number as an argument
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (Process process = Process.Start(startInfo))
+                {
+                    // Read the output of the script
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+
+                    // Wait for the process to exit
+                    process.WaitForExit();
+
+                    // Display output or error if needed
+                    if (!string.IsNullOrEmpty(output))
+                    {
+
+                    }
+
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        MessageBox.Show($"Error: {error}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
+        private void btnRunPython_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+
+            // Calculate the sum of product prices and convert to decimal
+            decimal totalPrice = scannedProducts.Sum(product => product.Price);
+
+            // Convert the decimal total to an integer, removing any decimal part
+            int totalInt = (int)totalPrice; // This will truncate the decimal part
+
+            // Convert the integer total to string
+            string numberString = totalInt.ToString();
+
+            // Debug output
+
+
+            // Iterate over each character in the numberString
+            foreach (char digit in numberString)
+            {
+                // Ensure the character is a digit
+                if (char.IsDigit(digit))
+                {
+                    // Debug output
+
+
+                    CallPythonScript(digit.ToString()); // Pass each digit as a string
+
+                    // Optional: Add a delay between calls if needed
+                    System.Threading.Thread.Sleep(1000); // 1 second delay
+                }
+            }
+        }
+
+
 
 
 
