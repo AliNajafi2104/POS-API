@@ -1,20 +1,23 @@
 ﻿
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
+using PdfiumViewer;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Windows.Forms;
 using WinformsGUI.Models;
+using System.IO;
 
 
 namespace WinformsGUI
 {
     public partial class Forside : Form
     {
-
+        PdfiumViewer.PdfViewer pdf;
         #region VARIABLES
         private readonly List<Product> scannedProducts = new List<Product>();
         private readonly ProductService productService = new ProductService();
@@ -22,19 +25,49 @@ namespace WinformsGUI
         #endregion
 
 
-
         public Forside()
         {
             InitializeComponent();
             InitializeFormSettings();
             InitializeSignalR();
-
+            panelPdfViewer.Visible = false;
+            pdf = new PdfiumViewer.PdfViewer();
+            pdf.Dock = DockStyle.Fill; // Make the PdfViewer fill the panel
+            panelPdfViewer.Controls.Add(pdf); // Add PdfViewer to the Panel
         }
 
+        private void openPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panelPdfViewer.Visible = true;
+           
+                openfile(@"C:\Users\Ali Najafi\OneDrive - Aarhus universitet\Dokumenter\priser vvm pdf.pdf");
 
 
-        #region INITIALIZATION
-        private async void InitializeSignalR()
+            FocusButton();
+           
+        }
+
+        public void openfile(string filepath)
+        {
+            byte[] bytes = System.IO.File.ReadAllBytes(filepath);
+            var stream = new MemoryStream(bytes);
+            PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(stream);
+            pdf.Document = pdfDocument;
+            
+        }
+    
+
+
+
+
+
+
+
+
+
+
+    #region INITIALIZATION
+    private async void InitializeSignalR()
         {
             // Initialize the connection to the SignalR hub
             _hubConnection = new HubConnectionBuilder()
@@ -45,16 +78,16 @@ namespace WinformsGUI
             _hubConnection.On<ProductResponse>("ReceiveProduct", result =>
             {
 
-              
+
                 // Update the UI on the main thread
                 Invoke(new Action(() =>
                 {
-                   if(result.Product!=null)
+                    if (result.Product != null)
                     {
                         scannedProducts.Add(result.Product);
                         UpdateDataGridView();
                     }
-                   else
+                    else
                     {
                         ShowPopUp();
                         tbBarcodeCreate.Text = result.Barcode;
@@ -130,7 +163,8 @@ namespace WinformsGUI
                     process.WaitForExit();
 
                     // Restore and maximize the form after the Python script completes
-                    this.Invoke((MethodInvoker)delegate {
+                    this.Invoke((MethodInvoker)delegate
+                    {
                         this.WindowState = FormWindowState.Maximized; // Restore and maximize the window
                         this.Activate(); // Bring the window to the foreground
                     });
@@ -160,7 +194,7 @@ namespace WinformsGUI
         {
             this.WindowState = FormWindowState.Minimized;
 
-          
+
             // Calculate the sum of product prices and convert to decimal
             decimal totalPrice = scannedProducts.Sum(product => product.Price);
 
@@ -383,7 +417,7 @@ namespace WinformsGUI
             try
             {
                 var product = await productService.GetProductFromApiAsync(tbBarcode.Text);
-               if(product==null)
+                if (product == null)
                 {
                     ShowPopUp();
                     return;
@@ -450,10 +484,15 @@ namespace WinformsGUI
             FocusButton();
         }
         private void btnClose_Click(object sender, EventArgs e) => Close();
+
+
         #endregion
 
-
-
+        private void button32_Click(object sender, EventArgs e)
+        {
+            panelPdfViewer.Visible = false;
+            FocusButton();
+        }
     }
 
 
