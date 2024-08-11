@@ -79,26 +79,36 @@ namespace WinformsGUI
             Controls.Add(maximizeButton);
         }
 
+
         private void MaximizeButton_Click(object sender, EventArgs e)
         {
-            
-            // Window title of the application you want to maximize
-            string windowTitle = "Lommeregner";
+            decimal totalPrice = scannedProducts.Sum(p => p.Price);
+
+            // Update the label with the total price
+            label7.Text = $"Seneste kurv: {totalPrice:C}";
+
+            btnResetBasket.PerformClick();
+
+            // Window title of the Calculator application in Danish
+            string windowTitle = "lommeregner";
 
             // Find the window by its title
             IntPtr hWnd = FindWindow(null, windowTitle);
 
             if (hWnd == IntPtr.Zero)
             {
-                MessageBox.Show("Window not found!");
+                MessageBox.Show("Calculator window not found!");
                 return;
             }
+
+            // Restore the window if it is minimized
+            this.WindowState = FormWindowState.Minimized;
 
             // Maximize the window
             ShowWindow(hWnd, SW_MAXIMIZE);
 
             // Bring the window to the foreground
-            SetForegroundWindow(hWnd);
+          
         }
 
         // Import the FindWindow function
@@ -114,18 +124,19 @@ namespace WinformsGUI
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
+        // Import the IsIconic function to check if the window is minimized
+        [DllImport("user32.dll")]
+        private static extern bool IsIconic(IntPtr hWnd);
+
         // Constants for ShowWindow
-        private const int SW_MAXIMIZE = 3;
-    
+        private const int SW_RESTORE = 9;  // Restore a minimized window
+        private const int SW_MAXIMIZE = 3; // Maximize the window
 
 
 
 
-
-
-
-    #region INITIALIZATION
-    private async void InitializeSignalR()
+        #region INITIALIZATION
+        private async void InitializeSignalR()
         {
             // Initialize the connection to the SignalR hub
             _hubConnection = new HubConnectionBuilder()
