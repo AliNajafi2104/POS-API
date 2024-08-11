@@ -38,7 +38,7 @@ namespace WinformsGUI
         {
             // Initialize the connection to the SignalR hub
             _hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://192.168.1.22:2030/notificationHub") // Use the correct URL for your SignalR hub
+                .WithUrl("http://localhost:2030/notificationHub") // Use the correct URL for your SignalR hub
                 .Build();
 
             // Define how to handle incoming messages
@@ -96,11 +96,11 @@ namespace WinformsGUI
         }
         #endregion
 
-
-        private void CallPythonScript(string number)
+        private void CallPythonScript(string numbers)
         {
             try
             {
+                // Minimize the form
                 this.WindowState = FormWindowState.Minimized;
 
                 // Path to your Python interpreter
@@ -113,7 +113,7 @@ namespace WinformsGUI
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = pythonPath,
-                    Arguments = $"\"{scriptPath}\" {number}",  // Pass the number as an argument
+                    Arguments = $"\"{scriptPath}\" {numbers}",  // Pass all numbers as a single argument
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -129,10 +129,17 @@ namespace WinformsGUI
                     // Wait for the process to exit
                     process.WaitForExit();
 
+                    // Restore and maximize the form after the Python script completes
+                    this.Invoke((MethodInvoker)delegate {
+                        this.WindowState = FormWindowState.Maximized; // Restore and maximize the window
+                        this.Activate(); // Bring the window to the foreground
+                    });
+
                     // Display output or error if needed
                     if (!string.IsNullOrEmpty(output))
                     {
-
+                        // Handle script output if necessary
+                        Console.WriteLine($"Output: {output}"); // For debugging
                     }
 
                     if (!string.IsNullOrEmpty(error))
@@ -147,10 +154,13 @@ namespace WinformsGUI
             }
         }
 
+
+
         private void btnRunPython_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
 
+          
             // Calculate the sum of product prices and convert to decimal
             decimal totalPrice = scannedProducts.Sum(product => product.Price);
 
@@ -160,26 +170,9 @@ namespace WinformsGUI
             // Convert the integer total to string
             string numberString = totalInt.ToString();
 
-            // Debug output
-
-
-            // Iterate over each character in the numberString
-            foreach (char digit in numberString)
-            {
-                // Ensure the character is a digit
-                if (char.IsDigit(digit))
-                {
-                    // Debug output
-
-
-                    CallPythonScript(digit.ToString()); // Pass each digit as a string
-
-                    // Optional: Add a delay between calls if needed
-                    System.Threading.Thread.Sleep(1000); // 1 second delay
-                }
-            }
+            // Call Python script once with the full number string
+            CallPythonScript(numberString);
         }
-
 
 
 

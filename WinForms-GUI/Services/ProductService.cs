@@ -16,7 +16,7 @@ namespace WinformsGUI
         public ProductService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://192.168.1.22:2030/");
+            _httpClient.BaseAddress = new Uri("http://localhost:2030/");
 
 
         }
