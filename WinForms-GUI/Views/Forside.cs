@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Windows.Forms;
 using WinformsGUI.Models;
 using System.IO;
+using System.Runtime.InteropServices;
 
 
 namespace WinformsGUI
@@ -22,6 +23,7 @@ namespace WinformsGUI
         private readonly List<Product> scannedProducts = new List<Product>();
         private readonly ProductService productService = new ProductService();
         private HubConnection _hubConnection;
+        private Button maximizeButton;
         #endregion
 
 
@@ -34,6 +36,14 @@ namespace WinformsGUI
             pdf = new PdfiumViewer.PdfViewer();
             pdf.Dock = DockStyle.Fill; // Make the PdfViewer fill the panel
             panelPdfViewer.Controls.Add(pdf); // Add PdfViewer to the Panel
+            maximizeButton = new Button
+            {
+                Text = "Maximize Other Window",
+                Dock = DockStyle.Fill
+            };
+            maximizeButton.Click += MaximizeButton_Click;
+
+            Controls.Add(maximizeButton);
         }
 
         private void openPdfToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,10 +65,58 @@ namespace WinformsGUI
             pdf.Document = pdfDocument;
             
         }
+
+
+        private void InitializeCustomComponents()
+        {
+            maximizeButton = new Button
+            {
+                Text = "Maximize Other Window",
+                Dock = DockStyle.Fill
+            };
+            maximizeButton.Click += MaximizeButton_Click;
+
+            Controls.Add(maximizeButton);
+        }
+
+        private void MaximizeButton_Click(object sender, EventArgs e)
+        {
+            
+            // Window title of the application you want to maximize
+            string windowTitle = "Lommeregner";
+
+            // Find the window by its title
+            IntPtr hWnd = FindWindow(null, windowTitle);
+
+            if (hWnd == IntPtr.Zero)
+            {
+                MessageBox.Show("Window not found!");
+                return;
+            }
+
+            // Maximize the window
+            ShowWindow(hWnd, SW_MAXIMIZE);
+
+            // Bring the window to the foreground
+            SetForegroundWindow(hWnd);
+        }
+
+        // Import the FindWindow function
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        // Import the ShowWindow function
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        // Import the SetForegroundWindow function
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        // Constants for ShowWindow
+        private const int SW_MAXIMIZE = 3;
     
-
-
-
 
 
 
