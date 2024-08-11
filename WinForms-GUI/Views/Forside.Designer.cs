@@ -112,6 +112,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -430,7 +432,7 @@
             // 
             this.tbBarcodeCreate.Enabled = false;
             this.tbBarcodeCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBarcodeCreate.Location = new System.Drawing.Point(1049, 20);
+            this.tbBarcodeCreate.Location = new System.Drawing.Point(1237, 23);
             this.tbBarcodeCreate.Margin = new System.Windows.Forms.Padding(2);
             this.tbBarcodeCreate.Name = "tbBarcodeCreate";
             this.tbBarcodeCreate.ReadOnly = true;
@@ -441,7 +443,7 @@
             // 
             this.tbNameCreate.Enabled = false;
             this.tbNameCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNameCreate.Location = new System.Drawing.Point(1049, 80);
+            this.tbNameCreate.Location = new System.Drawing.Point(1237, 83);
             this.tbNameCreate.Margin = new System.Windows.Forms.Padding(2);
             this.tbNameCreate.Name = "tbNameCreate";
             this.tbNameCreate.ReadOnly = true;
@@ -452,7 +454,7 @@
             // 
             this.tbPriceCreate.Enabled = false;
             this.tbPriceCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPriceCreate.Location = new System.Drawing.Point(1049, 140);
+            this.tbPriceCreate.Location = new System.Drawing.Point(1237, 143);
             this.tbPriceCreate.Margin = new System.Windows.Forms.Padding(2);
             this.tbPriceCreate.Name = "tbPriceCreate";
             this.tbPriceCreate.ReadOnly = true;
@@ -815,7 +817,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label1.Location = new System.Drawing.Point(878, 24);
+            this.label1.Location = new System.Drawing.Point(1066, 27);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(162, 37);
@@ -827,7 +829,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label3.Location = new System.Drawing.Point(962, 145);
+            this.label3.Location = new System.Drawing.Point(1150, 148);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 37);
@@ -839,7 +841,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label4.Location = new System.Drawing.Point(945, 82);
+            this.label4.Location = new System.Drawing.Point(1133, 85);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 37);
@@ -877,7 +879,7 @@
             // 
             this.tbPriceDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPriceDel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.tbPriceDel.Location = new System.Drawing.Point(1570, 141);
+            this.tbPriceDel.Location = new System.Drawing.Point(1758, 144);
             this.tbPriceDel.Name = "tbPriceDel";
             this.tbPriceDel.Size = new System.Drawing.Size(54, 37);
             this.tbPriceDel.TabIndex = 297;
@@ -902,7 +904,7 @@
             // 
             this.tbNameDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNameDel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.tbNameDel.Location = new System.Drawing.Point(1569, 82);
+            this.tbNameDel.Location = new System.Drawing.Point(1757, 85);
             this.tbNameDel.Margin = new System.Windows.Forms.Padding(2);
             this.tbNameDel.Name = "tbNameDel";
             this.tbNameDel.Size = new System.Drawing.Size(54, 37);
@@ -1093,13 +1095,37 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(713, 35);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.button1.Location = new System.Drawing.Point(683, 20);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 84);
+            this.button1.Size = new System.Drawing.Size(122, 61);
             this.button1.TabIndex = 307;
-            this.button1.Text = "button1";
+            this.button1.Text = "Kort";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnRunPython_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.button4.Location = new System.Drawing.Point(809, 20);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(122, 61);
+            this.button4.TabIndex = 308;
+            this.button4.Text = "Kontant";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button12.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.button12.Location = new System.Drawing.Point(935, 20);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(122, 61);
+            this.button12.TabIndex = 309;
+            this.button12.Text = "Mobilepay";
+            this.button12.UseVisualStyleBackColor = true;
             // 
             // Forside
             // 
@@ -1107,6 +1133,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1856, 1024);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button9);
@@ -1269,6 +1297,8 @@
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button12;
     }
 }
 
