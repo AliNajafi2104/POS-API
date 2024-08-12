@@ -1,28 +1,16 @@
-﻿
-using Microsoft.AspNetCore.SignalR.Client;
-using Newtonsoft.Json;
-using PdfiumViewer;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using WinformsGUI.Models;
-using System.IO;
-using System.Runtime.InteropServices;
 
 
 namespace WinformsGUI
 {
     public partial class Forside : Form
     {
-        
+
         private readonly List<Product> scannedProducts = new List<Product>();
         private readonly ProductService productService = new ProductService();
-     
-       
+
+
         public Forside()
         {
             InitializeComponent();
@@ -42,7 +30,7 @@ namespace WinformsGUI
             Controls.Add(maximizeButton);
         }
 
- 
+
         private void InitializeFormSettings()
         {
 
@@ -131,7 +119,7 @@ namespace WinformsGUI
 
         #endregion
 
-        
+
     }
 
 

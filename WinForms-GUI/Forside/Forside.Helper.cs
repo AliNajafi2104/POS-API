@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinformsGUI
 {
     public partial class Forside
     {
-      
+
         private void ShowError(string message, Exception ex)
         {
             MessageBox.Show(message, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
