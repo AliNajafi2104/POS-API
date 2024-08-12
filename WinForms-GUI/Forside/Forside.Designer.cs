@@ -1099,9 +1099,9 @@
             // 
             this.panelPdfViewer.BackColor = System.Drawing.Color.Gainsboro;
             this.panelPdfViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPdfViewer.Location = new System.Drawing.Point(1173, -31);
+            this.panelPdfViewer.Location = new System.Drawing.Point(1229, -31);
             this.panelPdfViewer.Name = "panelPdfViewer";
-            this.panelPdfViewer.Size = new System.Drawing.Size(739, 889);
+            this.panelPdfViewer.Size = new System.Drawing.Size(683, 889);
             this.panelPdfViewer.TabIndex = 310;
             // 
             // btnÅbnPdf
