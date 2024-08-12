@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Media;
 namespace WinformsGUI
 {
    
@@ -118,9 +118,11 @@ namespace WinformsGUI
                 var product = await productService.GetProductFromApiAsync(tbBarcode.Text);
                 if (product == null)
                 {
+                    SystemSounds.Hand.Play();
                     ProductNotFoundPopUp();
                     return;
                 }
+                SystemSounds.Beep.Play();
                 scannedProducts.Add(product);
                 tbBarcode.Clear();
 
