@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using WinformsGUI.Models;
 
 namespace WinformsGUI
 {
@@ -16,7 +17,7 @@ namespace WinformsGUI
         public ProductService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:2030/");
+            _httpClient.BaseAddress = new Uri($"http://{Config.IP_ADDRESS}:2030/");
 
 
         }
