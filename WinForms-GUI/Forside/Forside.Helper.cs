@@ -9,21 +9,7 @@ namespace WinformsGUI
 {
     public partial class Forside
     {
-        private void ManuelPrice_Click(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(tbManuelPrice.Text, out var manuelPrice))
-            {
-                scannedProducts.Add(new Product
-                {
-                    Name = (sender as Control)?.Text,
-                    Barcode = null,
-                    Price = manuelPrice,
-                });
-                tbManuelPrice.Clear();
-                UpdateDataGridView();
-                FocusButton();
-            }
-        }
+      
         private void ShowError(string message, Exception ex)
         {
             MessageBox.Show(message, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);

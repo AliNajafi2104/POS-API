@@ -11,6 +11,13 @@ namespace WinformsGUI
    
    public partial class Forside
     {
+
+        private void VareOprettetOK_Click(object sender, EventArgs e)
+        {
+            panelVareOprettet.Visible = false;
+            FocusButton();
+
+        }
         private void ClearTextBoxBasedOnButton(object sender, EventArgs e)
         {
             if (sender is Button button)
@@ -35,6 +42,70 @@ namespace WinformsGUI
                 }
             }
             FocusButton();
+        }
+        private void btnClose_Click(object sender, EventArgs e) => Close();
+
+
+
+        #region DATABASE
+        private async void CreateProduct(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tbPriceCreate.Text)) return;
+
+            var product = new Product
+            {
+                Barcode = tbBarcodeCreate.Text,
+                Name = tbNameCreate.Text,
+                Price = Convert.ToDecimal(tbPriceCreate.Text),
+            };
+
+            try
+            {
+                await productService.CreateProductAsync(product);
+                panelVareOprettet.Visible = true;
+                scannedProducts.Add(product);
+                ClearTextBoxes(tbBarcodeCreate, tbNameCreate, tbPriceCreate);
+            }
+            catch (Exception ex)
+            {
+                ShowError("error" + ex.Message, ex);
+            }
+            FocusButton();
+            UpdateDataGridView();
+        }
+        private void SletVare_Click(object sender, EventArgs e)
+        {
+            var sletVare = new SletVare();
+            sletVare.ShowDialog();
+            FocusButton();
+        }
+        #endregion
+
+
+
+        #region BASKET RELATED
+        private void ManuelPrice_Click(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(tbManuelPrice.Text, out var manuelPrice))
+            {
+                scannedProducts.Add(new Product
+                {
+                    Name = (sender as Control)?.Text,
+                    Barcode = null,
+                    Price = manuelPrice,
+                });
+                tbManuelPrice.Clear();
+                UpdateDataGridView();
+                FocusButton();
+            }
+        }
+        private void BtnBetal_Click(object sender, EventArgs e)
+        {
+            decimal totalPrice = scannedProducts.Sum(p => p.Price);
+            // Update the label with the total price
+            label7.Text = $"Seneste kurv: {totalPrice:C}";
+
+            btnResetBasket.PerformClick();
         }
         private async void btnAddToBasket_Click_1(object sender, EventArgs e)
         {
@@ -69,43 +140,18 @@ namespace WinformsGUI
                 UpdateDataGridView();
             }
         }
-        private async void CreateProduct(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(tbPriceCreate.Text)) return;
-
-            var product = new Product
-            {
-                Barcode = tbBarcodeCreate.Text,
-                Name = tbNameCreate.Text,
-                Price = Convert.ToDecimal(tbPriceCreate.Text),
-            };
-
-            try
-            {
-                await productService.CreateProductAsync(product);
-                panelVareOprettet.Visible = true;
-                scannedProducts.Add(product);
-                ClearTextBoxes(tbBarcodeCreate, tbNameCreate, tbPriceCreate);
-            }
-            catch (Exception ex)
-            {
-                ShowError("error" + ex.Message, ex);
-            }
-            FocusButton();
-            UpdateDataGridView();
-        }
         private void btnResetBasket_Click(object sender, EventArgs e)
         {
             scannedProducts.Clear();
             UpdateDataGridView();
             FocusButton();
         }
-       
-       
-        private void btnClose_Click(object sender, EventArgs e) => Close();
+        #endregion
 
 
 
+
+        #region NUMPAD & KEYBOARD
         private void HandleInput(object sender, EventArgs e)
         {
             if (sender is Button button)
@@ -172,17 +218,9 @@ namespace WinformsGUI
                 }
             }
         }
+        #endregion
 
 
-
-        private void BtnBetal_Click(object sender, EventArgs e)
-        {
-            decimal totalPrice = scannedProducts.Sum(p => p.Price);
-            // Update the label with the total price
-            label7.Text = $"Seneste kurv: {totalPrice:C}";
-
-            btnResetBasket.PerformClick();
-        }
 
     }
 }

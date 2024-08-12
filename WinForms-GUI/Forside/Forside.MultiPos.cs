@@ -47,7 +47,7 @@ namespace WinformsGUI
                 Text = "Maximize Other Window",
                 Dock = DockStyle.Fill
             };
-            maximizeButton.Click += MaximizeButton_Click;
+            maximizeButton.Click += BtnBetal_Click;
 
             Controls.Add(maximizeButton);
         }

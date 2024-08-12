@@ -37,12 +37,12 @@ namespace WinformsGUI
                 Text = "Maximize Other Window",
                 Dock = DockStyle.Fill
             };
-            maximizeButton.Click += MaximizeButton_Click;
+            maximizeButton.Click += BtnBetal_Click;
 
             Controls.Add(maximizeButton);
         }
 
-     
+ 
         private void InitializeFormSettings()
         {
 
@@ -61,9 +61,6 @@ namespace WinformsGUI
 
 
         }
-        
-
-      
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Handle key press event
@@ -82,6 +79,19 @@ namespace WinformsGUI
                 e.Handled = true; // Prevent invalid keys from being processed
             }
         }
+        private void ShowPopUp()
+        {
+            panel1.Visible = false;
+            var popUp = new PopUp();
+            popUp.ShowDialog();
+            tbBarcodeCreate.Text = tbBarcode.Text;
+            ClearTextBoxes(tbBarcode, tbPriceCreate, tbBarcode);
+        }
+
+
+
+
+        #region DATAGRIDVIEW
         private void DataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             // Set column widths after data binding is complete
@@ -92,16 +102,7 @@ namespace WinformsGUI
                 dataGridView1.Columns[3].Width = 110;
             }
         }
-        private void ShowPopUp()
-        {
-            panel1.Visible = false;
-            var popUp = new PopUp();
-            popUp.ShowDialog();
-            tbBarcodeCreate.Text = tbBarcode.Text;
-            ClearTextBoxes(tbBarcode, tbPriceCreate, tbBarcode);
-        }
-      
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DeleteBasketProduct_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.RowIndex < dataGridView1.Rows.Count)
             {
@@ -121,25 +122,12 @@ namespace WinformsGUI
             }
             FocusButton();
         }
+        #endregion
 
-        private void MaximizeButton_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void VareOprettetOK_Click(object sender, EventArgs e)
-        {
-            panelVareOprettet.Visible = false;
-            FocusButton();
 
-        }
 
-        private void SletVare_Click(object sender, EventArgs e)
-        {
-            var sletVare = new SletVare();
-            sletVare.ShowDialog();
-            FocusButton();
-        }
     }
 
 
