@@ -11,5 +11,4 @@ namespace WinformsGUI.Models
     {
         public const string IP_ADDRESS = "localhost";
     }
-
 }
