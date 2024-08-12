@@ -61,6 +61,9 @@ namespace WinformsGUI
 
 
         }
+
+
+        //FYSISK KEYBOARD
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Handle key press event
@@ -79,6 +82,10 @@ namespace WinformsGUI
                 e.Handled = true; // Prevent invalid keys from being processed
             }
         }
+        //FYSISK KEYBOARD
+
+
+
         private void ShowPopUp()
         {
             panel1.Visible = false;
