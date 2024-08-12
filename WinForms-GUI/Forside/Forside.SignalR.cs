@@ -15,7 +15,7 @@ namespace WinformsGUI
         {
             // Initialize the connection to the SignalR hub
             _hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:2030/notificationHub") // Use the correct URL for your SignalR hub
+                .WithUrl($"http://{Config.IP_ADDRESS}:2030/notificationHub") // Use the correct URL for your SignalR hub
                 .Build();
 
             // Define how to handle incoming messages

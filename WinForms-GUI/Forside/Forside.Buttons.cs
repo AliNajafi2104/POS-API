@@ -73,7 +73,7 @@ namespace WinformsGUI
             FocusButton();
             UpdateDataGridView();
         }
-        private void SletVare_Click(object sender, EventArgs e)
+        private void BtnDeleteProduct_Click(object sender, EventArgs e)
         {
             var sletVare = new SletVare();
             sletVare.ShowDialog();

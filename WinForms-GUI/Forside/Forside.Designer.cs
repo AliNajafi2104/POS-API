@@ -105,7 +105,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
+            this.BtnDeleteProduct = new System.Windows.Forms.Button();
             this.panelVareOprettet = new System.Windows.Forms.Panel();
             this.BtnVareOprettetOK = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -987,16 +987,17 @@
             this.label2.TabIndex = 304;
             this.label2.Text = "LOADING...";
             // 
-            // button9
+            // BtnDeleteProduct
             // 
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.ForeColor = System.Drawing.Color.RosyBrown;
-            this.button9.Location = new System.Drawing.Point(1741, 869);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(171, 119);
-            this.button9.TabIndex = 304;
-            this.button9.Text = "SLET VARE";
-            this.button9.UseVisualStyleBackColor = true;
+            this.BtnDeleteProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDeleteProduct.ForeColor = System.Drawing.Color.RosyBrown;
+            this.BtnDeleteProduct.Location = new System.Drawing.Point(1741, 869);
+            this.BtnDeleteProduct.Name = "BtnDeleteProduct";
+            this.BtnDeleteProduct.Size = new System.Drawing.Size(171, 119);
+            this.BtnDeleteProduct.TabIndex = 304;
+            this.BtnDeleteProduct.Text = "SLET VARE";
+            this.BtnDeleteProduct.UseVisualStyleBackColor = true;
+            this.BtnDeleteProduct.Click += new System.EventHandler(this.BtnDeleteProduct_Click);
             // 
             // panelVareOprettet
             // 
@@ -1100,7 +1101,7 @@
             this.panelPdfViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelPdfViewer.Location = new System.Drawing.Point(1173, -31);
             this.panelPdfViewer.Name = "panelPdfViewer";
-            this.panelPdfViewer.Size = new System.Drawing.Size(739, 1054);
+            this.panelPdfViewer.Size = new System.Drawing.Size(739, 889);
             this.panelPdfViewer.TabIndex = 310;
             // 
             // btnÅbnPdf
@@ -1161,7 +1162,7 @@
             this.Controls.Add(this.btnÅbnPdf);
             this.Controls.Add(this.panelPdfViewer);
             this.Controls.Add(this.panelVareOprettet);
-            this.Controls.Add(this.button9);
+            this.Controls.Add(this.BtnDeleteProduct);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button24);
@@ -1315,7 +1316,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button BtnDeleteProduct;
         private System.Windows.Forms.Panel panelVareOprettet;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;

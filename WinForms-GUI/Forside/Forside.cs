@@ -125,12 +125,13 @@ namespace WinformsGUI
             }
             FocusButton();
         }
+
+
+
+
         #endregion
 
-
-
-
-
+        
     }
 
 

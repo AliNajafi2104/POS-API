@@ -17,7 +17,7 @@ namespace WinformsGUI
             panelPdfViewer.Visible = true;
 
 
-            byte[] bytes = System.IO.File.ReadAllBytes(@"C:\Users\Ali Najafi\OneDrive - Aarhus universitet\Dokumenter\priser vvm pdf.pdf");
+            byte[] bytes = System.IO.File.ReadAllBytes(@"C:\priser vvm pdf.pdf");
             var stream = new MemoryStream(bytes);
             PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(stream);
             pdf.Document = pdfDocument;
