@@ -265,6 +265,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="Forside\Forside.MultiPos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forside\Forside.Pdf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forside\Forside.Python.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forside\Forside.SignalR.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductResponse.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -272,28 +285,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forside.cs">
+    <Compile Include="Forside\Forside.Buttons.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Forside.Designer.cs">
+    <Compile Include="Forside\Forside.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forside\Forside.Designer.cs">
       <DependentUpon>Forside.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProductService.cs" />
-    <Compile Include="Views\PopUp.cs">
+    <Compile Include="Forside\Forside.Helper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PopUp.Designer.cs">
+    <Compile Include="Forside\PopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forside\PopUp.Designer.cs">
       <DependentUpon>PopUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SletVare.cs">
+    <Compile Include="Forside\SletVare.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\SletVare.Designer.cs">
+    <Compile Include="Forside\SletVare.Designer.cs">
       <DependentUpon>SletVare.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\Forside.resx">
+    <EmbeddedResource Include="Forside\Forside.resx">
       <DependentUpon>Forside.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -301,10 +320,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PopUp.resx">
+    <EmbeddedResource Include="Forside\PopUp.resx">
       <DependentUpon>PopUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SletVare.resx">
+    <EmbeddedResource Include="Forside\SletVare.resx">
       <DependentUpon>SletVare.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
