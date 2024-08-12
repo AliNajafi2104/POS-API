@@ -434,33 +434,33 @@
             // 
             this.tbBarcodeCreate.Enabled = false;
             this.tbBarcodeCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBarcodeCreate.Location = new System.Drawing.Point(1237, 23);
+            this.tbBarcodeCreate.Location = new System.Drawing.Point(1127, 24);
             this.tbBarcodeCreate.Margin = new System.Windows.Forms.Padding(2);
             this.tbBarcodeCreate.Name = "tbBarcodeCreate";
             this.tbBarcodeCreate.ReadOnly = true;
-            this.tbBarcodeCreate.Size = new System.Drawing.Size(516, 44);
+            this.tbBarcodeCreate.Size = new System.Drawing.Size(416, 44);
             this.tbBarcodeCreate.TabIndex = 236;
             // 
             // tbNameCreate
             // 
             this.tbNameCreate.Enabled = false;
             this.tbNameCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNameCreate.Location = new System.Drawing.Point(1237, 83);
+            this.tbNameCreate.Location = new System.Drawing.Point(1127, 84);
             this.tbNameCreate.Margin = new System.Windows.Forms.Padding(2);
             this.tbNameCreate.Name = "tbNameCreate";
             this.tbNameCreate.ReadOnly = true;
-            this.tbNameCreate.Size = new System.Drawing.Size(516, 44);
+            this.tbNameCreate.Size = new System.Drawing.Size(416, 44);
             this.tbNameCreate.TabIndex = 237;
             // 
             // tbPriceCreate
             // 
             this.tbPriceCreate.Enabled = false;
             this.tbPriceCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPriceCreate.Location = new System.Drawing.Point(1237, 143);
+            this.tbPriceCreate.Location = new System.Drawing.Point(1127, 144);
             this.tbPriceCreate.Margin = new System.Windows.Forms.Padding(2);
             this.tbPriceCreate.Name = "tbPriceCreate";
             this.tbPriceCreate.ReadOnly = true;
-            this.tbPriceCreate.Size = new System.Drawing.Size(516, 44);
+            this.tbPriceCreate.Size = new System.Drawing.Size(416, 44);
             this.tbPriceCreate.TabIndex = 238;
             // 
             // Q
@@ -819,7 +819,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label1.Location = new System.Drawing.Point(1066, 27);
+            this.label1.Location = new System.Drawing.Point(956, 28);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(162, 37);
@@ -831,7 +831,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label3.Location = new System.Drawing.Point(1150, 148);
+            this.label3.Location = new System.Drawing.Point(1040, 149);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 37);
@@ -843,7 +843,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label4.Location = new System.Drawing.Point(1133, 85);
+            this.label4.Location = new System.Drawing.Point(1023, 86);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 37);
@@ -855,7 +855,7 @@
             this.btnCreateProduct.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnCreateProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateProduct.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnCreateProduct.Location = new System.Drawing.Point(1646, 595);
+            this.btnCreateProduct.Location = new System.Drawing.Point(1564, 869);
             this.btnCreateProduct.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreateProduct.Name = "btnCreateProduct";
             this.btnCreateProduct.Size = new System.Drawing.Size(172, 119);
@@ -881,7 +881,7 @@
             // 
             this.tbPriceDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPriceDel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.tbPriceDel.Location = new System.Drawing.Point(1758, 144);
+            this.tbPriceDel.Location = new System.Drawing.Point(1548, 149);
             this.tbPriceDel.Name = "tbPriceDel";
             this.tbPriceDel.Size = new System.Drawing.Size(54, 37);
             this.tbPriceDel.TabIndex = 297;
@@ -906,7 +906,7 @@
             // 
             this.tbNameDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNameDel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.tbNameDel.Location = new System.Drawing.Point(1757, 85);
+            this.tbNameDel.Location = new System.Drawing.Point(1547, 90);
             this.tbNameDel.Margin = new System.Windows.Forms.Padding(2);
             this.tbNameDel.Name = "tbNameDel";
             this.tbNameDel.Size = new System.Drawing.Size(54, 37);
@@ -1099,9 +1099,9 @@
             // 
             this.panelPdfViewer.BackColor = System.Drawing.Color.Gainsboro;
             this.panelPdfViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPdfViewer.Location = new System.Drawing.Point(1229, -31);
+            this.panelPdfViewer.Location = new System.Drawing.Point(1389, -31);
             this.panelPdfViewer.Name = "panelPdfViewer";
-            this.panelPdfViewer.Size = new System.Drawing.Size(683, 889);
+            this.panelPdfViewer.Size = new System.Drawing.Size(523, 748);
             this.panelPdfViewer.TabIndex = 310;
             // 
             // btnÅbnPdf
