@@ -63,6 +63,9 @@ namespace WinformsGUI
         }
 
 
+
+
+
         //FYSISK KEYBOARD
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -86,14 +89,7 @@ namespace WinformsGUI
 
 
 
-        private void ShowPopUp()
-        {
-            panel1.Visible = false;
-            var popUp = new PopUp();
-            popUp.ShowDialog();
-            tbBarcodeCreate.Text = tbBarcode.Text;
-            ClearTextBoxes(tbBarcode, tbPriceCreate, tbBarcode);
-        }
+
 
 
 

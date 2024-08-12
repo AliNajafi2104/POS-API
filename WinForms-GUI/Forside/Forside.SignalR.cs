@@ -33,7 +33,7 @@ namespace WinformsGUI
                     }
                     else
                     {
-                        ShowPopUp();
+                        ProductNotFoundPopUp();
                         tbBarcodeCreate.Text = result.Barcode;
                     }
 

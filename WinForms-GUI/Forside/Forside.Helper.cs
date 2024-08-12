@@ -35,5 +35,14 @@ namespace WinformsGUI
                 textBox.Clear();
             }
         }
+
+        private void ProductNotFoundPopUp()
+        {
+            panel1.Visible = false;
+            var popUp = new PopUp();
+            popUp.ShowDialog();
+            tbBarcodeCreate.Text = tbBarcode.Text;
+            ClearTextBoxes(tbBarcode, tbPriceCreate, tbBarcode);
+        }
     }
 }

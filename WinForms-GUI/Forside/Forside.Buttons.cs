@@ -118,7 +118,7 @@ namespace WinformsGUI
                 var product = await productService.GetProductFromApiAsync(tbBarcode.Text);
                 if (product == null)
                 {
-                    ShowPopUp();
+                    ProductNotFoundPopUp();
                     return;
                 }
                 scannedProducts.Add(product);
