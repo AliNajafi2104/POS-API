@@ -83,7 +83,7 @@ namespace WinformsGUI
             try
             {
                 await productService.CreateProductAsync(product);
-                panel2.Visible = true;
+                panelVareOprettet.Visible = true;
                 scannedProducts.Add(product);
                 ClearTextBoxes(tbBarcodeCreate, tbNameCreate, tbPriceCreate);
             }
@@ -100,17 +100,8 @@ namespace WinformsGUI
             UpdateDataGridView();
             FocusButton();
         }
-        private void button9_Click(object sender, EventArgs e)
-        {
-            var sletVare = new SletVare();
-            sletVare.ShowDialog();
-            FocusButton();
-        }
-        private void button28_Click(object sender, EventArgs e)
-        {
-            panel2.Visible = false;
-            FocusButton();
-        }
+       
+       
         private void btnClose_Click(object sender, EventArgs e) => Close();
 
 
@@ -180,6 +171,17 @@ namespace WinformsGUI
                     tbNameCreate.Text += button.Text;
                 }
             }
+        }
+
+
+
+        private void BtnBetal_Click(object sender, EventArgs e)
+        {
+            decimal totalPrice = scannedProducts.Sum(p => p.Price);
+            // Update the label with the total price
+            label7.Text = $"Seneste kurv: {totalPrice:C}";
+
+            btnResetBasket.PerformClick();
         }
 
     }

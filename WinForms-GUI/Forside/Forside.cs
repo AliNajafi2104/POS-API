@@ -51,7 +51,7 @@ namespace WinformsGUI
             WindowState = FormWindowState.Maximized;
             Click += HandleInput;
             panel1.Visible = false;
-            panel2.Visible = false;
+            panelVareOprettet.Visible = false;
             tbBarcode.Enabled = false;
             timer1.Start();
             pictureBox1.Image = Properties.Resources.green_check;
@@ -122,17 +122,24 @@ namespace WinformsGUI
             FocusButton();
         }
 
+        private void MaximizeButton_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void VareOprettetOK_Click(object sender, EventArgs e)
+        {
+            panelVareOprettet.Visible = false;
+            FocusButton();
 
-       
+        }
 
-
-       
-
-      
-
-       
+        private void SletVare_Click(object sender, EventArgs e)
+        {
+            var sletVare = new SletVare();
+            sletVare.ShowDialog();
+            FocusButton();
+        }
     }
 
 

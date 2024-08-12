@@ -10,7 +10,7 @@ namespace WinformsGUI
 {
     public partial class Forside
     {
-        private void MaximizeButton_Click(object sender, EventArgs e)
+        private void BetalButton_Click(object sender, EventArgs e)
         {
             decimal totalPrice = scannedProducts.Sum(p => p.Price);
             // Update the label with the total price
