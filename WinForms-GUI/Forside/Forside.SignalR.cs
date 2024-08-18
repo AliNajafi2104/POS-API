@@ -10,17 +10,17 @@ namespace WinformsGUI
         private HubConnection _hubConnection;
         private async void InitializeSignalR()
         {
-            // Initialize the connection to the SignalR hub
+           
             _hubConnection = new HubConnectionBuilder()
-                .WithUrl($"http://{Config.IP_ADDRESS}:2030/notificationHub") // Use the correct URL for your SignalR hub
+                .WithUrl($"http://{Config.IP_ADDRESS}:2030/notificationHub") 
                 .Build();
 
-            // Define how to handle incoming messages
+           
             _hubConnection.On<ProductResponse>("ReceiveProduct", result =>
             {
 
 
-                // Update the UI on the main thread
+               
                 Invoke(new Action(() =>
                 {
                     if (result.Product != null)
@@ -42,7 +42,7 @@ namespace WinformsGUI
 
             try
             {
-                // Start the connection
+              
                 await _hubConnection.StartAsync();
                 Console.WriteLine("SignalR connection started.");
             }

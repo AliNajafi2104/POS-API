@@ -36,7 +36,7 @@ namespace POS_API.Controllers
                 Product = product,
                 Barcode = barcode
             };
-            // Broadcast the product data to all connected clients
+           
             await _hubContext.Clients.All.SendAsync("ReceiveProduct", productResponse);
             return Ok();
         }
