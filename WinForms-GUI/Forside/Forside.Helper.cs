@@ -21,7 +21,7 @@ namespace WinformsGUI
             displayTotal.Text = $"Total: {scannedProducts.Sum(product => product.Price):C}";
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = scannedProducts;
-            dataGridView1.Columns["Id"].Visible = false;
+            //dataGridView1.Columns["ProductID"].Visible = false;
             dataGridView1.Refresh();
 
         }

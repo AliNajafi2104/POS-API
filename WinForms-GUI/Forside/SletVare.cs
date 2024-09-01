@@ -6,6 +6,7 @@ namespace WinformsGUI
 {
     public partial class SletVare : Form
     {
+        ProductService productService = new ProductService(Environment.GetEnvironmentVariable("x-api-key"));
         public SletVare()
         {
             InitializeComponent();
@@ -46,6 +47,5 @@ namespace WinformsGUI
 
 
 
-        ProductService productService = new ProductService();
     }
 }

@@ -11,15 +11,21 @@ namespace WinformsGUI
     {
 
         private readonly HttpClient _httpClient;
+        private readonly string _apiKey; 
+        
 
 
-        public ProductService()
+        public ProductService(string apiKey)
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri($"http://{Config.IP_ADDRESS}:2030/");
+            _httpClient.BaseAddress = new Uri($"http://{Config.IP_ADDRESS}:5258/");
+            _apiKey = apiKey;
 
-
+            // Set the API key in the default headers
+            _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
         }
+
+
 
 
         public async Task<Product> GetProductFromApiAsync(string barcode)

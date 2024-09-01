@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 
@@ -8,7 +9,7 @@ namespace WinformsGUI
     {
 
         private readonly List<Product> scannedProducts = new List<Product>();
-        private readonly ProductService productService = new ProductService();
+        private readonly ProductService productService = new ProductService(Environment.GetEnvironmentVariable("x-api-key"));
 
 
         public Forside()
@@ -90,7 +91,7 @@ namespace WinformsGUI
             {
                 dataGridView1.Columns[1].Width = 138;
                 dataGridView1.Columns[2].Width = 95;
-                dataGridView1.Columns[3].Width = 110;
+                //dataGridView1.Columns[3].Width = 110;
             }
         }
         private void DeleteBasketProduct_CellClick(object sender, DataGridViewCellEventArgs e)

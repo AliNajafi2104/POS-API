@@ -128,6 +128,7 @@ namespace WinformsGUI
             catch (HttpRequestException ex)
             {
                 ShowError("API is unavailable. Please try again later.", ex);
+                return;
             }
             catch (Exception ex)
             {
