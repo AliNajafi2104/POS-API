@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using POS_API.Authentication;
 using POS_API.Services;
 using POS_API.Services.Interfaces; // Add SignalR namespace
 
@@ -41,6 +42,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+app.UseMiddleware<ApiKeyAuthMiddleware>();
 app.UseAuthorization();
 
 // Map SignalR hubs

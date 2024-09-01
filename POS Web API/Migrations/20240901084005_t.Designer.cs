@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace POS_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240810085540_terr")]
-    partial class terr
+    [Migration("20240901084005_t")]
+    partial class t
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

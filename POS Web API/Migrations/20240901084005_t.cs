@@ -5,7 +5,7 @@
 namespace POS_API.Migrations
 {
     /// <inheritdoc />
-    public partial class ere : Migration
+    public partial class t : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,6 @@ namespace POS_API.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Barcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: true),
                     Count = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
