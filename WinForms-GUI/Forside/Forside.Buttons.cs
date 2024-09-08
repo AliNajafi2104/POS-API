@@ -116,7 +116,9 @@ namespace WinformsGUI
                 if (product == null)
                 {
                     SystemSounds.Hand.Play();
+                    tabControl1.SelectedTab = tabPage1;
                     ProductNotFoundPopUp();
+
                     return;
                 }
                 SystemSounds.Beep.Play();
@@ -148,7 +150,7 @@ namespace WinformsGUI
         }
         #endregion
 
-
+        
 
 
         #region NUMPAD & KEYBOARD

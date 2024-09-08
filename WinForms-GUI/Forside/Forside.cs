@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 using System.Windows.Forms;
 
 
@@ -10,17 +14,22 @@ namespace WinformsGUI
 
         private readonly List<Product> scannedProducts = new List<Product>();
         private readonly ProductService productService = new ProductService(Environment.GetEnvironmentVariable("x-api-key"));
-
+        private readonly List<PricePrKg> pricePrKgs = new List<PricePrKg>();
 
         public Forside()
         {
+            string filePath = "PricePrKgLibrary.json";
+
+            // Read the JSON file content
+            string json = File.ReadAllText(filePath);
+
+            // Deserialize the JSON string to a List<PricePrKg>
+            pricePrKgs = JsonSerializer.Deserialize<List<PricePrKg>>(json);
             InitializeComponent();
             InitializeFormSettings();
             InitializeSignalR();
-            panelPdfViewer.Visible = false;
             pdf = new PdfiumViewer.PdfViewer();
             pdf.Dock = DockStyle.Fill; // Make the PdfViewer fill the panel
-            panelPdfViewer.Controls.Add(pdf); // Add PdfViewer to the Panel
             maximizeButton = new Button
             {
                 Text = "Maximize Other Window",
@@ -29,6 +38,8 @@ namespace WinformsGUI
             maximizeButton.Click += BtnBetal_Click;
 
             Controls.Add(maximizeButton);
+            tabControl1.SelectedTab = tab2; 
+            cassava.Image = Image.FromFile("Images/cassava.jpg");
         }
 
 
@@ -118,9 +129,29 @@ namespace WinformsGUI
 
 
 
+
+
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            decimal price = Convert.ToDecimal((pricePrKgs.FirstOrDefault(n => n.Name == clickedButton.Name).pricePrKg))/1000;
+            scannedProducts.Add(new Product
+            {
+                Name = clickedButton.Name,
+                Price = Convert.ToDecimal(tbManuelPrice.Text) * price
 
+
+            });
+            UpdateDataGridView();
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tab2;
+        }
     }
 
 
