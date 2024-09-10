@@ -17,16 +17,18 @@ namespace WinformsGUI
         private readonly List<Product> scannedProducts = new List<Product>();
         private readonly ProductService productService = new ProductService(Environment.GetEnvironmentVariable("x-api-key"));
         private readonly List<PricePrKg> pricePrKgs = new List<PricePrKg>();
+        private readonly List<PricePrKg> stykPris = new List<stykPris>();
 
         public Forside()
         {
             string filePath = "PricePrKgLibrary.json";
-
+            string filepath2 = "StykPrisLibrary.json";
             // Read the JSON file content
             string json = File.ReadAllText(filePath);
-
+            string json2 = File.ReadAllText(filepath2);
             // Deserialize the JSON string to a List<PricePrKg>
             pricePrKgs = JsonSerializer.Deserialize<List<PricePrKg>>(json);
+            stykPris = JsonSerializer.Deserialize<List<StykPris>>(json2);
             InitializeComponent();
             InitializeFormSettings();
             InitializeSignalR();
