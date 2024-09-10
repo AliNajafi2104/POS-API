@@ -37,11 +37,15 @@ namespace WinformsGUI
         }
 
 
+       
         private void setButtonImages()
         {
             cassava.Image = Image.FromFile("Images/cassava.jpg");
             sødKartoffel.Image = Image.FromFile("Images/sødKartoffel.jpg");
-
+            koriander.Image = Image.FromFile("Images/koriander.png");
+            dild.Image = Image.FromFile("Images/dild.jpg");
+            mynte.Image = Image.FromFile("Images/mynte.png");
+           
         }
 
 

@@ -319,9 +319,15 @@
       <DependentUpon>SletVare.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <Content Include="Images\dild.jpg" />
-    <Content Include="Images\koriander.png" />
-    <Content Include="Images\mynte.png" />
+    <Content Include="Images\dild.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\koriander.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\mynte.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\sødKartoffel.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
