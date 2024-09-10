@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -49,7 +50,6 @@ namespace WinformsGUI
             KeyPreview = true;
             KeyPress += Form1_KeyPress;
             WindowState = FormWindowState.Maximized;
-            Click += HandleInput;
             panel1.Visible = false;
             panelVareOprettet.Visible = false;
             tbBarcode.Enabled = false;
@@ -63,7 +63,10 @@ namespace WinformsGUI
         }
 
 
+        private void dild_Click(object sender, EventArgs e)
+        {
 
+        }
 
 
         //FYSISK KEYBOARD
@@ -133,33 +136,14 @@ namespace WinformsGUI
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = sender as Button;
-            decimal price = Convert.ToDecimal((pricePrKgs.FirstOrDefault(n => n.Name == clickedButton.Name).pricePrKg)) / 1000;
-
-            string result = Regex.Replace(clickedButton.Name, "(?<!^)([A-Z])", " $1").ToLower();
-
-            scannedProducts.Add(new Product
-            {
-                Name = result + " " + tbManuelPrice.Text + "g",
-                Price = Convert.ToDecimal(tbManuelPrice.Text) * price
-
-
-            });
-            UpdateDataGridView();
-
-        }
+      
 
         private void button9_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tab2;
         }
 
-        private void tbManuelPriceDel_Click(object sender, EventArgs e)
-        {
-            tbManuelPrice.Clear();
-        }
+       
     }
 
 

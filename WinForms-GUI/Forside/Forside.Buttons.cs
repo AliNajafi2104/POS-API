@@ -31,7 +31,7 @@ namespace WinformsGUI
                         tbBarcode.Clear();
                         break;
                     case "tbManuelPriceDel":
-                        tbManuelPrice.Clear();
+                       
                         break;
                     default:
 
@@ -81,21 +81,7 @@ namespace WinformsGUI
 
 
         #region BASKET RELATED
-        private void ManuelPrice_Click(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(tbManuelPrice.Text, out var manuelPrice))
-            {
-                scannedProducts.Add(new Product
-                {
-                    Name = (sender as Control)?.Text,
-                    Barcode = null,
-                    Price = manuelPrice,
-                });
-                tbManuelPrice.Clear();
-                UpdateDataGridView();
-                FocusButton();
-            }
-        }
+
         private void BtnBetal_Click(object sender, EventArgs e)
         {
             decimal totalPrice = scannedProducts.Sum(p => p.Price);
@@ -154,49 +140,7 @@ namespace WinformsGUI
 
 
         #region NUMPAD & KEYBOARD
-        private void HandleInput(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                // Determine if the button is a numpad or keyboard button based on its text
-                if (char.IsDigit(button.Text[0]) || button.Text == ",")  // Check if the button's text is a digit
-                {
-                    HandleNumpadInput(button);
-                }
-                else
-                {
-                    HandleKeyboardInput(button);
-                }
-            }
-            FocusButton();
-        }
-        private void HandleNumpadInput(Button button)
-        {
-            // Handle inputs for the numpad
-            if (!string.IsNullOrWhiteSpace(tbNameCreate.Text))
-            {
-                tbPriceCreate.Text += button.Text;
-            }
-            else
-            {
-                switch (button.Text)
-                {
-                    case ",":
-                        tbManuelPrice.Text += ",";
-                        break;
-                    case "c":
-                        tbManuelPrice.Clear();
-                        break;
-                    case "":
-                        if (tbManuelPrice.Text.Length > 0)
-                            tbManuelPrice.Text = tbManuelPrice.Text.Substring(0, tbManuelPrice.Text.Length - 1);
-                        break;
-                    default:
-                        tbManuelPrice.Text += button.Text;
-                        break;
-                }
-            }
-        }
+      
         private void HandleKeyboardInput(Button button)
         {
             // Handle inputs for the keyboard
