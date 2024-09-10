@@ -266,6 +266,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="EnterWeight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterWeight.Designer.cs">
+      <DependentUpon>EnterWeight.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forside\Forside.SignalR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +310,9 @@
     <Compile Include="Forside\SletVare.Designer.cs">
       <DependentUpon>SletVare.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EnterWeight.resx">
+      <DependentUpon>EnterWeight.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forside\Forside.resx">
       <DependentUpon>Forside.cs</DependentUpon>
     </EmbeddedResource>

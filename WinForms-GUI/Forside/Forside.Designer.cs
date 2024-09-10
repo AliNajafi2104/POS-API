@@ -802,6 +802,7 @@
             this.cassava.TabIndex = 0;
             this.cassava.Tag = "hej";
             this.cassava.UseVisualStyleBackColor = true;
+            this.cassava.Click += new System.EventHandler(this.cassava_Click);
             // 
             // tabPage1
             // 

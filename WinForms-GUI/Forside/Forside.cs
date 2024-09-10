@@ -158,7 +158,13 @@ namespace WinformsGUI
             tabControl1.SelectedTab = tab2;
         }
 
-       
+        private void cassava_Click(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+
+            EnterWeight enterWeight = new EnterWeight(clickedButton.Image);
+            enterWeight.ShowDialog();
+        }
     }
 
 
