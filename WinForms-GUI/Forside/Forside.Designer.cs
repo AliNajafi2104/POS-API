@@ -135,6 +135,7 @@
             this.sødKartoffel = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.cassava = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnClose = new System.Windows.Forms.Button();
             this.button36 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -446,7 +447,7 @@
             this.btnCreateProduct.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnCreateProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateProduct.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.btnCreateProduct.Location = new System.Drawing.Point(1564, 869);
+            this.btnCreateProduct.Location = new System.Drawing.Point(968, 27);
             this.btnCreateProduct.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreateProduct.Name = "btnCreateProduct";
             this.btnCreateProduct.Size = new System.Drawing.Size(172, 119);
@@ -486,7 +487,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(340, 562);
+            this.panel1.Location = new System.Drawing.Point(151, 237);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(430, 283);
             this.panel1.TabIndex = 303;
@@ -532,7 +533,7 @@
             this.panelVareOprettet.Controls.Add(this.BtnVareOprettetOK);
             this.panelVareOprettet.Controls.Add(this.label6);
             this.panelVareOprettet.Controls.Add(this.pictureBox1);
-            this.panelVareOprettet.Location = new System.Drawing.Point(340, 596);
+            this.panelVareOprettet.Location = new System.Drawing.Point(48, 548);
             this.panelVareOprettet.Name = "panelVareOprettet";
             this.panelVareOprettet.Size = new System.Drawing.Size(561, 542);
             this.panelVareOprettet.TabIndex = 305;
@@ -625,6 +626,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tab2);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(683, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -640,6 +642,7 @@
             this.tabPage1.Controls.Add(this.button17);
             this.tabPage1.Controls.Add(this.BtnBetal);
             this.tabPage1.Controls.Add(this.button24);
+            this.tabPage1.Controls.Add(this.btnCreateProduct);
             this.tabPage1.Controls.Add(this.button41);
             this.tabPage1.Controls.Add(this.tbNameCreate);
             this.tabPage1.Controls.Add(this.tbPriceCreate);
@@ -1210,7 +1213,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 22);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(1236, 561);
+            this.tab2.Size = new System.Drawing.Size(1236, 582);
             this.tab2.TabIndex = 1;
             this.tab2.Tag = "hej";
             this.tab2.Text = "KG pris";
@@ -1420,6 +1423,15 @@
             this.cassava.UseVisualStyleBackColor = true;
             this.cassava.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1236, 582);
+            this.tabPage2.TabIndex = 2;
+            this.tabPage2.Text = "Styk pris";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
@@ -1458,7 +1470,6 @@
             this.Controls.Add(this.BtnDeleteProduct);
             this.Controls.Add(this.tbManuelPriceDel);
             this.Controls.Add(this.tbBarcodeDel);
-            this.Controls.Add(this.btnCreateProduct);
             this.Controls.Add(this.button36);
             this.Controls.Add(this.btnRis);
             this.Controls.Add(this.btnKød);
@@ -1607,6 +1618,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button sødKartoffel;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
