@@ -70,6 +70,7 @@
             this.panelVareOprettet = new System.Windows.Forms.Panel();
             this.BtnVareOprettetOK = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -114,35 +115,35 @@
             this.button16 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.tab2 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cassava = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button40 = new System.Windows.Forms.Button();
-            this.button39 = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
-            this.button37 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.button42 = new System.Windows.Forms.Button();
             this.button43 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
             this.button45 = new System.Windows.Forms.Button();
             this.button46 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.button37 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
+            this.button40 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.sødKartoffel = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cassava = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.button36 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelVareOprettet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tab2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAddToBasket
@@ -477,6 +478,7 @@
             this.tbManuelPriceDel.TabIndex = 300;
             this.tbManuelPriceDel.Text = "DEL";
             this.tbManuelPriceDel.UseVisualStyleBackColor = true;
+            this.tbManuelPriceDel.Click += new System.EventHandler(this.tbManuelPriceDel_Click);
             // 
             // panel1
             // 
@@ -558,6 +560,14 @@
             this.label6.Size = new System.Drawing.Size(241, 42);
             this.label6.TabIndex = 0;
             this.label6.Text = "Vare Oprettet";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(89, 110);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(471, 309);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // dataGridView1
             // 
@@ -1177,6 +1187,7 @@
             // 
             // tab2
             // 
+            this.tab2.Controls.Add(this.label9);
             this.tab2.Controls.Add(this.button42);
             this.tab2.Controls.Add(this.button43);
             this.tab2.Controls.Add(this.button44);
@@ -1193,7 +1204,7 @@
             this.tab2.Controls.Add(this.button13);
             this.tab2.Controls.Add(this.button12);
             this.tab2.Controls.Add(this.button4);
-            this.tab2.Controls.Add(this.button1);
+            this.tab2.Controls.Add(this.sødKartoffel);
             this.tab2.Controls.Add(this.label8);
             this.tab2.Controls.Add(this.cassava);
             this.tab2.Location = new System.Drawing.Point(4, 22);
@@ -1201,8 +1212,191 @@
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
             this.tab2.Size = new System.Drawing.Size(1236, 561);
             this.tab2.TabIndex = 1;
+            this.tab2.Tag = "hej";
             this.tab2.Text = "KG pris";
             this.tab2.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label9.Location = new System.Drawing.Point(250, 148);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(68, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Tag = "kgPriceImageTag";
+            this.label9.Text = "Sød Kartoffel";
+            this.label9.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button42
+            // 
+            this.button42.Location = new System.Drawing.Point(910, 338);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(172, 129);
+            this.button42.TabIndex = 19;
+            this.button42.Tag = "kgPriceImageTag";
+            this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button43
+            // 
+            this.button43.Location = new System.Drawing.Point(733, 338);
+            this.button43.Name = "button43";
+            this.button43.Size = new System.Drawing.Size(172, 129);
+            this.button43.TabIndex = 18;
+            this.button43.Tag = "kgPriceImageTag";
+            this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button44
+            // 
+            this.button44.Location = new System.Drawing.Point(555, 338);
+            this.button44.Name = "button44";
+            this.button44.Size = new System.Drawing.Size(172, 129);
+            this.button44.TabIndex = 17;
+            this.button44.Tag = "kgPriceImageTag";
+            this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button45
+            // 
+            this.button45.Location = new System.Drawing.Point(377, 338);
+            this.button45.Name = "button45";
+            this.button45.Size = new System.Drawing.Size(172, 129);
+            this.button45.TabIndex = 16;
+            this.button45.Tag = "kgPriceImageTag";
+            this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button46
+            // 
+            this.button46.Location = new System.Drawing.Point(199, 338);
+            this.button46.Name = "button46";
+            this.button46.Size = new System.Drawing.Size(172, 129);
+            this.button46.TabIndex = 15;
+            this.button46.Tag = "kgPriceImageTag";
+            this.button46.UseVisualStyleBackColor = true;
+            this.button46.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button47
+            // 
+            this.button47.Location = new System.Drawing.Point(21, 338);
+            this.button47.Name = "button47";
+            this.button47.Size = new System.Drawing.Size(172, 129);
+            this.button47.TabIndex = 14;
+            this.button47.Tag = "kgPriceImageTag";
+            this.button47.UseVisualStyleBackColor = true;
+            this.button47.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button32
+            // 
+            this.button32.Location = new System.Drawing.Point(910, 181);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(172, 129);
+            this.button32.TabIndex = 13;
+            this.button32.Tag = "kgPriceImageTag";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button34
+            // 
+            this.button34.Location = new System.Drawing.Point(733, 181);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(172, 129);
+            this.button34.TabIndex = 12;
+            this.button34.Tag = "kgPriceImageTag";
+            this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button37
+            // 
+            this.button37.Location = new System.Drawing.Point(555, 181);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(172, 129);
+            this.button37.TabIndex = 11;
+            this.button37.Tag = "kgPriceImageTag";
+            this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button38
+            // 
+            this.button38.Location = new System.Drawing.Point(377, 181);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(172, 129);
+            this.button38.TabIndex = 10;
+            this.button38.Tag = "kgPriceImageTag";
+            this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button39
+            // 
+            this.button39.Location = new System.Drawing.Point(199, 181);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(172, 129);
+            this.button39.TabIndex = 9;
+            this.button39.Tag = "kgPriceImageTag";
+            this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button40
+            // 
+            this.button40.Location = new System.Drawing.Point(21, 181);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(172, 129);
+            this.button40.TabIndex = 8;
+            this.button40.Tag = "kgPriceImageTag";
+            this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(910, 16);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(172, 129);
+            this.button28.TabIndex = 7;
+            this.button28.Tag = "kgPriceImageTag";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(733, 16);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(172, 129);
+            this.button13.TabIndex = 6;
+            this.button13.Tag = "kgPriceImageTag";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(555, 16);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(172, 129);
+            this.button12.TabIndex = 5;
+            this.button12.Tag = "kgPriceImageTag";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(377, 16);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(172, 129);
+            this.button4.TabIndex = 4;
+            this.button4.Tag = "kgPriceImageTag";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // sødKartoffel
+            // 
+            this.sødKartoffel.Location = new System.Drawing.Point(199, 16);
+            this.sødKartoffel.Name = "sødKartoffel";
+            this.sødKartoffel.Size = new System.Drawing.Size(172, 129);
+            this.sødKartoffel.TabIndex = 3;
+            this.sødKartoffel.Tag = "kgPriceImageTag";
+            this.sødKartoffel.UseVisualStyleBackColor = true;
+            this.sødKartoffel.Click += new System.EventHandler(this.button1_Click);
             // 
             // label8
             // 
@@ -1212,7 +1406,9 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 13);
             this.label8.TabIndex = 2;
+            this.label8.Tag = "kgPriceImageTag";
             this.label8.Text = "Cassava";
+            this.label8.Click += new System.EventHandler(this.button1_Click);
             // 
             // cassava
             // 
@@ -1220,6 +1416,7 @@
             this.cassava.Name = "cassava";
             this.cassava.Size = new System.Drawing.Size(172, 129);
             this.cassava.TabIndex = 0;
+            this.cassava.Tag = "hej";
             this.cassava.UseVisualStyleBackColor = true;
             this.cassava.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -1248,150 +1445,6 @@
             this.button36.Text = "-";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.HandleInput);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(89, 110);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(471, 309);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(199, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(172, 129);
-            this.button1.TabIndex = 3;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(377, 16);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(172, 129);
-            this.button4.TabIndex = 4;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(555, 16);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(172, 129);
-            this.button12.TabIndex = 5;
-            this.button12.UseVisualStyleBackColor = true;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(733, 16);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(172, 129);
-            this.button13.TabIndex = 6;
-            this.button13.UseVisualStyleBackColor = true;
-            // 
-            // button28
-            // 
-            this.button28.Location = new System.Drawing.Point(910, 16);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(172, 129);
-            this.button28.TabIndex = 7;
-            this.button28.UseVisualStyleBackColor = true;
-            // 
-            // button40
-            // 
-            this.button40.Location = new System.Drawing.Point(21, 181);
-            this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(172, 129);
-            this.button40.TabIndex = 8;
-            this.button40.UseVisualStyleBackColor = true;
-            // 
-            // button39
-            // 
-            this.button39.Location = new System.Drawing.Point(199, 181);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(172, 129);
-            this.button39.TabIndex = 9;
-            this.button39.UseVisualStyleBackColor = true;
-            // 
-            // button38
-            // 
-            this.button38.Location = new System.Drawing.Point(377, 181);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(172, 129);
-            this.button38.TabIndex = 10;
-            this.button38.UseVisualStyleBackColor = true;
-            // 
-            // button37
-            // 
-            this.button37.Location = new System.Drawing.Point(555, 181);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(172, 129);
-            this.button37.TabIndex = 11;
-            this.button37.UseVisualStyleBackColor = true;
-            // 
-            // button34
-            // 
-            this.button34.Location = new System.Drawing.Point(733, 181);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(172, 129);
-            this.button34.TabIndex = 12;
-            this.button34.UseVisualStyleBackColor = true;
-            // 
-            // button32
-            // 
-            this.button32.Location = new System.Drawing.Point(910, 181);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(172, 129);
-            this.button32.TabIndex = 13;
-            this.button32.UseVisualStyleBackColor = true;
-            // 
-            // button42
-            // 
-            this.button42.Location = new System.Drawing.Point(910, 338);
-            this.button42.Name = "button42";
-            this.button42.Size = new System.Drawing.Size(172, 129);
-            this.button42.TabIndex = 19;
-            this.button42.UseVisualStyleBackColor = true;
-            // 
-            // button43
-            // 
-            this.button43.Location = new System.Drawing.Point(733, 338);
-            this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(172, 129);
-            this.button43.TabIndex = 18;
-            this.button43.UseVisualStyleBackColor = true;
-            // 
-            // button44
-            // 
-            this.button44.Location = new System.Drawing.Point(555, 338);
-            this.button44.Name = "button44";
-            this.button44.Size = new System.Drawing.Size(172, 129);
-            this.button44.TabIndex = 17;
-            this.button44.UseVisualStyleBackColor = true;
-            // 
-            // button45
-            // 
-            this.button45.Location = new System.Drawing.Point(377, 338);
-            this.button45.Name = "button45";
-            this.button45.Size = new System.Drawing.Size(172, 129);
-            this.button45.TabIndex = 16;
-            this.button45.UseVisualStyleBackColor = true;
-            // 
-            // button46
-            // 
-            this.button46.Location = new System.Drawing.Point(199, 338);
-            this.button46.Name = "button46";
-            this.button46.Size = new System.Drawing.Size(172, 129);
-            this.button46.TabIndex = 15;
-            this.button46.UseVisualStyleBackColor = true;
-            // 
-            // button47
-            // 
-            this.button47.Location = new System.Drawing.Point(21, 338);
-            this.button47.Name = "button47";
-            this.button47.Size = new System.Drawing.Size(172, 129);
-            this.button47.TabIndex = 14;
-            this.button47.UseVisualStyleBackColor = true;
             // 
             // Forside
             // 
@@ -1437,13 +1490,13 @@
             this.panel1.PerformLayout();
             this.panelVareOprettet.ResumeLayout(false);
             this.panelVareOprettet.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tab2.ResumeLayout(false);
             this.tab2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1552,7 +1605,8 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button sødKartoffel;
+        private System.Windows.Forms.Label label9;
     }
 }
 

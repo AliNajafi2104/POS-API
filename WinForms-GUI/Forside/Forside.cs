@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
@@ -38,9 +39,18 @@ namespace WinformsGUI
             maximizeButton.Click += BtnBetal_Click;
 
             Controls.Add(maximizeButton);
-            tabControl1.SelectedTab = tab2; 
-            cassava.Image = Image.FromFile("Images/cassava.jpg");
+            tabControl1.SelectedTab = tab2;
+            setButtonImages();
         }
+
+
+        private void setButtonImages()
+        {
+            cassava.Image = Image.FromFile("Images/cassava.jpg");
+            sødKartoffel.Image = Image.FromFile("Images/sødKartoffel.jpg");
+
+        }
+
 
 
         private void InitializeFormSettings()
@@ -136,10 +146,13 @@ namespace WinformsGUI
         private void button1_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
-            decimal price = Convert.ToDecimal((pricePrKgs.FirstOrDefault(n => n.Name == clickedButton.Name).pricePrKg))/1000;
+            decimal price = Convert.ToDecimal((pricePrKgs.FirstOrDefault(n => n.Name == clickedButton.Name).pricePrKg)) / 1000;
+
+            string result = Regex.Replace(clickedButton.Name, "(?<!^)([A-Z])", " $1").ToLower();
+
             scannedProducts.Add(new Product
             {
-                Name = clickedButton.Name,
+                Name = result + " "+tbManuelPrice.Text+"g",
                 Price = Convert.ToDecimal(tbManuelPrice.Text) * price
 
 
@@ -151,6 +164,11 @@ namespace WinformsGUI
         private void button9_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tab2;
+        }
+
+        private void tbManuelPriceDel_Click(object sender, EventArgs e)
+        {
+            tbManuelPrice.Clear();
         }
     }
 

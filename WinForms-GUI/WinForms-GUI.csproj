@@ -328,6 +328,9 @@
       <DependentUpon>SletVare.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <Content Include="Images\sødKartoffel.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PricePrKgLibrary.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
