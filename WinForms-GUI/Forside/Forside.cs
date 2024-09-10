@@ -65,9 +65,18 @@ namespace WinformsGUI
 
         private void dild_Click(object sender, EventArgs e)
         {
+            Button clickedButton = sender as Button;
+
+            scannedProducts.Add(new Product
+            {
+                Name = clickedButton.Name,
+                Price = Convert.ToDecimal(stykPris.FirstOrDefault(n => n.Name == clickedButton.Name).stykPris)
+
+            });
+            UpdateDataGridView();
+
 
         }
-
 
         //FYSISK KEYBOARD
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
