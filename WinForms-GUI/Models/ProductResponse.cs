@@ -1,4 +1,4 @@
-﻿namespace WinformsGUI.Models
+﻿namespace WinformsGUI
 {
     public class ProductResponse
     {

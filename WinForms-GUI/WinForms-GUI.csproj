@@ -266,8 +266,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Forside\Forside.SignalR.cs">
+    <Compile Include="Forside\Forside.Designer.cs">
+      <DependentUpon>Forside.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forside\Forside.SignalR.cs" />
+    <Compile Include="Forside\indtastVaegt.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forside\indtastVaegt.Designer.cs">
+      <DependentUpon>indtastVaegt.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductResponse.cs" />
@@ -277,21 +284,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Forside\Forside.Buttons.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forside\Forside.Buttons.cs" />
     <Compile Include="Forside\Forside.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forside\Forside.Designer.cs">
-      <DependentUpon>Forside.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProductService.cs" />
-    <Compile Include="Forside\Forside.Helper.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forside\Forside.Helper.cs" />
     <Compile Include="Forside\PopUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +307,9 @@
     <EmbeddedResource Include="Forside\Forside.resx">
       <DependentUpon>Forside.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forside\indtastVaegt.resx">
+      <DependentUpon>indtastVaegt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -319,6 +322,25 @@
       <DependentUpon>SletVare.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <Content Include="Images\aflangPideBrød.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\brød.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dild.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\kartofflerINet.png" />
+    <Content Include="Images\koriander.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\mynte.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\persille.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\sødKartoffel.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -334,6 +356,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="StykPrisLibrary.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
