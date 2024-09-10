@@ -1,9 +1,10 @@
-﻿using POS_API.DTO;
+﻿
+using POS_API.Services.Interfaces;
 using System.Data.Entity;
 
 namespace POS_API.Services
 {
-    public class ServiceCounter: IServiceCounter
+    public class ServiceCounter : IServiceCounter
     {
 
         private readonly DataContext _context;
@@ -14,41 +15,40 @@ namespace POS_API.Services
         }
 
 
-        public async Task AddProductCount(ProductDTO product)
+        public async Task AddProductCount(Product product)
         {
-
             try
             {
-
-                var productToUpdate =  _context.Product.FirstOrDefault(p => p.Barcode == product.Barcode);
-
-
+                var productToUpdate = _context.Product.FirstOrDefault(p => p.Barcode == product.Barcode);
 
                 if (productToUpdate != null)
                 {
-                    if(product.Name !=null)
+                    if (product.Name != null)
                     {
                         productToUpdate.Name = product.Name;
                     }
-                    if(product.Price !=null)
+
+                    // Since Price is non-nullable, directly assign it
+                    if (product.Price >= 0) // Assuming that a valid Price is non-negative
                     {
-                        productToUpdate.Price = (product.Price ?? 0);
+                        productToUpdate.Price = product.Price;
                     }
-                    productToUpdate.Count = product.Amount;
-                    productToUpdate.CountDate = System.DateTime.Now;
+
+                    productToUpdate.Count = product.Count;
+
                     await _context.SaveChangesAsync();
                 }
                 else
                 {
                     throw new InvalidOperationException($"Product with Barcode '{product.Barcode}' not found.");
                 }
-
             }
             catch (Exception ex)
             {
-                throw new Exception("Error occcured Adding producct count", ex);
+                throw new Exception("Error occurred adding product count", ex);
             }
         }
+
 
 
 

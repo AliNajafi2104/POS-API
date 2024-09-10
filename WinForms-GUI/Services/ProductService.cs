@@ -1,50 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
-using System.Data;
-
+﻿using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Math.EC.Multiplier;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Net;
-using FunctionLibrary.Models;
-using Mysqlx;
 
-namespace searchengine123
+namespace WinformsGUI
 {
-    public  class ProductService
+    public class ProductService
     {
 
         private readonly HttpClient _httpClient;
+        private readonly string _apiKey; 
+        
 
 
-        public ProductService()
+        public ProductService(string apiKey)
         {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://poswebapi20240714125856.azurewebsites.net/"); 
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri($"http://{Config.IP_ADDRESS}:5258/");
+            _apiKey = apiKey;
 
-
+            // Set the API key in the default headers
+            _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
         }
+
+
 
 
         public async Task<Product> GetProductFromApiAsync(string barcode)
         {
-           
+
             string requestUri = $"api/product/{barcode}";
 
             HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
 
+            string responseData = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                string responseData = await response.Content.ReadAsStringAsync();
                 Product product = JsonConvert.DeserializeObject<Product>(responseData);
                 return product;
             }
@@ -58,10 +51,10 @@ namespace searchengine123
                 throw new Exception("Error\n" + response);
             }
         }
-    
 
 
-    public async Task<Product> CreateProductAsync(Product product)
+
+        public async Task<Product> CreateProductAsync(Product product)
         {
             try
             {
@@ -92,7 +85,7 @@ namespace searchengine123
         {
             try
             {
-                string url = $"{barcode}";
+                string url = $"api/product/{barcode}";
 
                 HttpResponseMessage response = await _httpClient.DeleteAsync(url);
                 if (response.IsSuccessStatusCode)
@@ -115,5 +108,11 @@ namespace searchengine123
 
 
 
+
+
+
+
     }
+
+
 }

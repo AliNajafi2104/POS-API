@@ -3,6 +3,7 @@
 
 
 
+
 public class DataContext : DbContext
 {
 
@@ -17,11 +18,6 @@ public class DataContext : DbContext
     }
 
     public DbSet<Product> Product { get; set; }
-
-    public DbSet<Transaction> Transaction_ { get; set; }
-
-    public DbSet<TransactionDetail> TransactionDetail { get; set; }
-
 
 }
 

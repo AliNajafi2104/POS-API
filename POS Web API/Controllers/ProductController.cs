@@ -1,8 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using POS_API.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using POS_API.Models;
+
 
 
 namespace POS_API.Controllers
@@ -12,16 +11,47 @@ namespace POS_API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IServiceProduct _serviceProduct;
-        private readonly ILogger<ProductController> _logger;
 
 
-        public ProductController(IServiceProduct serviceProduct, ILogger<ProductController> logger)
+        public ProductController(IServiceProduct serviceProduct, IHubContext<NotificationHub> hubContext)
         {
             _serviceProduct = serviceProduct;
-            _logger = logger;
+            _hubContext = hubContext;
         }
 
 
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+
+        [HttpPost("SignalR/{barcode}")]
+        public async Task<IActionResult> PostBarcode(string barcode)
+        {
+
+            
+            Product product = await _serviceProduct.GetProduct(barcode);
+            
+            
+            ProductResponse productResponse = new ProductResponse
+            {
+                Product = product,
+                Barcode = barcode
+            };
+           
+            await _hubContext.Clients.All.SendAsync("ReceiveProduct", productResponse);
+            return Ok();
+        }
+
+
+        [HttpGet("move")]
+        public async Task getdata()
+        {
+            await _serviceProduct.getdata();
+
+        }
+
+
+
+        #region CRUD
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
@@ -33,8 +63,8 @@ namespace POS_API.Controllers
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error gettings products ");
-                return StatusCode(500, new { message = "Error occurred while fetching products" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
@@ -44,24 +74,21 @@ namespace POS_API.Controllers
             try
             {
 
-                var product = await _serviceProduct.GetProduct(barcode);
-                if (product == null)
-                {
-                    return NotFound();
-                }
-                return Ok(product);
+                var result = await _serviceProduct.GetProduct(barcode);
+              
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting product");
-                return StatusCode(500, new { message = "Error occurred while fetching product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostProduct([FromBody]Product product)
+        public async Task<IActionResult> PostProduct([FromBody] Product product)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -72,8 +99,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error");
-                return StatusCode(500, new { message = "Error occurred while creating product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
@@ -88,8 +115,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error");
-                return StatusCode(500, new { message = "Error occurred while deleting product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
 
@@ -103,13 +130,13 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error");
-                return StatusCode(500, new { message = "Error occurred while updating product" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception: " + ex.InnerException });
             }
         }
-
-
+        #endregion
 
     }
 
 }
+

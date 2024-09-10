@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using POS_API.DTO;
-using POS_API.Services;
-using System.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using POS_API.Services.Interfaces;
 
 namespace POS_API.Controllers
 {
@@ -11,18 +8,17 @@ namespace POS_API.Controllers
     public class CounterController : ControllerBase
     {
         private readonly IServiceCounter _serviceCounter;
-        private readonly ILogger<CounterController> _logger;
 
-        public CounterController(IServiceCounter serviceCounter, ILogger<CounterController> logger)
+        public CounterController(IServiceCounter serviceCounter)
         {
             _serviceCounter = serviceCounter;
-            _logger = logger;
+
         }
 
 
 
         [HttpPatch("count")]
-        public async Task<IActionResult> PostProductCount(ProductDTO product)
+        public async Task<IActionResult> PostProductCount(Product product)
         {
             if (!ModelState.IsValid)
             {
@@ -36,8 +32,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while adding product count");
-                return StatusCode(500, new { message = "Error occurred while adding product count" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception:" + ex.InnerException });
             }
         }
 
@@ -52,8 +48,8 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error reseting product Counters");
-                return StatusCode(500, new { message = "Error occurred while reseting product counters" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception:" + ex.InnerException });
             }
         }
 
@@ -68,9 +64,18 @@ namespace POS_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting total count price");
-                return StatusCode(500, new { message = "Error occurred while fetching total price of counters" });
+
+                return StatusCode(500, new { message = ex.Message + "Innerexception:" + ex.InnerException });
             }
+
+
+
+
+
         }
+
+
+
+
     }
 }

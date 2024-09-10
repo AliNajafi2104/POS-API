@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
-using POS_API.DTO;
+﻿using Microsoft.EntityFrameworkCore;
 
 
 
@@ -8,13 +6,14 @@ using POS_API.DTO;
 
 public class ServiceProducts : IServiceProduct
 {
+    private readonly HttpClient _httpClient;
     private readonly DataContext _context;
 
-    public ServiceProducts(DataContext context)
+    public ServiceProducts(HttpClient httpClient, DataContext context)
     {
+        _httpClient = httpClient;
         _context = context;
     }
-
 
 
 
@@ -38,6 +37,7 @@ public class ServiceProducts : IServiceProduct
         {
 
             var entity = await _context.Product.FirstOrDefaultAsync(e => e.Barcode == barcode);
+           
             return entity;
         }
         catch (Exception ex)
@@ -106,6 +106,45 @@ public class ServiceProducts : IServiceProduct
     }
 
 
-  
+
+    public async Task getdata()
+    {
+        string baseUrl = "https://poswebapi20240714125856.azurewebsites.net";
+        string endpoint = "/api/product";
+
+        try
+        {
+            // Step 1: Get the list of products from the remote API
+            var products = await _httpClient.GetFromJsonAsync<List<Product>>(baseUrl + endpoint);
+
+            if (products != null)
+            {
+                // Step 2: Create each product in the local database
+                foreach (var product in products)
+                {
+
+                    if (product.Barcode.Length < 255)
+                    {
+
+                        Product productDTOMove = new Product
+                        {
+                            Name = product.Name,
+                            Price = product.Price,
+                            Barcode = product.Barcode
+                        };
+                        await CreateProductAsync(productDTOMove);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions as needed
+            throw new Exception("An error occurred while retrieving or saving products.", ex);
+        }
+    }
+
+
+
 }
 
