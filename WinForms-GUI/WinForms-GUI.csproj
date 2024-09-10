@@ -319,6 +319,9 @@
       <DependentUpon>SletVare.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <Content Include="Images\dild.jpg" />
+    <Content Include="Images\koriander.png" />
+    <Content Include="Images\mynte.png" />
     <Content Include="Images\sødKartoffel.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -334,6 +337,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="stykPrisLibrary.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

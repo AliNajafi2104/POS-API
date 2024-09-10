@@ -17,7 +17,7 @@ namespace WinformsGUI
         private readonly List<Product> scannedProducts = new List<Product>();
         private readonly ProductService productService = new ProductService(Environment.GetEnvironmentVariable("x-api-key"));
         private readonly List<PricePrKg> pricePrKgs = new List<PricePrKg>();
-        private readonly List<PricePrKg> stykPris = new List<stykPris>();
+        private readonly List<StykPris> stykPris = new List<StykPris>();
 
         public Forside()
         {
