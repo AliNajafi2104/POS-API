@@ -29,16 +29,6 @@ namespace WinformsGUI
             InitializeComponent();
             InitializeFormSettings();
             InitializeSignalR();
-            pdf = new PdfiumViewer.PdfViewer();
-            pdf.Dock = DockStyle.Fill; // Make the PdfViewer fill the panel
-            maximizeButton = new Button
-            {
-                Text = "Maximize Other Window",
-                Dock = DockStyle.Fill
-            };
-            maximizeButton.Click += BtnBetal_Click;
-
-            Controls.Add(maximizeButton);
             tabControl1.SelectedTab = tab2;
             setButtonImages();
         }
@@ -152,7 +142,7 @@ namespace WinformsGUI
 
             scannedProducts.Add(new Product
             {
-                Name = result + " "+tbManuelPrice.Text+"g",
+                Name = result + " " + tbManuelPrice.Text + "g",
                 Price = Convert.ToDecimal(tbManuelPrice.Text) * price
 
 

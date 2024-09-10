@@ -266,21 +266,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Forside\Forside.MultiPos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forside\Forside.Pdf.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forside\Forside.Python.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forside\Forside.SignalR.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductResponse.cs" />
-    <Compile Include="PricePrKg.cs" />
+    <Compile Include="Models\PricePrKg.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
