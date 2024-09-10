@@ -16,4 +16,15 @@ namespace WinformsGUI
         public string pricePrKg { get; set; }
 
     }
+
+
+    public class StykPris
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("stykPris")]
+        public string stykPris { get; set; }
+
+    }
 }
