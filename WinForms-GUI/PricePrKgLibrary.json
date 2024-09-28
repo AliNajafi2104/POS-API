@@ -1,15 +1,94 @@
 [
-
   {
     "name": "cassava",
     "KgPrice": "35"
-
   },
   {
     "name": "sødKartoffel",
     "KgPrice": "50"
-
+  },
+  {
+    "name": "kartofflerINet",
+    "KgPrice": "35"
+  },
+  {
+    "name": "gurkemeje",
+    "KgPrice": "150"
+  },
+  {
+    "name": "ingefær",
+    "KgPrice": "70"
+  },
+  {
+    "name": "grønChili",
+    "KgPrice": "100"
+  },
+  {
+    "name": "rødChili",
+    "KgPrice": "200"
+  },
+  {
+    "name": "chiliHabenero",
+    "KgPrice": "150"
+  },
+  {
+    "name": "løgINet",
+    "KgPrice": "45"
+  },
+  {
+    "name": "rødLøg",
+    "KgPrice": "15"
+  },
+  {
+    "name": "okra",
+    "KgPrice": "70"
+  },
+  {
+    "name": "miniAgurk",
+    "KgPrice": "30"
+  },
+  {
+    "name": "madbananer",
+    "KgPrice": "30"
+  },
+  {
+    "name": "plantain",
+    "KgPrice": "30"
+  },
+  {
+    "name": "hvidAubergine",
+    "KgPrice": "66"
+  },
+  {
+    "name": "aubergine",
+    "KgPrice": "30"
+  },
+  {
+    "name": "mango",
+    "KgPrice": "80"
+  },
+  {
+    "name": "granatæbler",
+    "KgPrice": "45"
+  },
+  {
+    "name": "vandmelon",
+    "KgPrice": "15"
+  },
+  {
+    "name": "lime",
+    "KgPrice": "20 (6 stk)"
+  },
+  {
+    "name": "citron",
+    "KgPrice": "10 (3 stk)"
+  },
+  {
+    "name": "abrikoser",
+    "KgPrice": "140"
+  },
+  {
+    "name": "valnødder",
+    "KgPrice": "220"
   }
 ]
-
-

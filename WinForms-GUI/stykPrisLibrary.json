@@ -1,9 +1,30 @@
 [
 
 
-{
-  "name": "dild",
-  "stykPris": "10"
-}
+  {
+    "name": "dild",
+    "stykPris": "15"
+  },
+
+  {
+    "name": "mynte",
+    "stykPris": "10"
+  },
+  {
+    "name": "koriander",
+    "stykPris": "10"
+  },
+  {
+    "name": "persille",
+    "stykPris": "10"
+  },
+  {
+    "name": "aflangPideBrød",
+    "stykPris": "13"
+  },
+  {
+    "name": "brød",
+    "stykPris": "13"
+  }
 
 ]
