@@ -8,9 +8,10 @@
     "KgPrice": "50"
   },
   {
-    "name": "kartofflerINet",
-    "KgPrice": "35"
+    "name": "sødKartoffelLilla",
+    "KgPrice": "50"
   },
+
   {
     "name": "gurkemeje",
     "KgPrice": "150"
@@ -30,10 +31,6 @@
   {
     "name": "chiliHabenero",
     "KgPrice": "150"
-  },
-  {
-    "name": "løgINet",
-    "KgPrice": "45"
   },
   {
     "name": "rødLøg",
@@ -75,14 +72,7 @@
     "name": "vandmelon",
     "KgPrice": "15"
   },
-  {
-    "name": "lime",
-    "KgPrice": "20 (6 stk)"
-  },
-  {
-    "name": "citron",
-    "KgPrice": "10 (3 stk)"
-  },
+
   {
     "name": "abrikoser",
     "KgPrice": "140"
@@ -90,5 +80,9 @@
   {
     "name": "valnødder",
     "KgPrice": "220"
+  },
+  {
+    "name": "indtastBeløb",
+    "KgPrice": "1000"
   }
 ]

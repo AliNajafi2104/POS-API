@@ -24,7 +24,23 @@
   },
   {
     "name": "brød",
-    "stykPris": "13"
+    "stykPris": "30"
+  },
+  {
+    "name": "lime",
+    "stykPris": "3"
+  },
+  {
+    "name": "citron",
+    "stykPris": "3"
+  },
+  {
+    "name": "kartofflerINet",
+    "stykPris": "35"
+  },
+  {
+    "name": "løgINet",
+    "stykPris": "45"
   }
 
 ]

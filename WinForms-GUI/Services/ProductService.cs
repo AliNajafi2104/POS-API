@@ -18,9 +18,9 @@ namespace WinformsGUI
         public ProductService(string apiKey)
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri($"http://{Config.IP_ADDRESS}:5258/");
+            _httpClient.BaseAddress = new Uri(Environment.GetEnvironmentVariable("h"));
             _apiKey = apiKey;
-
+        //http://localhost:5258/
             // Set the API key in the default headers
             _httpClient.DefaultRequestHeaders.Add("x-api-key", _apiKey);
         }

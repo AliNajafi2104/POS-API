@@ -37,9 +37,9 @@ namespace WinformsGUI
             tabControl1.SelectedTab = tab2;
             setButtonImages();
             panel2.Visible = false;
-            
+
             // Hook up the DrawItem event to hide the tabs
-           
+
         }
 
 
@@ -104,9 +104,11 @@ namespace WinformsGUI
         {
             Button clickedButton = sender as Button;
 
+            string formattedName = FormatProductName(clickedButton.Name);
+
             scannedProducts.Add(new Product
             {
-                Name = clickedButton.Name,
+                Name = formattedName,
                 Price = Convert.ToDecimal(stykPris.FirstOrDefault(n => n.Name == clickedButton.Name).stykPris)
 
             });
@@ -115,6 +117,15 @@ namespace WinformsGUI
             btnAddToBasket.Focus();
 
 
+        }
+
+        private string FormatProductName(string name)
+        {
+            // Use regular expression to insert spaces before each uppercase letter except the first one
+            string formattedName = System.Text.RegularExpressions.Regex.Replace(name, "(?<!^)([A-Z])", " $1");
+
+            // Capitalize the first letter of each word
+            return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(formattedName.ToLower());
         }
 
         //FYSISK KEYBOARD
@@ -194,11 +205,26 @@ namespace WinformsGUI
         private void cassava_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
-            if (clickedButton.Image == null) return;
-            pictureBox2.Image = clickedButton.Image;
-            panel2.Visible = true;
-            name = clickedButton.Name;
-            label32.Text =  name +" "+(pricePrKgs.FirstOrDefault(n => n.Name == name).pricePrKg) + " pr/KG";
+
+          
+
+            if (clickedButton.Name == "indtastBeløb")
+            {
+                pictureBox2.Image = null;
+                panel2.Visible = true;
+                name = clickedButton.Name;
+                label32.Text = "Indtast manuel pris";
+
+            }
+            else
+            {
+                if (clickedButton.Image == null) return;
+                pictureBox2.Image = clickedButton.Image;
+                panel2.Visible = true;
+                name = clickedButton.Name;
+                label32.Text = name + " " + (pricePrKgs.FirstOrDefault(n => n.Name == clickedButton.Name).pricePrKg) + " pr/KG";
+                d = pricePrKgs.FirstOrDefault(n => n.Name == clickedButton.Name).pricePrKg;
+            }
 
         }
         string name;
@@ -207,26 +233,26 @@ namespace WinformsGUI
             Button button = sender as Button;
             textBox1.Text += button.Text;
         }
-
+        string d;
         private void button43_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "")
             {
-                panel2.Visible=false; 
-                
+                panel2.Visible = false;
+
             }
             else
             {
+                scannedProducts.Add(new Product
+                {
 
-            scannedProducts.Add(new Product
-            {
-                Name = name + " " + textBox1.Text + " g",
-                Price = Convert.ToDecimal(pricePrKgs.FirstOrDefault(n => n.Name == name).pricePrKg) * Convert.ToDecimal(textBox1.Text) / 1000
+                    Name = name + " " + textBox1.Text + " g",
+                    Price =  Convert.ToDecimal(d) * Convert.ToDecimal(textBox1.Text) / 1000
 
-            });
-            panel2.Visible = false;
-            textBox1.Clear();
-            UpdateDataGridView();
+                });
+                panel2.Visible = false;
+                textBox1.Clear();
+                UpdateDataGridView();
             }
             this.ActiveControl = null;
             btnAddToBasket.Focus();
@@ -468,9 +494,23 @@ namespace WinformsGUI
                 }
             }
         }
+
         #endregion
 
+        private void button42_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+        }
 
+        private void button41_Click(object sender, EventArgs e)
+        {
+            panel2.Visible = false;
+            this.ActiveControl = null;
+            btnAddToBasket.Focus();
+
+        }
     }
 
 

@@ -12,7 +12,7 @@ namespace WinformsGUI
         {
            
             _hubConnection = new HubConnectionBuilder()
-                .WithUrl($"http://{Config.IP_ADDRESS}:2030/notificationHub") 
+                .WithUrl(Environment.GetEnvironmentVariable("URL")) 
                 .Build();
 
            
